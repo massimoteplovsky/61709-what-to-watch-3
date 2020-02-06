@@ -138,11 +138,11 @@ const Main = ({filmInfo: {title, genre, year}, filmTitles}) => {
 
 Main.propTypes = {
   filmInfo: PropTypes.shape({
-    title: PropTypes.string,
-    genre: PropTypes.string,
-    year: PropTypes.number
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    year: PropTypes.number.isRequired
   }),
-  filmTitles: PropTypes.arrayOf(PropTypes.string)
+  filmTitles: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default Main;
