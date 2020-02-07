@@ -1,15 +1,17 @@
 import {
-  shape,
+  exact,
   string,
   number,
-  arrayOf
+  arrayOf,
+  func
 } from "prop-types";
 
-export const filmTypes = {
-  info: shape({
+export const FilmPropType = {
+  INFO: exact({
     title: string.isRequired,
     genre: string.isRequired,
     year: number.isRequired
   }),
-  titles: arrayOf(string).isRequired
+  TITLE: arrayOf(string).isRequired,
+  TITLE_CLICK: func.isRequired
 };

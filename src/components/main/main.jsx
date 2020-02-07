@@ -1,7 +1,7 @@
 import React from "react";
-import {filmTypes} from "../../prop-validator/prop-validator";
+import {FilmPropType} from "../../prop-validator/prop-validator";
 
-const Main = ({filmInfo: {title, genre, year}, filmTitles}) => {
+const Main = ({filmInfo: {title, genre, year}, filmTitles, onTitleClick}) => {
   return (
     <>
       <section className="movie-card">
@@ -104,7 +104,10 @@ const Main = ({filmInfo: {title, genre, year}, filmTitles}) => {
                     <div className="small-movie-card__image">
                       <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
                     </div>
-                    <h3 className="small-movie-card__title">
+                    <h3
+                      className="small-movie-card__title"
+                      onClick={onTitleClick}
+                    >
                       <a className="small-movie-card__link" href="movie-page.html">{item}</a>
                     </h3>
                   </article>
@@ -137,8 +140,9 @@ const Main = ({filmInfo: {title, genre, year}, filmTitles}) => {
 };
 
 Main.propTypes = {
-  filmInfo: filmTypes.info,
-  filmTitles: filmTypes.titles
+  filmInfo: FilmPropType.INFO,
+  filmTitles: FilmPropType.TITLE,
+  onTitleClick: FilmPropType.TITLE_CLICK
 };
 
 export default Main;
