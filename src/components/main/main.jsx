@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import {filmTypes} from "../../prop-validator/prop-validator";
 
 const Main = ({filmInfo: {title, genre, year}, filmTitles}) => {
   return (
@@ -137,12 +137,8 @@ const Main = ({filmInfo: {title, genre, year}, filmTitles}) => {
 };
 
 Main.propTypes = {
-  filmInfo: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    genre: PropTypes.string.isRequired,
-    year: PropTypes.number.isRequired
-  }),
-  filmTitles: PropTypes.arrayOf(PropTypes.string).isRequired
+  filmInfo: filmTypes.info,
+  filmTitles: filmTypes.titles
 };
 
 export default Main;

@@ -1,7 +1,7 @@
 import React from "react";
+import {filmTypes} from "../../prop-validator/prop-validator";
 import Main from "../main/main.jsx";
 
-// eslint-disable-next-line react/prop-types
 const App = ({filmInfo, filmTitles}) => {
   return (
     <Main
@@ -9,6 +9,11 @@ const App = ({filmInfo, filmTitles}) => {
       filmTitles={filmTitles}
     />
   );
+};
+
+App.propTypes = {
+  filmInfo: filmTypes.info,
+  filmTitles: filmTypes.titles
 };
 
 export default App;
