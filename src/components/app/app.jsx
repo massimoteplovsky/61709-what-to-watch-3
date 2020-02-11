@@ -2,21 +2,21 @@ import React from "react";
 import {FilmPropType} from "../../prop-validator/prop-validator";
 import Main from "../main/main.jsx";
 
-const titleClickHandler = () => {};
+const handleTitleClick = () => {};
 
-const App = ({filmInfo, filmTitles}) => {
+const App = ({promoFilmInfo, films}) => {
   return (
     <Main
-      filmInfo={filmInfo}
-      filmTitles={filmTitles}
-      onTitleClick={titleClickHandler}
+      promoFilmInfo={promoFilmInfo}
+      films={films}
+      onTitleClick={handleTitleClick}
     />
   );
 };
 
 App.propTypes = {
-  filmInfo: FilmPropType.INFO,
-  filmTitles: FilmPropType.TITLE
+  promoFilmInfo: FilmPropType.PROMO_FILM_INFO,
+  films: FilmPropType.FILMS
 };
 
 export default App;

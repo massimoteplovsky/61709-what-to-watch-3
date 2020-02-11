@@ -1,147 +1,139 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import {FilmPropType} from "../../prop-validator/prop-validator";
+import MovieList from "../movie-list/movie-list.jsx";
 
-const Main = ({filmInfo: {title, genre, year}, filmTitles, onTitleClick}) => {
-  return (
-    <>
-      <section className="movie-card">
-        <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
-        </div>
+class Main extends PureComponent {
 
-        <h1 className="visually-hidden">WTW</h1>
+  constructor(props) {
+    super(props);
+  }
 
-        <header className="page-header movie-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
+  render() {
+    const {films, onTitleClick, promoFilmInfo: {title, genre, year}} = this.props;
+
+    return (
+      <>
+        <section className="movie-card">
+          <div className="movie-card__bg">
+            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
           </div>
 
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
-        </header>
+          <h1 className="visually-hidden">WTW</h1>
 
-        <div className="movie-card__wrap">
-          <div className="movie-card__info">
-            <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <header className="page-header movie-card__head">
+            <div className="logo">
+              <a className="logo__link">
+                <span className="logo__letter logo__letter--1">W</span>
+                <span className="logo__letter logo__letter--2">T</span>
+                <span className="logo__letter logo__letter--3">W</span>
+              </a>
             </div>
 
-            <div className="movie-card__desc">
-              <h2 className="movie-card__title">{title}</h2>
-              <p className="movie-card__meta">
-                <span className="movie-card__genre">{genre}</span>
-                <span className="movie-card__year">{year}</span>
-              </p>
+            <div className="user-block">
+              <div className="user-block__avatar">
+                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              </div>
+            </div>
+          </header>
 
-              <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+          <div className="movie-card__wrap">
+            <div className="movie-card__info">
+              <div className="movie-card__poster">
+                <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              </div>
+
+              <div className="movie-card__desc">
+                <h2 className="movie-card__title">{title}</h2>
+                <p className="movie-card__meta">
+                  <span className="movie-card__genre">{genre}</span>
+                  <span className="movie-card__year">{year}</span>
+                </p>
+
+                <div className="movie-card__buttons">
+                  <button className="btn btn--play movie-card__button" type="button">
+                    <svg viewBox="0 0 19 19" width="19" height="19">
+                      <use xlinkHref="#play-s"></use>
+                    </svg>
+                    <span>Play</span>
+                  </button>
+                  <button className="btn btn--list movie-card__button" type="button">
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                    <span>My list</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
-
-          <div className="catalog__movies-list">
-            {
-              filmTitles.map((item, index) => {
-                return (
-                  <article className="small-movie-card catalog__movies-card" key={item + index}>
-                    <div className="small-movie-card__image">
-                      <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-                    </div>
-                    <h3
-                      className="small-movie-card__title"
-                      onClick={onTitleClick}
-                    >
-                      <a className="small-movie-card__link" href="movie-page.html">{item}</a>
-                    </h3>
-                  </article>
-                );
-              })
-            }
-          </div>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+        <div className="page-content">
+          <section className="catalog">
+            <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
-      </div>
-    </>
-  );
-};
+            <ul className="catalog__genres-list">
+              <li className="catalog__genres-item catalog__genres-item--active">
+                <a href="#" className="catalog__genres-link">All genres</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Comedies</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Crime</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Documentary</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Dramas</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Horror</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Kids & Family</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Romance</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              </li>
+              <li className="catalog__genres-item">
+                <a href="#" className="catalog__genres-link">Thrillers</a>
+              </li>
+            </ul>
+
+            <MovieList films={films} onTitleClick={onTitleClick}/>
+
+            <div className="catalog__more">
+              <button className="catalog__button" type="button">Show more</button>
+            </div>
+          </section>
+
+          <footer className="page-footer">
+            <div className="logo">
+              <a className="logo__link logo__link--light">
+                <span className="logo__letter logo__letter--1">W</span>
+                <span className="logo__letter logo__letter--2">T</span>
+                <span className="logo__letter logo__letter--3">W</span>
+              </a>
+            </div>
+
+            <div className="copyright">
+              <p>© 2019 What to watch Ltd.</p>
+            </div>
+          </footer>
+        </div>
+      </>
+    );
+  }
+}
 
 Main.propTypes = {
-  filmInfo: FilmPropType.INFO,
-  filmTitles: FilmPropType.TITLE,
+  promoFilmInfo: FilmPropType.PROMO_FILM_INFO,
+  films: FilmPropType.FILMS,
   onTitleClick: FilmPropType.TITLE_CLICK
 };
 
