@@ -4,7 +4,8 @@ import {
   number,
   arrayOf,
   func,
-  shape
+  shape,
+  array
 } from "prop-types";
 
 export const FilmPropType = {
@@ -17,13 +18,31 @@ export const FilmPropType = {
       exact({
         id: number.isRequired,
         title: string.isRequired,
-        poster: string.isRequired
+        genre: arrayOf(string).isRequired,
+        year: number.isRequired,
+        promoPoster: string.isRequired,
+        poster: string.isRequired,
+        cover: string.isRequired,
+        description: string.isRequired,
+        rating: number.isRequired,
+        votes: number.isRequired,
+        director: string.isRequired,
+        starring: array.isRequired
       })
   ).isRequired,
   FILM_INFO: shape({
     id: number.isRequired,
     title: string.isRequired,
-    poster: string.isRequired
+    genre: arrayOf(string).isRequired,
+    year: number.isRequired,
+    promoPoster: string.isRequired,
+    poster: string.isRequired,
+    cover: string.isRequired,
+    description: string.isRequired,
+    rating: number.isRequired,
+    votes: number.isRequired,
+    director: string.isRequired,
+    starring: array.isRequired
   }).isRequired,
   TITLE_CLICK: func.isRequired,
   CARD_MOUSE_ENTER: func.isRequired

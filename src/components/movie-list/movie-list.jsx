@@ -22,6 +22,12 @@ class MovieList extends PureComponent {
   render() {
     const {films, onTitleClick} = this.props;
 
+    if (films.length === 0) {
+      return (
+        <h2>Movie list is empty</h2>
+      );
+    }
+
     return (
       <div className="catalog__movies-list">
         {

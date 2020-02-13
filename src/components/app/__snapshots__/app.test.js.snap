@@ -263,6 +263,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Terminator 2. Judgment day"
@@ -289,6 +290,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="1+1"
@@ -315,6 +317,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Joker"
@@ -341,6 +344,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Once upon a time in Hollywood"
@@ -367,6 +371,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Ford vs Ferrari"
@@ -393,6 +398,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="1917"
@@ -419,6 +425,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Parasite"
@@ -445,6 +452,7 @@ Array [
         >
           <div
             className="small-movie-card__image"
+            onClick={[Function]}
           >
             <img
               alt="Irishman"

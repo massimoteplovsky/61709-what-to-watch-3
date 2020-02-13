@@ -10,6 +10,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Terminator 2. Judgment day"
@@ -36,6 +37,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="1+1"
@@ -62,6 +64,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Joker"
@@ -88,6 +91,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Once upon a time in Hollywood"
@@ -114,6 +118,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Ford vs Ferrari"
@@ -140,6 +145,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="1917"
@@ -166,6 +172,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Parasite"
@@ -192,6 +199,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
   >
     <div
       className="small-movie-card__image"
+      onClick={[Function]}
     >
       <img
         alt="Irishman"
@@ -213,4 +221,10 @@ exports[`<MovieList /> component renders correctly 1`] = `
     </h3>
   </article>
 </div>
+`;
+
+exports[`<MovieList /> component renders correctly with empty films array 1`] = `
+<h2>
+  Movie list is empty
+</h2>
 `;
