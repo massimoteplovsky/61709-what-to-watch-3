@@ -1,20 +1,22 @@
-import React from "react";
-import {FilmPropType} from "../../prop-validator/prop-validator";
+import React from 'react';
+import VideoPlayer from '../video-player/video-player.jsx';
+import {PropValidator} from '../../prop-validator/prop-validator';
 
-const MovieCard = ({film, onTitleClick, onMouseEnter}) => {
-  const {id, title, poster} = film;
+const MovieCard = ({film, isPlaying, onTitleClick, onMouseEnter, onMouseLeave}) => {
+  const {id, title, poster, src} = film;
 
   return (
     <article
       className="small-movie-card catalog__movies-card"
       onMouseEnter={() => onMouseEnter(id)}
+      onMouseLeave={onMouseLeave}
     >
       <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, film)}>
-        <img
-          src={poster}
-          alt={title}
-          width="280"
-          height="175"
+        <VideoPlayer
+          src={src}
+          poster={poster}
+          isMuted={true}
+          isPlaying={isPlaying}
         />
       </div>
       <h3
@@ -28,9 +30,11 @@ const MovieCard = ({film, onTitleClick, onMouseEnter}) => {
 };
 
 MovieCard.propTypes = {
-  film: FilmPropType.FILM_INFO,
-  onTitleClick: FilmPropType.TITLE_CLICK,
-  onMouseEnter: FilmPropType.CARD_MOUSE_ENTER
+  film: PropValidator.FILM_INFO,
+  onTitleClick: PropValidator.TITLE_CLICK,
+  onMouseEnter: PropValidator.CARD_MOUSE_ENTER,
+  isPlaying: PropValidator.IS_PLAYING,
+  onMouseLeave: PropValidator.CARD_MOUSE_LEAVE
 };
 
 export default MovieCard;

@@ -8,7 +8,9 @@ it(`<App /> component renders correctly`, () => {
     .create(<App
       promoFilmInfo={promoFilmInfo}
       films={films}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }}).toJSON();
   expect(tree).toMatchSnapshot();
 });

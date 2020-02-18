@@ -11,7 +11,9 @@ it(`<Main /> component renders correctly`, () => {
       promoFilmInfo={promoFilmInfo}
       films={films}
       onTitleClick={handleTitleClick}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }}).toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -10,13 +10,35 @@ Enzyme.configure({
 
 const handleMouseEnter = jest.fn((...args) => [...args]);
 const handleClick = jest.fn((...args) => [...args]);
+const handleMouseLeave = jest.fn();
+
+it(`Mouse leave triggered`, () => {
+
+  const movieCard = shallow(
+      <MovieCard
+        film={film}
+        isPlaying={false}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onTitleClick={handleClick}
+      />
+  );
+
+  const card = movieCard.find(`.small-movie-card`).at(0);
+
+  card.simulate(`mouseleave`);
+
+  expect(handleMouseLeave.mock.calls.length).toBe(1);
+});
 
 it(`Title has been clicked`, () => {
 
   const movieCard = shallow(
       <MovieCard
         film={film}
+        isPlaying={false}
         onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onTitleClick={handleClick}
       />
   );
@@ -36,7 +58,9 @@ it(`Movie data has been passed to the callback handler`, () => {
   const movieCard = shallow(
       <MovieCard
         film={film}
+        isPlaying={false}
         onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onTitleClick={handleClick}
       />
   );

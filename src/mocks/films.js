@@ -15,8 +15,8 @@ export default [
     rating: 8.5,
     votes: 12000,
     director: `James Cameron`,
-    starring: [`Arnold Schwarzenegger`, `Linda Hamilton`, `Robert Patrick`]
-
+    starring: [`Arnold Schwarzenegger`, `Linda Hamilton`, `Robert Patrick`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 2,
@@ -33,7 +33,8 @@ export default [
     rating: 8.2,
     votes: 1000,
     director: `Olivier Nakache`,
-    starring: [`François Cluzet`, `Omar Sy`]
+    starring: [`François Cluzet`, `Omar Sy`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 3,
@@ -53,7 +54,8 @@ export default [
     rating: 8.1,
     votes: 1440,
     director: `Todd Phillips`,
-    starring: [`Joaquin Phoenix`, `Robert De Niro`, `Zazie Beetz`, `Frances Conroy`]
+    starring: [`Joaquin Phoenix`, `Robert De Niro`, `Zazie Beetz`, `Frances Conroy`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 4,
@@ -69,7 +71,8 @@ export default [
     rating: 7.1,
     votes: 440,
     director: `Quentin Tarantino`,
-    starring: [`Leonardo DiCaprio`, `Brad Pitt`, `Margot Robbie`]
+    starring: [`Leonardo DiCaprio`, `Brad Pitt`, `Margot Robbie`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 5,
@@ -86,7 +89,8 @@ export default [
     rating: 8.1,
     votes: 940,
     director: `James Mangold`,
-    starring: [`Matt Damon`, `Christian Bale`]
+    starring: [`Matt Damon`, `Christian Bale`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 6,
@@ -103,7 +107,8 @@ export default [
     rating: 8.1,
     votes: 280,
     director: `Sam Mendes`,
-    starring: [`George MacKay`, `Dean-Charles Chapman`, `Mark Strong`]
+    starring: [`George MacKay`, `Dean-Charles Chapman`, `Mark Strong`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 7,
@@ -120,7 +125,8 @@ export default [
     rating: 8.3,
     votes: 563,
     director: `Bong Joon-ho`,
-    starring: [`Song Kang-ho`, `Lee Sun-kyun`, `Cho Yeo-jeong`]
+    starring: [`Song Kang-ho`, `Lee Sun-kyun`, `Cho Yeo-jeong`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   },
   {
     id: 8,
@@ -136,6 +142,7 @@ export default [
     rating: 7.5,
     votes: 380,
     director: `Martin Scorsese`,
-    starring: [`Robert De Niro`, `Al Pacino`, `Joe Pesci`]
+    starring: [`Robert De Niro`, `Al Pacino`, `Joe Pesci`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`
   }
 ];

@@ -1,5 +1,5 @@
 import React from "react";
-import {FilmPropType} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator";
 
 const Movie = ({filmInfo}) => {
   const {
@@ -17,21 +17,24 @@ const Movie = ({filmInfo}) => {
 
   const makeRating = (number) => number.toFixed(1).replace(`.`, `,`);
   const makeTextRating = (numericRating) => {
-    let textRating;
 
     if (numericRating < 3) {
-      textRating = `Bad`;
-    } else if (numericRating >= 3 && numericRating < 5) {
-      textRating = `Normal`;
-    } else if (numericRating >= 5 && numericRating < 8) {
-      textRating = `Good`;
-    } else if (numericRating >= 8 && numericRating < 10) {
-      textRating = `Very good`;
-    } else if (numericRating === 10) {
-      textRating = `Awesome`;
+      return `Bad`;
     }
 
-    return textRating;
+    if (numericRating >= 3 && numericRating < 5) {
+      return `Normal`;
+    }
+
+    if (numericRating >= 5 && numericRating < 8) {
+      return `Good`;
+    }
+
+    if (numericRating >= 8 && numericRating < 10) {
+      return `Very good`;
+    }
+
+    return `Awesome`;
   };
 
   return (
@@ -190,7 +193,7 @@ const Movie = ({filmInfo}) => {
 };
 
 Movie.propTypes = {
-  filmInfo: FilmPropType.FILM_INFO
+  filmInfo: PropValidator.FILM_INFO
 };
 
 export default Movie;

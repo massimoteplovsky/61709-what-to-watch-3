@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
-import {FilmPropType} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator";
 import Main from "../main/main.jsx";
 import Movie from "../movie/movie.jsx";
 
@@ -13,10 +13,10 @@ class App extends PureComponent {
     };
 
     this._renderApp = this._renderApp.bind(this);
-    this._handleTitleClick = this._handleTitleClick.bind(this);
+    this.handleTitleClick = this.handleTitleClick.bind(this);
   }
 
-  _handleTitleClick(event, film) {
+  handleTitleClick(event, film) {
     event.preventDefault();
     this.setState({filmInfo: film});
   }
@@ -35,7 +35,7 @@ class App extends PureComponent {
       <Main
         promoFilmInfo={promoFilmInfo}
         films={films}
-        onTitleClick={this._handleTitleClick}
+        onTitleClick={this.handleTitleClick}
       />
     );
   }
@@ -56,8 +56,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  promoFilmInfo: FilmPropType.PROMO_FILM_INFO,
-  films: FilmPropType.FILMS
+  promoFilmInfo: PropValidator.PROMO_FILM_INFO,
+  films: PropValidator.FILMS
 };
 
 export default App;

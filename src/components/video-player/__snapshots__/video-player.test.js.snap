@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VideoPlayer /> is rendered correctly 1`] = `
+<video
+  height="175"
+  style={
+    Object {
+      "objectFit": "cover",
+    }
+  }
+  width="280"
+/>
+`;

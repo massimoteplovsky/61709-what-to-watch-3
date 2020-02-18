@@ -260,15 +260,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Terminator 2. Judgment day"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>
@@ -287,15 +291,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="1+1"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>
@@ -314,15 +322,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Joker"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>
@@ -341,15 +353,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Once upon a time in Hollywood"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>
@@ -368,15 +384,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Ford vs Ferrari"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>
@@ -395,15 +415,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="1917"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>
@@ -422,15 +446,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Parasite"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>
@@ -449,15 +477,19 @@ Array [
         <article
           className="small-movie-card catalog__movies-card"
           onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
         >
           <div
             className="small-movie-card__image"
             onClick={[Function]}
           >
-            <img
-              alt="Irishman"
+            <video
               height="175"
-              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
               width="280"
             />
           </div>

@@ -11,7 +11,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   },
   {
     id: 3,
@@ -39,7 +41,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   },
   {
     id: 4,
@@ -53,7 +56,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   },
   {
     id: 5,
@@ -67,7 +71,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   },
   {
     id: 6,
@@ -81,7 +86,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   },
   {
     id: 7,
@@ -95,7 +101,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   },
   {
     id: 8,
@@ -109,7 +116,8 @@ export const films = [
     rating: 8.5,
     votes: 12000,
     director: ``,
-    starring: []
+    starring: [],
+    src: ``
   }
 ];
 
@@ -125,7 +133,8 @@ export const film = {
   rating: 8.5,
   votes: 12000,
   director: ``,
-  starring: []
+  starring: [],
+  src: ``
 };
 
 export const promoFilmInfo = {
@@ -133,3 +142,4 @@ export const promoFilmInfo = {
   genre: `Drama`,
   year: 2014
 };
+

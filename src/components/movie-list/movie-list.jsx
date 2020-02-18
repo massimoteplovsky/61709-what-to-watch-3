@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {FilmPropType} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator";
 import MovieCard from "../movie-card/movie-card.jsx";
 
 class MovieList extends PureComponent {
@@ -10,17 +10,25 @@ class MovieList extends PureComponent {
       activeCard: null
     };
 
-    this._handleMouseEnter = this._handleMouseEnter.bind(this);
+    this._timerID = null;
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
   }
 
-  _handleMouseEnter(id) {
-    this.setState({
-      activeCard: id
-    });
+  handleMouseEnter(filmID) {
+    this._timerID = setTimeout(() => {
+      this.setState({activeCard: filmID});
+    }, 1000);
+  }
+
+  handleMouseLeave() {
+    clearTimeout(this._timerID);
+    this.setState({activeCard: null});
   }
 
   render() {
     const {films, onTitleClick} = this.props;
+    const {activeCard} = this.state;
 
     if (films.length === 0) {
       return (
@@ -36,7 +44,9 @@ class MovieList extends PureComponent {
               <MovieCard
                 key={film.id}
                 film={film}
-                onMouseEnter={this._handleMouseEnter}
+                isPlaying={film.id === activeCard}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
                 onTitleClick={onTitleClick}
               />
             );
@@ -48,8 +58,8 @@ class MovieList extends PureComponent {
 }
 
 MovieList.propTypes = {
-  films: FilmPropType.FILMS,
-  onTitleClick: FilmPropType.TITLE_CLICK
+  films: PropValidator.FILMS,
+  onTitleClick: PropValidator.TITLE_CLICK
 };
 
 export default MovieList;

@@ -10,8 +10,10 @@ it(`<MovieList /> component renders correctly`, () => {
     .create(<MovieList
       films={films}
       onTitleClick={handleTitleClick}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }}).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
@@ -20,7 +22,9 @@ it(`<MovieList /> component renders correctly with empty films array`, () => {
     .create(<MovieList
       films={[]}
       onTitleClick={handleTitleClick}
-    />)
-    .toJSON();
+    />, {
+      createNodeMock: () => {
+        return {};
+      }}).toJSON();
   expect(tree).toMatchSnapshot();
 });

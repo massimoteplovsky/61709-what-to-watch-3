@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {FilmPropType} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator";
 import MovieList from "../movie-list/movie-list.jsx";
 
 class Main extends PureComponent {
@@ -132,9 +132,9 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  promoFilmInfo: FilmPropType.PROMO_FILM_INFO,
-  films: FilmPropType.FILMS,
-  onTitleClick: FilmPropType.TITLE_CLICK
+  promoFilmInfo: PropValidator.PROMO_FILM_INFO,
+  films: PropValidator.FILMS,
+  onTitleClick: PropValidator.TITLE_CLICK
 };
 
 export default Main;
