@@ -1,40 +1,64 @@
-import React from 'react';
-import VideoPlayer from '../video-player/video-player.jsx';
+import React, {PureComponent} from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
 
-const MovieCard = ({film, isPlaying, onTitleClick, onMouseEnter, onMouseLeave}) => {
-  const {id, title, poster, src} = film;
+class MovieCard extends PureComponent {
+  constructor(props) {
+    super(props);
 
-  return (
-    <article
-      className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => onMouseEnter(id)}
-      onMouseLeave={onMouseLeave}
-    >
-      <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, film)}>
-        <VideoPlayer
-          src={src}
-          poster={poster}
-          isMuted={true}
-          isPlaying={isPlaying}
-        />
-      </div>
-      <h3
-        className="small-movie-card__title"
-        onClick={(event) => onTitleClick(event, film)}
+    this.timerID = null;
+    this._handleMouseEnter = this._handleMouseEnter.bind(this);
+    this._handleMouseLeave = this._handleMouseLeave.bind(this);
+  }
+
+  _handleMouseEnter(onChangePlayerRunMode) {
+    this._timerID = setTimeout(() => {
+      onChangePlayerRunMode(true);
+    }, 1000);
+  }
+
+  _handleMouseLeave(onChangePlayerRunMode) {
+    clearTimeout(this._timerID);
+    onChangePlayerRunMode(false);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this._timerID);
+  }
+
+  render() {
+    const {
+      film,
+      film: {src, poster, title},
+      onChangePlayerRunMode,
+      onTitleClick,
+      renderVideoPlayer
+    } = this.props;
+
+    return (
+      <article
+        className="small-movie-card catalog__movies-card"
+        onMouseEnter={() => this._handleMouseEnter(onChangePlayerRunMode)}
+        onMouseLeave={() => this._handleMouseLeave(onChangePlayerRunMode)}
       >
-        <a className="small-movie-card__link" href="movie-page.html">{title}</a>
-      </h3>
-    </article>
-  );
-};
+        <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, film)}>
+          {renderVideoPlayer(src, poster)}
+        </div>
+        <h3
+          className="small-movie-card__title"
+          onClick={(event) => onTitleClick(event, film)}
+        >
+          <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        </h3>
+      </article>
+    );
+  }
+}
 
 MovieCard.propTypes = {
   film: PropValidator.FILM_INFO,
   onTitleClick: PropValidator.TITLE_CLICK,
-  onMouseEnter: PropValidator.CARD_MOUSE_ENTER,
-  isPlaying: PropValidator.IS_PLAYING,
-  onMouseLeave: PropValidator.CARD_MOUSE_LEAVE
+  onChangePlayerRunMode: PropValidator.CHANGE_PLAYER_RUN_MODE,
+  renderVideoPlayer: PropValidator.RENDER_VIDEO_PLAYER
 };
 
 export default MovieCard;

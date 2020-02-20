@@ -257,6 +257,6 @@ exports[`<MovieList /> component renders correctly 1`] = `
 
 exports[`<MovieList /> component renders correctly with empty films array 1`] = `
 <h2>
-  Movie list is empty
+  No movies
 </h2>
 `;

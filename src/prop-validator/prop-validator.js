@@ -17,7 +17,7 @@ const FilmPropType = {
   FILM_INFO: exact({
     id: number.isRequired,
     title: string.isRequired,
-    genre: arrayOf(string).isRequired,
+    genre: string.isRequired,
     year: number.isRequired,
     promoPoster: string.isRequired,
     poster: string.isRequired,
@@ -25,9 +25,18 @@ const FilmPropType = {
     description: string.isRequired,
     rating: number.isRequired,
     votes: number.isRequired,
+    runtime: number.isRequired,
     director: string.isRequired,
     starring: array.isRequired,
-    src: string.isRequired
+    src: string.isRequired,
+    reviews: arrayOf(
+        exact({
+          text: string.isRequired,
+          author: string.isRequired,
+          date: string.isRequired,
+          rating: number.isRequired
+        })
+    ).isRequired
   }).isRequired,
   TITLE_CLICK: func.isRequired,
   CARD_MOUSE_ENTER: func.isRequired,
@@ -38,12 +47,20 @@ const VideoPropType = {
   IS_PLAYING: bool.isRequired,
   SRC: string.isRequired,
   IS_MUTED: bool.isRequired,
-  POSTER: string.isRequired
+  POSTER: string.isRequired,
+  CHANGE_PLAYER_RUN_MODE: func.isRequired,
+  RENDER_VIDEO_PLAYER: func.isRequired
+};
+
+const MovieTabs = {
+  ACTIVE_ITEM_INDEX: number.isRequired,
+  CHANGE_ACTIVE_ITEM: func.isRequired
 };
 
 export const PropValidator = Object.assign(
     FilmPropType,
     {FILMS: arrayOf(FilmPropType.FILM_INFO).isRequired},
-    VideoPropType
+    VideoPropType,
+    MovieTabs
 );
 

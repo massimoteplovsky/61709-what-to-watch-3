@@ -8,27 +8,26 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const handleMouseEnter = jest.fn((...args) => [...args]);
 const handleClick = jest.fn((...args) => [...args]);
-const handleMouseLeave = jest.fn();
+const handlePlayerRunMode = jest.fn();
 
-it(`Mouse leave triggered`, () => {
+it(`VideoPlayer mode has been chahnged (paused)`, () => {
 
   const movieCard = shallow(
       <MovieCard
         film={film}
-        isPlaying={false}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         onTitleClick={handleClick}
+        onChangePlayerRunMode={handlePlayerRunMode}
+        renderVideoPlayer={() => {}}
       />
   );
 
-  const card = movieCard.find(`.small-movie-card`).at(0);
+  const card = movieCard.find(`.small-movie-card`);
 
   card.simulate(`mouseleave`);
 
-  expect(handleMouseLeave.mock.calls.length).toBe(1);
+  expect(handlePlayerRunMode).toHaveBeenCalledTimes(1);
+  expect(handlePlayerRunMode).toHaveBeenCalledWith(false);
 });
 
 it(`Title has been clicked`, () => {
@@ -36,10 +35,9 @@ it(`Title has been clicked`, () => {
   const movieCard = shallow(
       <MovieCard
         film={film}
-        isPlaying={false}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
         onTitleClick={handleClick}
+        onChangePlayerRunMode={handlePlayerRunMode}
+        renderVideoPlayer={() => {}}
       />
   );
 
@@ -53,21 +51,22 @@ it(`Title has been clicked`, () => {
   expect(handleClick.mock.calls[0][1]).toMatchObject(film);
 });
 
-it(`Movie data has been passed to the callback handler`, () => {
-
+it(`VideoPlayer mode has been chahnged (play)`, () => {
+  jest.useFakeTimers();
   const movieCard = shallow(
       <MovieCard
         film={film}
-        isPlaying={false}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onChangePlayerRunMode={handlePlayerRunMode}
         onTitleClick={handleClick}
+        renderVideoPlayer={() => {}}
       />
   );
 
   const card = movieCard.find(`.small-movie-card`);
 
-  card.simulate(`mouseenter`);
-  expect(handleMouseEnter.mock.calls.length).toBe(1);
-  expect(handleMouseEnter).toHaveBeenCalledWith(1);
+  setTimeout(() => {
+    card.simulate(`mouseenter`);
+    expect(handlePlayerRunMode.mock.calls.length).toBe(1);
+    expect(handlePlayerRunMode).toHaveBeenCalledWith(true);
+  }, 1000);
 });

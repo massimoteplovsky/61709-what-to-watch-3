@@ -27,7 +27,7 @@ class App extends PureComponent {
 
     if (filmInfo) {
       return (
-        <Movie filmInfo={filmInfo}/>
+        <Movie filmInfo={filmInfo} films={films} onTitleClick={this.handleTitleClick}/>
       );
     }
 

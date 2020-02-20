@@ -8,7 +8,7 @@ Enzyme.configure({adapter: new Adapter()});
 jest.spyOn(window.HTMLMediaElement.prototype, `play`)
   .mockImplementation(() => {});
 
-jest.spyOn(window.HTMLMediaElement.prototype, `pause`)
+jest.spyOn(window.HTMLMediaElement.prototype, `load`)
   .mockImplementation(() => {});
 
 it(`VideoPlayer should have state isPlaying true`, () => {
@@ -18,6 +18,8 @@ it(`VideoPlayer should have state isPlaying true`, () => {
     isMuted={true}
     isPlaying={true}
   />);
+
+  player.instance()._videoRef.current.onplay();
 
   expect(player.state().isPlaying).toBe(true);
 });
