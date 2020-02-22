@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app.jsx";
-import films from "./mocks/films";
+import {Provider} from 'react-redux';
+import store from './store';
 
 const promoFilmInfo = {
   title: `The Grand Budapest Hotel`,
@@ -10,9 +11,10 @@ const promoFilmInfo = {
 };
 
 ReactDOM.render(
-    <App
-      promoFilmInfo={promoFilmInfo}
-      films={films}
-    />,
+    <Provider store={store}>
+      <App
+        promoFilmInfo={promoFilmInfo}
+      />
+    </Provider>,
     document.querySelector(`#root`)
 );

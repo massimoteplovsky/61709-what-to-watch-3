@@ -1,0 +1,2 @@
+export const CHANGE_FILM_GENRE = `CHANGE_FILM_GENRE`;
+export const GET_FILMS_BY_GENRE = `GET_FILMS_BY_GENRE`;

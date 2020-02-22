@@ -25,7 +25,6 @@ const withVideoPlayer = (Component) => {
       return (
         <Component
           {...this.props}
-          isPlaying={isPlaying}
           onChangePlayerRunMode={this.handlePlayerRunMode}
           renderVideoPlayer={
             (src, poster) => {

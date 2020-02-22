@@ -11,7 +11,7 @@ Enzyme.configure({
 const handleClick = jest.fn((...args) => [...args]);
 const handlePlayerRunMode = jest.fn();
 
-it(`VideoPlayer mode has been chahnged (paused)`, () => {
+it(`VideoPlayer mode has been changed (paused)`, () => {
 
   const movieCard = shallow(
       <MovieCard
@@ -52,7 +52,9 @@ it(`Title has been clicked`, () => {
 });
 
 it(`VideoPlayer mode has been chahnged (play)`, () => {
+
   jest.useFakeTimers();
+
   const movieCard = shallow(
       <MovieCard
         film={film}
@@ -64,9 +66,10 @@ it(`VideoPlayer mode has been chahnged (play)`, () => {
 
   const card = movieCard.find(`.small-movie-card`);
 
-  setTimeout(() => {
-    card.simulate(`mouseenter`);
-    expect(handlePlayerRunMode.mock.calls.length).toBe(1);
-    expect(handlePlayerRunMode).toHaveBeenCalledWith(true);
-  }, 1000);
+  card.simulate(`mouseenter`);
+
+  jest.runAllTimers();
+
+  expect(handlePlayerRunMode).toHaveBeenCalledTimes(2);
+  expect(handlePlayerRunMode).toHaveBeenCalledWith(true);
 });

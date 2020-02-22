@@ -1,4 +1,4 @@
-export default [
+export const films = [
   {
     id: 1,
     title: `Terminator 2. Judgment day`,
@@ -492,4 +492,17 @@ export default [
       },
     ]
   }
+];
+
+export const genresList = [
+  `All genres`,
+  `Comedies`,
+  `Crime`,
+  `Documentary`,
+  `Dramas`,
+  `Horror`,
+  `Kids & Family`,
+  `Romance`,
+  `Sci-Fi`,
+  `Thrillers`
 ];

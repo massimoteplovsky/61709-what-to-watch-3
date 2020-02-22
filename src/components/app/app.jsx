@@ -1,6 +1,8 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import {PropValidator} from "../../prop-validator/prop-validator";
+import {connect} from 'react-redux';
+import {changeFilmGenre, getFilmsByGenre} from '../../actions/action-creators/film-action-creators';
 import Main from "../main/main.jsx";
 import Movie from "../movie/movie.jsx";
 
@@ -22,12 +24,22 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {promoFilmInfo, films} = this.props;
+    const {
+      promoFilmInfo,
+      films,
+      filteredFilms,
+      actualGenre,
+      onChangeFilmGenre
+    } = this.props;
     const {filmInfo} = this.state;
 
     if (filmInfo) {
       return (
-        <Movie filmInfo={filmInfo} films={films} onTitleClick={this.handleTitleClick}/>
+        <Movie
+          filmInfo={filmInfo}
+          films={films}
+          onTitleClick={this.handleTitleClick}
+        />
       );
     }
 
@@ -35,7 +47,10 @@ class App extends PureComponent {
       <Main
         promoFilmInfo={promoFilmInfo}
         films={films}
+        filteredFilms={filteredFilms}
+        actualGenre={actualGenre}
         onTitleClick={this.handleTitleClick}
+        onChangeFilmGenre={onChangeFilmGenre}
       />
     );
   }
@@ -57,7 +72,24 @@ class App extends PureComponent {
 
 App.propTypes = {
   promoFilmInfo: PropValidator.PROMO_FILM_INFO,
-  films: PropValidator.FILMS
+  films: PropValidator.FILMS,
+  filteredFilms: PropValidator.FILMS,
+  actualGenre: PropValidator.GENRE,
+  onChangeFilmGenre: PropValidator.CHANGE_GENRE,
 };
 
-export default App;
+const mapStateToProps = ({films, actualGenre, filteredFilms}) => ({
+  films,
+  filteredFilms,
+  actualGenre
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeFilmGenre(genre, films) {
+    dispatch(changeFilmGenre(genre));
+    dispatch(getFilmsByGenre(genre, films));
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

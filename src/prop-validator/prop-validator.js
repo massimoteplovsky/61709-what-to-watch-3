@@ -38,9 +38,11 @@ const FilmPropType = {
         })
     ).isRequired
   }).isRequired,
+  GENRE: string.isRequired,
   TITLE_CLICK: func.isRequired,
   CARD_MOUSE_ENTER: func.isRequired,
-  CARD_MOUSE_LEAVE: func.isRequired
+  CARD_MOUSE_LEAVE: func.isRequired,
+  CHANGE_GENRE: func.isRequired
 };
 
 const VideoPropType = {

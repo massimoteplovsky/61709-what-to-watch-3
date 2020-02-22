@@ -10,6 +10,9 @@ it(`<Main /> component renders correctly`, () => {
     .create(<Main
       promoFilmInfo={promoFilmInfo}
       films={films}
+      filteredFilms = {films}
+      actualGenre = {``}
+      onChangeFilmGenre = {() => {}}
       onTitleClick={handleTitleClick}
     />, {
       createNodeMock: () => {
