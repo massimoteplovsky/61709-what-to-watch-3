@@ -38,11 +38,12 @@ const FilmPropType = {
         })
     ).isRequired
   }).isRequired,
-  GENRE: string.isRequired,
   TITLE_CLICK: func.isRequired,
   CARD_MOUSE_ENTER: func.isRequired,
   CARD_MOUSE_LEAVE: func.isRequired,
-  CHANGE_GENRE: func.isRequired
+  SHOW_MORE_FILMS: func.isRequired,
+  FILM_COUNTER: number.isRequired,
+  RESET_FILM_COUNTER: func.isRequired
 };
 
 const VideoPropType = {
@@ -59,10 +60,16 @@ const MovieTabs = {
   CHANGE_ACTIVE_ITEM: func.isRequired
 };
 
+const MovieGenre = {
+  CHANGE_GENRE: func.isRequired,
+  GENRE: string.isRequired,
+};
+
 export const PropValidator = Object.assign(
     FilmPropType,
     {FILMS: arrayOf(FilmPropType.FILM_INFO).isRequired},
     VideoPropType,
-    MovieTabs
+    MovieTabs,
+    MovieGenre
 );
 

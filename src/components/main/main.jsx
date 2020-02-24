@@ -1,18 +1,20 @@
 import React from "react";
 import {PropValidator} from "../../prop-validator/prop-validator";
+import {connect} from 'react-redux';
 import Header from '../header/header.jsx';
 import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from "../movie-list/movie-list.jsx";
+import ShowMore from '../show-more/show-more.jsx';
 import Footer from '../footer/footer.jsx';
 
 const Main = ({
-  films,
   filteredFilms,
   onTitleClick,
-  actualGenre,
-  onChangeFilmGenre,
+  filmCounter,
   promoFilmInfo: {title, genre, year}}
 ) => {
+
+  const countFilteredFilms = (films, count) => films.length > count ? films.slice(0, count) : films;
 
   return (
     <>
@@ -61,17 +63,14 @@ const Main = ({
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList
-            films={films}
-            onChangeFilmGenre={onChangeFilmGenre}
-            actualGenre={actualGenre}
+          <GenreList/>
+
+          <MovieList
+            films={countFilteredFilms(filteredFilms, filmCounter)}
+            onTitleClick={onTitleClick}
           />
 
-          <MovieList films={filteredFilms} onTitleClick={onTitleClick}/>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {filmCounter >= filteredFilms.length || <ShowMore/>}
         </section>
 
         <Footer/>
@@ -82,12 +81,17 @@ const Main = ({
 
 Main.propTypes = {
   promoFilmInfo: PropValidator.PROMO_FILM_INFO,
-  films: PropValidator.FILMS,
   filteredFilms: PropValidator.FILMS,
-  actualGenre: PropValidator.GENRE,
-  onChangeFilmGenre: PropValidator.CHANGE_GENRE,
-  onTitleClick: PropValidator.TITLE_CLICK
+  onTitleClick: PropValidator.TITLE_CLICK,
+  filmCounter: PropValidator.FILM_COUNTER
 };
 
-export default Main;
+const mapStateToProps = ({filteredFilms, filmCounter}) => ({
+  filteredFilms,
+  filmCounter
+});
+
+export {Main};
+
+export default connect(mapStateToProps)(Main);
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import {film, films} from '../../mocks/films-test';
-import Movie from './movie.jsx';
+import {Movie} from './movie.jsx';
 
 const handleTitleClick = () => {};
 

@@ -1,7 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {PropValidator} from '../../prop-validator/prop-validator';
+import {changeFilmGenre, getFilmsByGenre, changeFilmCounter} from '../../actions/action-creators/film-action-creators';
+import {FILM_TO_SHOW} from '../../consts';
 
-const GenreList = ({films, actualGenre, onChangeFilmGenre}) => {
+const GenreList = ({films, actualGenre, handleFilmGenreChange}) => {
 
   const genres = [...new Set([`All genres`, ...films.map((film) => film.genre)])];
 
@@ -19,7 +22,7 @@ const GenreList = ({films, actualGenre, onChangeFilmGenre}) => {
                 className="catalog__genres-link"
                 onClick={(event) => {
                   event.preventDefault();
-                  onChangeFilmGenre(genre, films);
+                  handleFilmGenreChange(genre, films, FILM_TO_SHOW);
                 }}
               >{genre}</a>
             </li>
@@ -33,7 +36,21 @@ const GenreList = ({films, actualGenre, onChangeFilmGenre}) => {
 GenreList.propTypes = {
   films: PropValidator.FILMS,
   actualGenre: PropValidator.GENRE,
-  onChangeFilmGenre: PropValidator.CHANGE_GENRE
+  handleFilmGenreChange: PropValidator.CHANGE_GENRE
 };
 
-export default GenreList;
+const mapStateToProps = ({films, actualGenre}) => ({
+  films,
+  actualGenre
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleFilmGenreChange(genre, films, count) {
+    dispatch(changeFilmGenre(genre));
+    dispatch(getFilmsByGenre(genre, films));
+    dispatch(changeFilmCounter(count));
+  }
+});
+
+export {GenreList};
+export default connect(mapStateToProps, mapDispatchToProps)(GenreList);

@@ -1,8 +1,13 @@
 import {filmsReducer} from "./films-reducer.js";
-import {changeFilmGenre, getFilmsByGenre} from '../../actions/action-creators/film-action-creators';
+import {
+  changeFilmGenre,
+  getFilmsByGenre,
+  changeFilmCounter
+} from '../../actions/action-creators/film-action-creators';
 import {
   CHANGE_FILM_GENRE,
-  GET_FILMS_BY_GENRE
+  GET_FILMS_BY_GENRE,
+  CHANGE_FILM_COUNTER
 } from '../../actions/types/film-action-types';
 import {films} from '../../mocks/films';
 const filteredFilms = [
@@ -71,6 +76,71 @@ const filteredFilms = [
         rating: 8.0
       },
     ]
+  },
+  {
+    id: 9,
+    title: `The Gentlemen`,
+    genre: `Action`,
+    year: 2020,
+    promoPoster: `https://media.kg-portal.ru/images/gentlemen/gentlemen_9.jpg`,
+    poster: `https://theplaylist.net/wp-content/uploads/2020/01/the-gentleman-360x240.jpg`,
+    cover: `https://upload.wikimedia.org/wikipedia/en/0/06/The_Gentlemen_poster.jpg`,
+    description: `Big Dave, editor of the Daily Print tabloid, is snubbed by cannabis baron Mickey Pearson at a
+     party and hires private investigator Fletcher to investigate Pearson's links to Lord Pressfield,
+     a minor Royal with a heroin-addicted daughter. Fletcher offers to sell his
+    findings (typed up as a screenplay entitled Bush) to Pearson's right-hand man Raymond for £20 million.`,
+    rating: 8.7,
+    votes: 380,
+    runtime: 120,
+    director: `Guy Ritchie`,
+    starring: [`Matthew McConaughey`, `Charlie Hunnam`, `Henry Golding`],
+    src: `https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm`,
+    reviews: [
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the
+         glorious Mittel-European kitsch of one of the director funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        date: `11.24.2016`,
+        rating: 8.6
+      },
+      {
+        text: `Anderson films are too precious for some, but for those of us willing to
+        lose ourselves in them, theyre a delight. The Grand Budapest Hotel is no different,
+        except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        date: `10.18.2015`,
+        rating: 8.9
+      },
+      {
+        text: `I didn find it amusing, and while I can appreciate the creativity,
+        it an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        date: `09.13.2015`,
+        rating: 8.0
+      },
+      {
+        text: `Discerning travellers and Wes Anderson fans will luxuriate in the
+         glorious Mittel-European kitsch of one of the director funniest and most exquisitely designed movies in years.`,
+        author: `Kate Muir`,
+        date: `11.24.2016`,
+        rating: 8.6
+      },
+      {
+        text: `Anderson films are too precious for some, but for those of us willing to
+        lose ourselves in them, theyre a delight. The Grand Budapest Hotel is no different,
+        except that he has added a hint of gravitas to the mix, improving the recipe.`,
+        author: `Bill Goodykoontz`,
+        date: `10.18.2015`,
+        rating: 8.9
+      },
+      {
+        text: `I didn find it amusing, and while I can appreciate the creativity,
+        it an hour and 40 minutes I wish I could take back.`,
+        author: `Amanda Greever`,
+        date: `09.13.2015`,
+        rating: 8.0
+      },
+    ]
   }
 ];
 
@@ -78,7 +148,8 @@ it(`Reducer without additional parameters should return initial state`, () => {
   expect(filmsReducer(void 0, {})).toEqual({
     films,
     filteredFilms: films,
-    actualGenre: `All genres`
+    actualGenre: `All genres`,
+    filmCounter: 8
   });
 });
 
@@ -112,6 +183,23 @@ it(`Reducer should change filtered films for recieved value`, () => {
   });
 });
 
+it(`Reducer should change film to show counter`, () => {
+  expect(filmsReducer({
+    films,
+    filteredFilms: films,
+    actualGenre: `All genres`,
+    filmCounter: 8
+  }, {
+    type: CHANGE_FILM_COUNTER,
+    payload: 16,
+  })).toEqual({
+    films,
+    filteredFilms: films,
+    actualGenre: `All genres`,
+    filmCounter: 16
+  });
+});
+
 describe(`Action creators work correctly`, () => {
 
   it(`Action creator for changing film genre returns correct action`, () => {
@@ -125,6 +213,13 @@ describe(`Action creators work correctly`, () => {
     expect(getFilmsByGenre(`Action`, films)).toEqual({
       type: GET_FILMS_BY_GENRE,
       payload: filteredFilms,
+    });
+  });
+
+  it(`Action creator for changing film counter returns correct action`, () => {
+    expect(changeFilmCounter(16)).toEqual({
+      type: CHANGE_FILM_COUNTER,
+      payload: 16,
     });
   });
 });

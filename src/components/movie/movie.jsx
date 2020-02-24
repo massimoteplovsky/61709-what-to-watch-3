@@ -1,10 +1,12 @@
-import React from "react";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import React from 'react';
+import {PropValidator} from '../../prop-validator/prop-validator';
+import {connect} from 'react-redux';
 import Header from '../header/header.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import Footer from '../footer/footer.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import {RELATED_MOVIE_COUNT} from '../../consts';
 
 const WrappedTabs = withActiveItem(Tabs);
 
@@ -16,8 +18,6 @@ const Movie = ({filmInfo, films, onTitleClick}) => {
     promoPoster,
     cover,
   } = filmInfo;
-
-  const RELATED_MOVIE_COUNT = 4;
 
   const findRelatedMovies = (movies) => {
     return movies.filter((movie) => {
@@ -100,4 +100,9 @@ Movie.propTypes = {
   onTitleClick: PropValidator.TITLE_CLICK
 };
 
-export default Movie;
+const mapStateToProps = ({films}) => ({
+  films
+});
+
+export {Movie};
+export default connect(mapStateToProps)(Movie);
