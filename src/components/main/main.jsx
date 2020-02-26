@@ -6,15 +6,15 @@ import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from "../movie-list/movie-list.jsx";
 import ShowMore from '../show-more/show-more.jsx';
 import Footer from '../footer/footer.jsx';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
+
+const WrappedGenreList = withActiveItem(GenreList);
 
 const Main = ({
   filteredFilms,
   onTitleClick,
-  filmCounter,
   promoFilmInfo: {title, genre, year}}
 ) => {
-
-  const countFilteredFilms = (films, count) => films.length > count ? films.slice(0, count) : films;
 
   return (
     <>
@@ -63,14 +63,14 @@ const Main = ({
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList/>
+          <WrappedGenreList/>
 
           <MovieList
-            films={countFilteredFilms(filteredFilms, filmCounter)}
+            films={filteredFilms}
             onTitleClick={onTitleClick}
           />
 
-          {filmCounter >= filteredFilms.length || <ShowMore/>}
+          <ShowMore/>
         </section>
 
         <Footer/>
@@ -87,7 +87,7 @@ Main.propTypes = {
 };
 
 const mapStateToProps = ({filteredFilms, filmCounter}) => ({
-  filteredFilms,
+  filteredFilms: filteredFilms.length > filmCounter ? filteredFilms.slice(0, filmCounter) : filteredFilms,
   filmCounter
 });
 

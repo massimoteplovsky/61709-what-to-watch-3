@@ -6,7 +6,6 @@ import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import Footer from '../footer/footer.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import {RELATED_MOVIE_COUNT} from '../../consts';
 
 const WrappedTabs = withActiveItem(Tabs);
 
@@ -19,7 +18,9 @@ const Movie = ({filmInfo, films, onTitleClick}) => {
     cover,
   } = filmInfo;
 
-  const findRelatedMovies = (movies) => {
+  const RELATED_MOVIE_COUNT = 4;
+
+  const findRelatedFilms = (movies) => {
     return movies.filter((movie) => {
       return movie.genre === genre && movie.title !== title;
     }).slice(0, RELATED_MOVIE_COUNT);
@@ -83,7 +84,7 @@ const Movie = ({filmInfo, films, onTitleClick}) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MovieList
-            films={findRelatedMovies(films)}
+            films={findRelatedFilms(films)}
             onTitleClick={onTitleClick}
           />
         </section>

@@ -2,6 +2,7 @@ import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {ShowMore} from './show-more.jsx';
+import {films} from '../../mocks/films';
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -13,8 +14,9 @@ it(`Film counter has been changed`, () => {
 
   const wrapper = shallow(
       <ShowMore
-        handleFilmCounterChange={handleFilmCounterChange}
         filmCounter={8}
+        handleFilmCounterChange={handleFilmCounterChange}
+        filteredFilms={films}
       />
   );
 
@@ -23,5 +25,4 @@ it(`Film counter has been changed`, () => {
   btn.simulate(`click`);
 
   expect(handleFilmCounterChange).toHaveBeenCalledTimes(1);
-  expect(handleFilmCounterChange).toHaveBeenCalledWith(16);
 });

@@ -20,6 +20,8 @@ it(`<App /> component renders correctly`, () => {
         <Provider store={store}>
           <App
             promoFilmInfo={promoFilmInfo}
+            activeFilm={{}}
+            onChangeActiveFilm={() => {}}
           />
         </Provider>, {
           createNodeMock: () => {

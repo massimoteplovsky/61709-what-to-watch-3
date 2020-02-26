@@ -5,7 +5,9 @@ import {
   arrayOf,
   func,
   array,
-  bool
+  bool,
+  oneOfType,
+  oneOf
 } from "prop-types";
 
 const FilmPropType = {
@@ -14,7 +16,7 @@ const FilmPropType = {
     genre: string.isRequired,
     year: number.isRequired
   }),
-  FILM_INFO: exact({
+  FILM_INFO: oneOfType([exact({
     id: number.isRequired,
     title: string.isRequired,
     genre: string.isRequired,
@@ -37,13 +39,15 @@ const FilmPropType = {
           rating: number.isRequired
         })
     ).isRequired
-  }).isRequired,
+  }).isRequired, oneOf([null]).isRequired]),
   TITLE_CLICK: func.isRequired,
   CARD_MOUSE_ENTER: func.isRequired,
   CARD_MOUSE_LEAVE: func.isRequired,
   SHOW_MORE_FILMS: func.isRequired,
+  CHANGE_ACTIVE_FILM: func.isRequired,
   FILM_COUNTER: number.isRequired,
-  RESET_FILM_COUNTER: func.isRequired
+  ITEM_ID: number.isRequired,
+  TITLE: string.isRequired
 };
 
 const VideoPropType = {

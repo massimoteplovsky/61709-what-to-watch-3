@@ -3,6 +3,7 @@ import {PropValidator} from '../../prop-validator/prop-validator';
 import MovieOverview from '../movie-overview/movie-overview.jsx';
 import MovieDetails from '../movie-details/movie-details.jsx';
 import MovieReviews from '../movie-reviews/movie-reviews.jsx';
+import TabsItem from '../tabs-item/tabs-item.jsx';
 
 const Tabs = ({filmInfo, activeItemIndex, onChangeActiveItemIndex}) => {
   const tabItems = [
@@ -26,20 +27,15 @@ const Tabs = ({filmInfo, activeItemIndex, onChangeActiveItemIndex}) => {
       <nav className="movie-nav movie-card__nav">
         <ul className="movie-nav__list">
           {
-            tabItems.map((item, index) => {
+            tabItems.map(({title}, index) => {
               return (
-                <li key={index} className={activeItemIndex === index ? `movie-nav__item movie-nav__item--active` : `movie-nav__item`}>
-                  <a
-                    href="#"
-                    className="movie-nav__link"
-                    onClick={(event) => {
-                      event.preventDefault();
-                      onChangeActiveItemIndex(index);
-                    }}
-                  >
-                    {item.title}
-                  </a>
-                </li>
+                <TabsItem
+                  key={index}
+                  id={index}
+                  title={title}
+                  activeItemIndex={activeItemIndex}
+                  onChangeActiveItemIndex={onChangeActiveItemIndex}
+                />
               );
             })
           }

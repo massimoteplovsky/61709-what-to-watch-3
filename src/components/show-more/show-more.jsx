@@ -2,16 +2,20 @@ import React from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
 import {connect} from 'react-redux';
 import {changeFilmCounter} from '../../actions/action-creators/film-action-creators';
-import {FILM_TO_SHOW} from '../../consts';
 
-const ShowMore = ({filmCounter, handleFilmCounterChange}) => {
+const ShowMore = ({filmCounter, handleFilmCounterChange, filteredFilms}) => {
+
+  if (filmCounter >= filteredFilms.length) {
+    return null;
+  }
+
   return (
     <div className="catalog__more">
       <button
         className="catalog__button"
         type="button"
         onClick={() => {
-          handleFilmCounterChange(filmCounter + FILM_TO_SHOW);
+          handleFilmCounterChange(filteredFilms);
         }}
       >Show more</button>
     </div>
@@ -20,16 +24,18 @@ const ShowMore = ({filmCounter, handleFilmCounterChange}) => {
 
 ShowMore.propTypes = {
   filmCounter: PropValidator.FILM_COUNTER,
-  handleFilmCounterChange: PropValidator.SHOW_MORE_FILMS
+  handleFilmCounterChange: PropValidator.SHOW_MORE_FILMS,
+  filteredFilms: PropValidator.FILMS
 };
 
-const mapStateToProps = ({filmCounter}) => ({
-  filmCounter
+const mapStateToProps = ({filmCounter, filteredFilms}) => ({
+  filmCounter,
+  filteredFilms
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleFilmCounterChange(count) {
-    dispatch(changeFilmCounter(count));
+  handleFilmCounterChange(filteredFilms, filmCounter) {
+    dispatch(changeFilmCounter(filteredFilms, filmCounter));
   }
 });
 

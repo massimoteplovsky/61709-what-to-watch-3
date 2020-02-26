@@ -3,35 +3,27 @@ import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import {PropValidator} from "../../prop-validator/prop-validator";
 import Main from "../main/main.jsx";
 import Movie from "../movie/movie.jsx";
+import withActiveFilm from '../../hocs/with-active-film/with-active-film';
 
 class App extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      filmInfo: null
-    };
-
     this._renderApp = this._renderApp.bind(this);
-    this.handleTitleClick = this.handleTitleClick.bind(this);
-  }
-
-  handleTitleClick(event, film) {
-    event.preventDefault();
-    this.setState({filmInfo: film});
   }
 
   _renderApp() {
     const {
       promoFilmInfo,
+      activeFilm,
+      onChangeActiveFilm
     } = this.props;
-    const {filmInfo} = this.state;
 
-    if (filmInfo) {
+    if (activeFilm) {
       return (
         <Movie
-          filmInfo={filmInfo}
-          onTitleClick={this.handleTitleClick}
+          filmInfo={activeFilm}
+          onTitleClick={onChangeActiveFilm}
         />
       );
     }
@@ -39,7 +31,7 @@ class App extends PureComponent {
     return (
       <Main
         promoFilmInfo={promoFilmInfo}
-        onTitleClick={this.handleTitleClick}
+        onTitleClick={onChangeActiveFilm}
       />
     );
   }
@@ -60,8 +52,10 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  promoFilmInfo: PropValidator.PROMO_FILM_INFO
+  promoFilmInfo: PropValidator.PROMO_FILM_INFO,
+  activeFilm: PropValidator.FILM_INFO,
+  onChangeActiveFilm: PropValidator.CHANGE_ACTIVE_FILM
 };
 
 export {App};
-export default App;
+export default withActiveFilm(App);

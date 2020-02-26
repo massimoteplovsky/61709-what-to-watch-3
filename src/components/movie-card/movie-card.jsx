@@ -31,7 +31,7 @@ class MovieCard extends PureComponent {
       film: {src, poster, title},
       onChangePlayerRunMode,
       onTitleClick,
-      renderVideoPlayer
+      renderVideoPlayer,
     } = this.props;
 
     return (
@@ -58,7 +58,8 @@ MovieCard.propTypes = {
   film: PropValidator.FILM_INFO,
   onTitleClick: PropValidator.TITLE_CLICK,
   onChangePlayerRunMode: PropValidator.CHANGE_PLAYER_RUN_MODE,
-  renderVideoPlayer: PropValidator.RENDER_VIDEO_PLAYER
+  renderVideoPlayer: PropValidator.RENDER_VIDEO_PLAYER,
 };
 
+export {MovieCard};
 export default MovieCard;

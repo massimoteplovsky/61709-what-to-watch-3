@@ -143,6 +143,7 @@ const filteredFilms = [
     ]
   }
 ];
+const filmCounter = 8;
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(filmsReducer(void 0, {})).toEqual({
@@ -217,7 +218,7 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for changing film counter returns correct action`, () => {
-    expect(changeFilmCounter(16)).toEqual({
+    expect(changeFilmCounter(new Array(10), filmCounter)).toEqual({
       type: CHANGE_FILM_COUNTER,
       payload: 16,
     });

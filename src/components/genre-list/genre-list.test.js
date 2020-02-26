@@ -7,8 +7,11 @@ it(`<GenreList /> component renders correctly`, () => {
   const tree = renderer
     .create(<GenreList
       films={films}
-      actualGenre={``}
       handleFilmGenreChange={() => {}}
+      filteredFilms={films}
+      filmCounter={8}
+      onChangeActiveItemIndex={() => {}}
+      activeItemIndex={0}
     />).toJSON();
   expect(tree).toMatchSnapshot();
 });

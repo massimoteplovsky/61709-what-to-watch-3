@@ -9,6 +9,7 @@ Enzyme.configure({
 });
 
 const handleFilmGenreChange = jest.fn();
+
 const genres = [...new Set([`All genres`, ...films.map((film) => film.genre)])];
 const mockEvent = {
   preventDefault() {}
@@ -20,8 +21,11 @@ it(`Change film genre handler has been called`, () => {
   const wrapper = shallow(
       <GenreList
         films={films}
-        actualGenre={``}
         handleFilmGenreChange={handleFilmGenreChange}
+        filteredFilms={films}
+        filmCounter={filmConter}
+        onChangeActiveItemIndex={() => {}}
+        activeItemIndex={0}
       />
   );
 
