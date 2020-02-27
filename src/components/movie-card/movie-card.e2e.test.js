@@ -17,8 +17,8 @@ it(`VideoPlayer mode has been changed (paused)`, () => {
       <MovieCard
         film={film}
         onTitleClick={handleClick}
-        onChangePlayerRunMode={handlePlayerRunMode}
-        renderVideoPlayer={() => {}}
+        onChangeActiveItemIndex={handlePlayerRunMode}
+        activeItemIndex={0}
       />
   );
 
@@ -27,7 +27,30 @@ it(`VideoPlayer mode has been changed (paused)`, () => {
   card.simulate(`mouseleave`);
 
   expect(handlePlayerRunMode).toHaveBeenCalledTimes(1);
-  expect(handlePlayerRunMode).toHaveBeenCalledWith(false);
+  expect(handlePlayerRunMode).toHaveBeenCalledWith(0);
+});
+
+it(`VideoPlayer mode has been chahnged (play)`, () => {
+
+  jest.useFakeTimers();
+
+  const movieCard = shallow(
+      <MovieCard
+        film={film}
+        onTitleClick={handleClick}
+        onChangeActiveItemIndex={handlePlayerRunMode}
+        activeItemIndex={1}
+      />
+  );
+
+  const card = movieCard.find(`.small-movie-card`);
+
+  card.simulate(`mouseenter`);
+
+  jest.runAllTimers();
+
+  expect(handlePlayerRunMode).toHaveBeenCalledTimes(2);
+  expect(handlePlayerRunMode).toHaveBeenCalledWith(1);
 });
 
 it(`Title has been clicked`, () => {
@@ -36,8 +59,8 @@ it(`Title has been clicked`, () => {
       <MovieCard
         film={film}
         onTitleClick={handleClick}
-        onChangePlayerRunMode={handlePlayerRunMode}
-        renderVideoPlayer={() => {}}
+        onChangeActiveItemIndex={handlePlayerRunMode}
+        activeItemIndex={1}
       />
   );
 
@@ -49,27 +72,4 @@ it(`Title has been clicked`, () => {
 
   expect(handleClick.mock.calls.length).toBe(2);
   expect(handleClick.mock.calls[0][1]).toMatchObject(film);
-});
-
-it(`VideoPlayer mode has been chahnged (play)`, () => {
-
-  jest.useFakeTimers();
-
-  const movieCard = shallow(
-      <MovieCard
-        film={film}
-        onChangePlayerRunMode={handlePlayerRunMode}
-        onTitleClick={handleClick}
-        renderVideoPlayer={() => {}}
-      />
-  );
-
-  const card = movieCard.find(`.small-movie-card`);
-
-  card.simulate(`mouseenter`);
-
-  jest.runAllTimers();
-
-  expect(handlePlayerRunMode).toHaveBeenCalledTimes(2);
-  expect(handlePlayerRunMode).toHaveBeenCalledWith(true);
 });

@@ -1,24 +1,26 @@
 import React, {PureComponent} from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
+import PreviewVideoPlayer from '../preview-video-player/preview-video-player.jsx';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
+
+const WrappedPreviewVideoPlayer = withVideoPlayer(PreviewVideoPlayer);
 
 class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.timerID = null;
-    this._handleMouseEnter = this._handleMouseEnter.bind(this);
-    this._handleMouseLeave = this._handleMouseLeave.bind(this);
+    this._timerID = null;
   }
 
-  _handleMouseEnter(onChangePlayerRunMode) {
+  _handleMouseEnter(cb, id) {
     this._timerID = setTimeout(() => {
-      onChangePlayerRunMode(true);
+      cb(id);
     }, 1000);
   }
 
-  _handleMouseLeave(onChangePlayerRunMode) {
+  _handleMouseLeave(cb) {
     clearTimeout(this._timerID);
-    onChangePlayerRunMode(false);
+    cb(0);
   }
 
   componentWillUnmount() {
@@ -28,20 +30,26 @@ class MovieCard extends PureComponent {
   render() {
     const {
       film,
-      film: {src, poster, title},
-      onChangePlayerRunMode,
+      film: {src, poster, title, id},
       onTitleClick,
-      renderVideoPlayer,
+      activeItemIndex,
+      onChangeActiveItemIndex
     } = this.props;
 
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={() => this._handleMouseEnter(onChangePlayerRunMode)}
-        onMouseLeave={() => this._handleMouseLeave(onChangePlayerRunMode)}
+        onMouseEnter={() => this._handleMouseEnter(onChangeActiveItemIndex, id)}
+        onMouseLeave={() => this._handleMouseLeave(onChangeActiveItemIndex)}
       >
         <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, film)}>
-          {renderVideoPlayer(src, poster)}
+          <WrappedPreviewVideoPlayer
+            src={src}
+            poster={poster}
+            isPlaying={id === activeItemIndex}
+            isMuted={true}
+            isPreviewMode={true}
+          />
         </div>
         <h3
           className="small-movie-card__title"
@@ -57,8 +65,8 @@ class MovieCard extends PureComponent {
 MovieCard.propTypes = {
   film: PropValidator.FILM_INFO,
   onTitleClick: PropValidator.TITLE_CLICK,
-  onChangePlayerRunMode: PropValidator.CHANGE_PLAYER_RUN_MODE,
-  renderVideoPlayer: PropValidator.RENDER_VIDEO_PLAYER,
+  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
+  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };
 
 export {MovieCard};

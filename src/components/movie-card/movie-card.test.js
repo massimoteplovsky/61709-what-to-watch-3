@@ -10,10 +10,8 @@ it(`<MovieCard /> component renders correctly`, () => {
     .create(<MovieCard
       film={film}
       onTitleClick={handleFunc}
-      onMouseEnter={handleFunc}
-      onMouseLeave={handleFunc}
-      onChangePlayerRunMode={handleFunc}
-      renderVideoPlayer={handleFunc}
+      onChangeActiveItemIndex={handleFunc}
+      activeItemIndex={0}
     />, {
       createNodeMock: () => {
         return {};

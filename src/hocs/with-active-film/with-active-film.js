@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 
 const withActiveFilm = (Component) => {
+
   class WithActiveFilm extends PureComponent {
     constructor(props) {
       super(props);
@@ -9,10 +10,10 @@ const withActiveFilm = (Component) => {
         activeFilm: null
       };
 
-      this.handleActiveFilm = this.handleActiveFilm.bind(this);
+      this.handleActiveFilmChange = this.handleActiveFilmChange.bind(this);
     }
 
-    handleActiveFilm(event, film) {
+    handleActiveFilmChange(event, film) {
       event.preventDefault();
       this.setState({activeFilm: film});
     }
@@ -24,7 +25,7 @@ const withActiveFilm = (Component) => {
         <Component
           {...this.props}
           activeFilm={activeFilm}
-          onChangeActiveFilm={this.handleActiveFilm}
+          onChangeActiveFilm={this.handleActiveFilmChange}
         />
       );
     }

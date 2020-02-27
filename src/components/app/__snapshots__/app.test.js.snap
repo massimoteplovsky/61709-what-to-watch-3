@@ -64,78 +64,70 @@ Array [
       className="movie-card__wrap"
     >
       <div
-        className="movie-card__info"
+        className="movie-card__desc"
       >
-        <div
-          className="movie-card__poster"
+        <h2
+          className="movie-card__title"
         >
-          <img
-            alt="The Grand Budapest Hotel poster"
-            height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
-            width="218"
-          />
-        </div>
-        <div
-          className="movie-card__desc"
+          The Grand Budapest Hotel
+        </h2>
+        <p
+          className="movie-card__meta"
         >
-          <h2
-            className="movie-card__title"
+          <span
+            className="movie-card__genre"
           >
-            The Grand Budapest Hotel
-          </h2>
-          <p
-            className="movie-card__meta"
+            Drama
+          </span>
+          <span
+            className="movie-card__year"
           >
-            <span
-              className="movie-card__genre"
+            2014
+          </span>
+        </p>
+        <div
+          className="movie-card__buttons"
+        >
+          <button
+            className="btn btn--play movie-card__button"
+            type="button"
+          >
+            <svg
+              height="19"
+              viewBox="0 0 19 19"
+              width="19"
             >
-              Drama
+              <use
+                xlinkHref="#play-s"
+              />
+            </svg>
+            <span>
+              Play
             </span>
-            <span
-              className="movie-card__year"
-            >
-              2014
-            </span>
-          </p>
-          <div
-            className="movie-card__buttons"
+          </button>
+          <button
+            className="btn btn--list movie-card__button"
+            type="button"
           >
-            <button
-              className="btn btn--play movie-card__button"
-              type="button"
+            <svg
+              height="20"
+              viewBox="0 0 19 20"
+              width="19"
             >
-              <svg
-                height="19"
-                viewBox="0 0 19 19"
-                width="19"
-              >
-                <use
-                  xlinkHref="#play-s"
-                />
-              </svg>
-              <span>
-                Play
-              </span>
-            </button>
-            <button
-              className="btn btn--list movie-card__button"
-              type="button"
-            >
-              <svg
-                height="20"
-                viewBox="0 0 19 20"
-                width="19"
-              >
-                <use
-                  xlinkHref="#add"
-                />
-              </svg>
-              <span>
-                My list
-              </span>
-            </button>
-          </div>
+              <use
+                xlinkHref="#add"
+              />
+            </svg>
+            <span>
+              My list
+            </span>
+          </button>
+          <a
+            className="btn movie-card__button"
+            href="add-review.html"
+          >
+            Add review
+          </a>
         </div>
       </div>
     </div>

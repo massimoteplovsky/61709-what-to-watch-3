@@ -7,7 +7,8 @@ import {
   array,
   bool,
   oneOfType,
-  oneOf
+  oneOf,
+  node
 } from "prop-types";
 
 const FilmPropType = {
@@ -46,8 +47,9 @@ const FilmPropType = {
   SHOW_MORE_FILMS: func.isRequired,
   CHANGE_ACTIVE_FILM: func.isRequired,
   FILM_COUNTER: number.isRequired,
-  ITEM_ID: number.isRequired,
-  TITLE: string.isRequired
+  TITLE: string.isRequired,
+  YEAR: number.isRequired,
+  GENRE: string.isRequired,
 };
 
 const VideoPropType = {
@@ -55,25 +57,28 @@ const VideoPropType = {
   SRC: string.isRequired,
   IS_MUTED: bool.isRequired,
   POSTER: string.isRequired,
-  CHANGE_PLAYER_RUN_MODE: func.isRequired,
-  RENDER_VIDEO_PLAYER: func.isRequired
-};
-
-const MovieTabs = {
-  ACTIVE_ITEM_INDEX: number.isRequired,
-  CHANGE_ACTIVE_ITEM: func.isRequired
 };
 
 const MovieGenre = {
   CHANGE_GENRE: func.isRequired,
-  GENRE: string.isRequired,
+};
+
+const General = {
+  CHILDREN: oneOfType([
+    arrayOf(node),
+    node
+  ]).isRequired,
+  IS_PREVIEW_MODE: bool.isRequired,
+  ACTIVE_ITEM_INDEX: number.isRequired,
+  CHANGE_ACTIVE_ITEM: func.isRequired,
+  ITEM_ID: number.isRequired,
 };
 
 export const PropValidator = Object.assign(
     FilmPropType,
     {FILMS: arrayOf(FilmPropType.FILM_INFO).isRequired},
     VideoPropType,
-    MovieTabs,
-    MovieGenre
+    MovieGenre,
+    General
 );
 
