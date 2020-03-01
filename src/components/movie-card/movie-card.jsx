@@ -1,26 +1,11 @@
 import React, {PureComponent} from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
-import PreviewVideoPlayer from '../preview-video-player/preview-video-player.jsx';
-import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
-
-const WrappedPreviewVideoPlayer = withVideoPlayer(PreviewVideoPlayer);
 
 class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
     this._timerID = null;
-  }
-
-  _handleMouseEnter(cb, id) {
-    this._timerID = setTimeout(() => {
-      cb(id);
-    }, 1000);
-  }
-
-  _handleMouseLeave(cb) {
-    clearTimeout(this._timerID);
-    cb(0);
   }
 
   componentWillUnmount() {
@@ -30,26 +15,28 @@ class MovieCard extends PureComponent {
   render() {
     const {
       film,
-      film: {src, poster, title, id},
+      film: {title},
       onTitleClick,
-      activeItemIndex,
-      onChangeActiveItemIndex
+      children,
+      onRunModeToggle,
+      isPlaying
     } = this.props;
 
     return (
       <article
         className="small-movie-card catalog__movies-card"
-        onMouseEnter={() => this._handleMouseEnter(onChangeActiveItemIndex, id)}
-        onMouseLeave={() => this._handleMouseLeave(onChangeActiveItemIndex)}
+        onMouseEnter={() => {
+          this._timerID = setTimeout(() => onRunModeToggle(true), 1000);
+        }}
+        onMouseLeave={() => {
+          if (isPlaying) {
+            onRunModeToggle();
+          }
+          clearTimeout(this._timerID);
+        }}
       >
         <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, film)}>
-          <WrappedPreviewVideoPlayer
-            src={src}
-            poster={poster}
-            isPlaying={id === activeItemIndex}
-            isMuted={true}
-            isPreviewMode={true}
-          />
+          {children}
         </div>
         <h3
           className="small-movie-card__title"
@@ -65,8 +52,9 @@ class MovieCard extends PureComponent {
 MovieCard.propTypes = {
   film: PropValidator.FILM_INFO,
   onTitleClick: PropValidator.TITLE_CLICK,
-  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
+  children: PropValidator.CHILDREN,
+  onRunModeToggle: PropValidator.TOGGLE_PLAYING,
+  isPlaying: PropValidator.IS_PLAYING
 };
 
 export {MovieCard};

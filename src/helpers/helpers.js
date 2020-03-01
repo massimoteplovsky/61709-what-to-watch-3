@@ -47,4 +47,12 @@ export const sortByDate = (a, b) => {
   return new Date(b.date) - new Date(a.date);
 };
 
+export const makeTimer = (time) => {
+  const pad = (num) => num < 10 ? `0${num}` : num;
+  const hours = Math.floor(time / 60 / 60);
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time - minutes * 60);
+  return `${hours}:${pad(minutes)}:${pad(seconds)}`;
+};
+
 

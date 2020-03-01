@@ -219,8 +219,11 @@ export const film = {
 };
 
 export const promoFilmInfo = {
+  id: 1,
   title: `The Grand Budapest Hotel`,
   genre: `Drama`,
-  year: 2014
+  year: 2014,
+  poster: ``,
+  src: ``
 };
 

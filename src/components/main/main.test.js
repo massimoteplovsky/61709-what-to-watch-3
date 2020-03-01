@@ -24,6 +24,8 @@ it(`<Main /> component renders correctly`, () => {
             filteredFilms = {films}
             onTitleClick={handleTitleClick}
             filmCounter={8}
+            activeItemIndex={0}
+            onChangeActiveItemIndex={() => {}}
           />
         </Provider>, {
           createNodeMock: () => {

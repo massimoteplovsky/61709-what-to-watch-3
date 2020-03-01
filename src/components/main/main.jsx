@@ -7,19 +7,40 @@ import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from "../movie-list/movie-list.jsx";
 import ShowMore from '../show-more/show-more.jsx';
 import Footer from '../footer/footer.jsx';
+import VideoPlayer from '../video-player/video-player.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
 const WrappedGenreList = withActiveItem(GenreList);
+const WrappedVideoPlayer = withVideoPlayer(VideoPlayer);
 
 const Main = ({
+  activeItemIndex,
+  onChangeActiveItemIndex,
   filteredFilms,
   onTitleClick,
   promoFilmInfo: {
+    id,
     title,
     genre,
-    year
+    year,
+    poster,
+    src
   }
 }) => {
+
+  if (activeItemIndex === id) {
+    return (
+      <WrappedVideoPlayer
+        src={src}
+        isMuted={false}
+        poster={poster}
+        isPlaying={true}
+        isPreviewMode={false}
+        onChangeActiveItemIndex={onChangeActiveItemIndex}
+      />
+    );
+  }
 
   return (
     <>
@@ -33,9 +54,11 @@ const Main = ({
         <Header/>
 
         <MoviePromo
+          id={id}
           title={title}
           genre={genre}
           year={year}
+          onChangeActiveItemIndex={onChangeActiveItemIndex}
         />
       </section>
 
@@ -63,7 +86,9 @@ Main.propTypes = {
   promoFilmInfo: PropValidator.PROMO_FILM_INFO,
   filteredFilms: PropValidator.FILMS,
   onTitleClick: PropValidator.TITLE_CLICK,
-  filmCounter: PropValidator.FILM_COUNTER
+  filmCounter: PropValidator.FILM_COUNTER,
+  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
+  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };
 
 const mapStateToProps = ({filteredFilms, filmCounter}) => ({

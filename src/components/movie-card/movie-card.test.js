@@ -3,18 +3,19 @@ import renderer from 'react-test-renderer';
 import {film} from '../../mocks/films-test';
 import MovieCard from './movie-card.jsx';
 
-const handleFunc = () => {};
-
 it(`<MovieCard /> component renders correctly`, () => {
   const tree = renderer
     .create(<MovieCard
       film={film}
-      onTitleClick={handleFunc}
-      onChangeActiveItemIndex={handleFunc}
-      activeItemIndex={0}
-    />, {
-      createNodeMock: () => {
-        return {};
-      }}).toJSON();
+      onTitleClick={() => {}}
+      src={film.src}
+      poster={film.poster}
+      isPlaying={false}
+      isMuted={true}
+      isPreviewMode={true}
+      onRunModeToggle={() => {}}
+    >
+      <video/>
+    </MovieCard>).toJSON();
   expect(tree).toMatchSnapshot();
 });

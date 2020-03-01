@@ -1,5 +1,6 @@
 import React, {PureComponent, createRef} from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
+import {makeTimer} from '../../helpers/helpers';
 
 const withVideoPlayer = (Component) => {
 
@@ -12,41 +13,68 @@ const withVideoPlayer = (Component) => {
         progress: 0,
         isLoading: true,
         isPlaying: false,
+        isFullScreenMode: false,
+        timeRemain: ``
       };
 
       this._videoRef = createRef();
+      this.handleRunModeToggle = this.handleRunModeToggle.bind(this);
+      this.handleFullScreenMode = this.handleFullScreenMode.bind(this);
     }
 
     componentDidMount() {
-      const {src, isMuted, poster, isPlaying} = this.props;
+      const {
+        isPlaying,
+        isPreviewMode
+      } = this.props;
       const video = this._videoRef.current;
 
       this.setState({isPlaying});
 
-      video.src = src;
-      video.muted = isMuted;
-      video.poster = poster;
+      if (!isPreviewMode) {
+        video.ontimeupdate = () => {
+          this.setState({
+            progress: video.currentTime / video.duration * 100,
+            timeRemain: makeTimer(video.duration - video.currentTime)
+          });
+        };
+      }
+    }
 
-      video.oncanplaythrough = () => this.setState({
-        isLoading: false,
-      });
+    handleRunModeToggle() {
+      const {isPlaying} = this.state;
+      this.setState({isPlaying: !isPlaying});
+    }
 
-      video.onplay = () => {
-        this.setState({isPlaying: true});
-      };
-
-      video.onpause = () => {
-        this.setState({isPlaying: false});
-      };
-
-      video.ontimeupdate = () => this.setState({
-        progress: Math.floor(video.currentTime),
+    handleFullScreenMode() {
+      const {isFullScreenMode} = this.state;
+      this.setState({
+        isFullScreenMode: !isFullScreenMode
       });
     }
 
     componentDidUpdate() {
       const video = this._videoRef.current;
-      const {isPlaying, isPreviewMode} = this.props;
+      const {isPreviewMode} = this.props;
+      const {isPlaying} = this.state;
+
+      if (video.ended) {
+
+        if (isPreviewMode) {
+          video.load();
+          return;
+        }
+
+        const playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            this.setState({isPlaying: false});
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
+        }
+      }
 
       if (isPlaying) {
         video.play();
@@ -61,23 +89,38 @@ const withVideoPlayer = (Component) => {
 
     componentWillUnmount() {
       let video = this._videoRef.current;
-      video.oncanplaythrough = null;
-      video.onplay = null;
-      video.onpause = null;
       video.src = ``;
       video.ontimeupdate = null;
       video = null;
     }
 
     render() {
-      const {isPlaying, isLoading} = this.state;
-      const {isPreviewMode} = this.props;
+
+      const {
+        isPlaying,
+        progress,
+        isFullScreenMode,
+        timeRemain
+      } = this.state;
+
+      const {
+        isPreviewMode,
+        poster,
+        src,
+        isMuted,
+        onChangeActiveItemIndex
+      } = this.props;
 
       return (
         <Component
           {...this.props}
-          isLoading={isLoading}
           isPlaying={isPlaying}
+          progress={progress}
+          timeRemain={timeRemain}
+          isFullScreenMode={isFullScreenMode}
+          onFullScreenMode={this.handleFullScreenMode}
+          onRunModeToggle={this.handleRunModeToggle}
+          onChangeActiveItemIndex={onChangeActiveItemIndex}
         >
           {
             isPreviewMode ?
@@ -85,10 +128,16 @@ const withVideoPlayer = (Component) => {
                 style={{objectFit: `cover`}}
                 width="280"
                 height="175"
+                poster={poster}
+                muted={isMuted}
+                src={src}
                 ref={this._videoRef}
               />
               :
               <video
+                className="player__video"
+                muted={isMuted}
+                src={src}
                 ref={this._videoRef}
               />
           }
@@ -102,7 +151,8 @@ const withVideoPlayer = (Component) => {
     src: PropValidator.SRC,
     isMuted: PropValidator.IS_MUTED,
     poster: PropValidator.POSTER,
-    isPreviewMode: PropValidator.IS_PREVIEW_MODE
+    isPreviewMode: PropValidator.IS_PREVIEW_MODE,
+    onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM,
   };
 
   return WithVideoPlayer;

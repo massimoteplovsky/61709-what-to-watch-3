@@ -16,18 +16,22 @@ it(`VideoPlayer mode has been changed (paused)`, () => {
   const movieCard = shallow(
       <MovieCard
         film={film}
-        onTitleClick={handleClick}
-        onChangeActiveItemIndex={handlePlayerRunMode}
-        activeItemIndex={0}
-      />
+        onTitleClick={() => {}}
+        src={film.src}
+        poster={film.poster}
+        isPlaying={true}
+        isMuted={true}
+        isPreviewMode={true}
+        onRunModeToggle={handlePlayerRunMode}
+      >
+        <video/>
+      </MovieCard>
   );
 
   const card = movieCard.find(`.small-movie-card`);
-
   card.simulate(`mouseleave`);
 
   expect(handlePlayerRunMode).toHaveBeenCalledTimes(1);
-  expect(handlePlayerRunMode).toHaveBeenCalledWith(0);
 });
 
 it(`VideoPlayer mode has been chahnged (play)`, () => {
@@ -37,10 +41,16 @@ it(`VideoPlayer mode has been chahnged (play)`, () => {
   const movieCard = shallow(
       <MovieCard
         film={film}
-        onTitleClick={handleClick}
-        onChangeActiveItemIndex={handlePlayerRunMode}
-        activeItemIndex={1}
-      />
+        onTitleClick={() => {}}
+        src={film.src}
+        poster={film.poster}
+        isPlaying={true}
+        isMuted={true}
+        isPreviewMode={true}
+        onRunModeToggle={handlePlayerRunMode}
+      >
+        <video/>
+      </MovieCard>
   );
 
   const card = movieCard.find(`.small-movie-card`);
@@ -50,7 +60,6 @@ it(`VideoPlayer mode has been chahnged (play)`, () => {
   jest.runAllTimers();
 
   expect(handlePlayerRunMode).toHaveBeenCalledTimes(2);
-  expect(handlePlayerRunMode).toHaveBeenCalledWith(1);
 });
 
 it(`Title has been clicked`, () => {
@@ -59,9 +68,15 @@ it(`Title has been clicked`, () => {
       <MovieCard
         film={film}
         onTitleClick={handleClick}
-        onChangeActiveItemIndex={handlePlayerRunMode}
-        activeItemIndex={1}
-      />
+        src={film.src}
+        poster={film.poster}
+        isPlaying={true}
+        isMuted={true}
+        isPreviewMode={true}
+        onRunModeToggle={handlePlayerRunMode}
+      >
+        <video/>
+      </MovieCard>
   );
 
   const title = movieCard.find(`h3.small-movie-card__title`);

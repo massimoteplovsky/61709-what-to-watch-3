@@ -4,6 +4,9 @@ exports[`withVideoPlayer is rendered correctly 1`] = `
 <div>
   <video
     height="175"
+    muted={true}
+    poster=""
+    src=""
     style={
       Object {
         "objectFit": "cover",

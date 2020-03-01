@@ -4,6 +4,10 @@ import {PropValidator} from "../../prop-validator/prop-validator";
 import Main from "../main/main.jsx";
 import Movie from "../movie/movie.jsx";
 import withActiveFilm from '../../hocs/with-active-film/with-active-film';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
+
+const WrappedMovie = withActiveItem(Movie);
+const WrappedMain = withActiveItem(Main);
 
 class App extends PureComponent {
   constructor(props) {
@@ -21,7 +25,7 @@ class App extends PureComponent {
 
     if (activeFilm) {
       return (
-        <Movie
+        <WrappedMovie
           filmInfo={activeFilm}
           onTitleClick={onChangeActiveFilm}
         />
@@ -29,7 +33,7 @@ class App extends PureComponent {
     }
 
     return (
-      <Main
+      <WrappedMain
         promoFilmInfo={promoFilmInfo}
         onTitleClick={onChangeActiveFilm}
       />

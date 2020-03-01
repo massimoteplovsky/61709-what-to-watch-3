@@ -5,7 +5,7 @@ import {changeFilmCounter} from '../../actions/action-creators/film-action-creat
 
 const ShowMore = ({filmCounter, handleFilmCounterChange, filteredFilms}) => {
 
-  if (filmCounter >= filteredFilms.length) {
+  if (filmCounter > filteredFilms.length) {
     return null;
   }
 
@@ -15,7 +15,7 @@ const ShowMore = ({filmCounter, handleFilmCounterChange, filteredFilms}) => {
         className="catalog__button"
         type="button"
         onClick={() => {
-          handleFilmCounterChange(filteredFilms);
+          handleFilmCounterChange(filteredFilms.length, filmCounter);
         }}
       >Show more</button>
     </div>
@@ -34,8 +34,8 @@ const mapStateToProps = ({filmCounter, filteredFilms}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleFilmCounterChange(filteredFilms, filmCounter) {
-    dispatch(changeFilmCounter(filteredFilms, filmCounter));
+  handleFilmCounterChange(filteredFilmsCount, filmCounter) {
+    dispatch(changeFilmCounter(filteredFilmsCount, filmCounter));
   }
 });
 

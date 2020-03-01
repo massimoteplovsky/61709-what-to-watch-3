@@ -218,7 +218,7 @@ describe(`Action creators work correctly`, () => {
   });
 
   it(`Action creator for changing film counter returns correct action`, () => {
-    expect(changeFilmCounter(new Array(10), filmCounter)).toEqual({
+    expect(changeFilmCounter(9, filmCounter)).toEqual({
       type: CHANGE_FILM_COUNTER,
       payload: 16,
     });

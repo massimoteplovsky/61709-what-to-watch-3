@@ -1,9 +1,9 @@
 import React from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
 import MovieCard from '../movie-card/movie-card.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
-const WrappedMovieCard = withActiveItem(MovieCard);
+const WrappedMovieCard = withVideoPlayer(MovieCard);
 
 const MovieList = ({films, onTitleClick}) => {
 
@@ -22,6 +22,11 @@ const MovieList = ({films, onTitleClick}) => {
               key={film.id}
               film={film}
               onTitleClick={onTitleClick}
+              src={film.src}
+              poster={film.poster}
+              isPlaying={false}
+              isMuted={true}
+              isPreviewMode={true}
             />
           );
         })
@@ -33,7 +38,7 @@ const MovieList = ({films, onTitleClick}) => {
 
 MovieList.propTypes = {
   films: PropValidator.FILMS,
-  onTitleClick: PropValidator.TITLE_CLICK,
+  onTitleClick: PropValidator.TITLE_CLICK
 };
 
 export default MovieList;

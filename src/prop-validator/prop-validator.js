@@ -13,9 +13,12 @@ import {
 
 const FilmPropType = {
   PROMO_FILM_INFO: exact({
+    id: number.isRequired,
     title: string.isRequired,
     genre: string.isRequired,
-    year: number.isRequired
+    year: number.isRequired,
+    poster: string.isRequired,
+    src: string.isRequired,
   }),
   FILM_INFO: oneOfType([exact({
     id: number.isRequired,
@@ -70,8 +73,17 @@ const General = {
   ]).isRequired,
   IS_PREVIEW_MODE: bool.isRequired,
   ACTIVE_ITEM_INDEX: number.isRequired,
-  CHANGE_ACTIVE_ITEM: func.isRequired,
+  CHANGE_ACTIVE_ITEM: func,
   ITEM_ID: number.isRequired,
+};
+
+const VideoPlayer = {
+  IS_PLAYING: bool.isRequired,
+  IS_FULL_SCREEN_MODE: bool.isRequired,
+  PROGRESS: number.isRequired,
+  TIME_REMAIN: string.isRequired,
+  TOGGLE_PLAYING: func.isRequired,
+  TOGGLE_FULL_SCREEN: func.isRequired,
 };
 
 export const PropValidator = Object.assign(
@@ -79,6 +91,7 @@ export const PropValidator = Object.assign(
     {FILMS: arrayOf(FilmPropType.FILM_INFO).isRequired},
     VideoPropType,
     MovieGenre,
-    General
+    General,
+    VideoPlayer
 );
 

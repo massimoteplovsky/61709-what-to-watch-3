@@ -6,17 +6,23 @@ import MoviePromo from '../movie-promo/movie-promo.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import Footer from '../footer/footer.jsx';
+import VideoPlayer from '../video-player/video-player.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
+import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
 const WrappedTabs = withActiveItem(Tabs);
+const WrappedVideoPlayer = withVideoPlayer(VideoPlayer);
 
-const Movie = ({filmInfo, films, onTitleClick}) => {
+const Movie = ({filmInfo, films, onChangeActiveItemIndex, activeItemIndex, onTitleClick}) => {
   const {
+    id,
     title,
     genre,
     year,
     promoPoster,
     cover,
+    poster,
+    src
   } = filmInfo;
 
   const RELATED_MOVIE_COUNT = 4;
@@ -26,6 +32,19 @@ const Movie = ({filmInfo, films, onTitleClick}) => {
       return movie.genre === genre && movie.title !== title;
     }).slice(0, RELATED_MOVIE_COUNT);
   };
+
+  if (activeItemIndex === id) {
+    return (
+      <WrappedVideoPlayer
+        src={src}
+        isMuted={false}
+        poster={poster}
+        isPlaying={true}
+        isPreviewMode={false}
+        onChangeActiveItemIndex={onChangeActiveItemIndex}
+      />
+    );
+  }
 
   return (
     <>
@@ -40,9 +59,11 @@ const Movie = ({filmInfo, films, onTitleClick}) => {
           <Header/>
 
           <MoviePromo
+            id={id}
             title={title}
             genre={genre}
             year={year}
+            onChangeActiveItemIndex={onChangeActiveItemIndex}
           />
         </div>
 
@@ -79,7 +100,9 @@ const Movie = ({filmInfo, films, onTitleClick}) => {
 Movie.propTypes = {
   films: PropValidator.FILMS,
   filmInfo: PropValidator.FILM_INFO,
-  onTitleClick: PropValidator.TITLE_CLICK
+  onTitleClick: PropValidator.TITLE_CLICK,
+  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
+  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };
 
 const mapStateToProps = ({films}) => ({

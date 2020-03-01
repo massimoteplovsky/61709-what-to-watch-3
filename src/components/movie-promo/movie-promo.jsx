@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
 
-const MoviePromo = ({title, year, genre}) => {
+const MoviePromo = ({id, title, year, genre, onChangeActiveItemIndex}) => {
 
   return (
     <div className="movie-card__wrap">
@@ -13,7 +13,11 @@ const MoviePromo = ({title, year, genre}) => {
         </p>
 
         <div className="movie-card__buttons">
-          <button className="btn btn--play movie-card__button" type="button">
+          <button
+            className="btn btn--play movie-card__button"
+            type="button"
+            onClick={() => onChangeActiveItemIndex(id)}
+          >
             <svg viewBox="0 0 19 19" width="19" height="19">
               <use xlinkHref="#play-s"></use>
             </svg>
@@ -33,9 +37,11 @@ const MoviePromo = ({title, year, genre}) => {
 };
 
 MoviePromo.propTypes = {
+  id: PropValidator.ITEM_ID,
   genre: PropValidator.GENRE,
   title: PropValidator.TITLE,
-  year: PropValidator.YEAR
+  year: PropValidator.YEAR,
+  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };
 
 export default MoviePromo;

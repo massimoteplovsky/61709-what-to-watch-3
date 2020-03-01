@@ -17,7 +17,7 @@ export const getFilmsByGenre = (genre, films) => ({
   payload: genre === DEFAULT_GENRE ? films : filterFilms(genre, films)
 });
 
-export const changeFilmCounter = (filteredFilms, filmCounter) => ({
+export const changeFilmCounter = (filteredFilmsCount, filmCounter) => ({
   type: CHANGE_FILM_COUNTER,
-  payload: filteredFilms.length > FILM_TO_SHOW ? filmCounter + FILM_TO_SHOW : FILM_TO_SHOW
+  payload: filteredFilmsCount > filmCounter ? filmCounter + FILM_TO_SHOW : FILM_TO_SHOW
 });

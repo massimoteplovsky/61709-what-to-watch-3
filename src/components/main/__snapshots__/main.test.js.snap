@@ -90,6 +90,7 @@ Array [
         >
           <button
             className="btn btn--play movie-card__button"
+            onClick={[Function]}
             type="button"
           >
             <svg
@@ -194,6 +195,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
@@ -225,6 +229,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
@@ -256,6 +263,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
@@ -287,6 +297,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
@@ -318,6 +331,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
@@ -349,6 +365,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
@@ -380,6 +399,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
@@ -411,6 +433,9 @@ Array [
           >
             <video
               height="175"
+              muted={true}
+              poster=""
+              src=""
               style={
                 Object {
                   "objectFit": "cover",
