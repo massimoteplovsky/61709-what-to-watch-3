@@ -1,8 +1,10 @@
 import React, {PureComponent} from "react";
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import {PropValidator} from "../../prop-validator/prop-validator";
+import {connect} from 'react-redux';
 import Main from "../main/main.jsx";
 import Movie from "../movie/movie.jsx";
+import ServerError from '../server-error/server-error.jsx';
 import withActiveFilm from '../../hocs/with-active-film/with-active-film';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
@@ -18,15 +20,14 @@ class App extends PureComponent {
 
   _renderApp() {
     const {
-      promoFilmInfo,
-      activeFilm,
-      onChangeActiveFilm
+      filmID,
+      onChangeActiveFilm,
     } = this.props;
 
-    if (activeFilm) {
+    if (filmID > 0) {
       return (
         <WrappedMovie
-          filmInfo={activeFilm}
+          filmID={filmID}
           onTitleClick={onChangeActiveFilm}
         />
       );
@@ -34,13 +35,18 @@ class App extends PureComponent {
 
     return (
       <WrappedMain
-        promoFilmInfo={promoFilmInfo}
         onTitleClick={onChangeActiveFilm}
       />
     );
   }
 
   render() {
+    const {error} = this.props;
+
+    if (error) {
+      return (<ServerError/>);
+    }
+
     return (
       <Router>
         <Switch>
@@ -56,10 +62,14 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  promoFilmInfo: PropValidator.PROMO_FILM_INFO,
-  activeFilm: PropValidator.FILM_INFO,
-  onChangeActiveFilm: PropValidator.CHANGE_ACTIVE_FILM
+  filmID: PropValidator.ITEM_ID,
+  onChangeActiveFilm: PropValidator.CHANGE_ACTIVE_FILM,
+  error: PropValidator.REQUEST_ERROR
 };
 
+const mapStateToProps = (state) => ({
+  error: state.application.error
+});
+
 export {App};
-export default withActiveFilm(App);
+export default connect(mapStateToProps)(withActiveFilm(App));

@@ -1,17 +1,23 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {promoFilmInfo} from '../../mocks/films-test';
-import App from './app.jsx';
+import {App} from './app.jsx';
 import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';
-import {films} from '../../mocks/films';
+import {films} from '../../mocks/films-test';
 
 const mockStore = configureMockStore([]);
 let store = mockStore({
-  filteredFilms: [],
-  films,
-  filmCounter: 8,
-  actualGenre: ``
+  films: {
+    filteredFilms: films,
+    films,
+    promoFilm: null,
+    filmCounter: 8,
+    actualGenre: ``,
+    reviews: []
+  },
+  application: {
+    error: false
+  }
 });
 
 it(`<App /> component renders correctly`, () => {
@@ -19,9 +25,25 @@ it(`<App /> component renders correctly`, () => {
     .create(
         <Provider store={store}>
           <App
-            promoFilmInfo={promoFilmInfo}
-            activeFilm={{}}
+            filmID={-1}
             onChangeActiveFilm={() => {}}
+            error={false}
+          />
+        </Provider>, {
+          createNodeMock: () => {
+            return {};
+          }}).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it(`<App /> component renders error`, () => {
+  const tree = renderer
+    .create(
+        <Provider store={store}>
+          <App
+            filmID={-1}
+            onChangeActiveFilm={() => {}}
+            error={true}
           />
         </Provider>, {
           createNodeMock: () => {

@@ -1,5 +1,4 @@
 import {
-  exact,
   string,
   number,
   arrayOf,
@@ -8,41 +7,29 @@ import {
   bool,
   oneOfType,
   oneOf,
-  node
+  node,
+  shape
 } from "prop-types";
 
 const FilmPropType = {
-  PROMO_FILM_INFO: exact({
+  FILM_INFO: oneOfType([shape({
     id: number.isRequired,
-    title: string.isRequired,
+    name: string.isRequired,
     genre: string.isRequired,
-    year: number.isRequired,
-    poster: string.isRequired,
-    src: string.isRequired,
-  }),
-  FILM_INFO: oneOfType([exact({
-    id: number.isRequired,
-    title: string.isRequired,
-    genre: string.isRequired,
-    year: number.isRequired,
-    promoPoster: string.isRequired,
-    poster: string.isRequired,
-    cover: string.isRequired,
+    released: number.isRequired,
+    backgroundImage: string.isRequired,
+    backgroundColor: string.isRequired,
+    previewImage: string.isRequired,
+    posterImage: string.isRequired,
     description: string.isRequired,
     rating: number.isRequired,
-    votes: number.isRequired,
-    runtime: number.isRequired,
+    scoresCount: number.isRequired,
+    runTime: number.isRequired,
     director: string.isRequired,
     starring: array.isRequired,
-    src: string.isRequired,
-    reviews: arrayOf(
-        exact({
-          text: string.isRequired,
-          author: string.isRequired,
-          date: string.isRequired,
-          rating: number.isRequired
-        })
-    ).isRequired
+    previewVideoLink: string.isRequired,
+    videoLink: string.isRequired,
+    isFavorite: false
   }).isRequired, oneOf([null]).isRequired]),
   TITLE_CLICK: func.isRequired,
   CARD_MOUSE_ENTER: func.isRequired,
@@ -66,6 +53,21 @@ const MovieGenre = {
   CHANGE_GENRE: func.isRequired,
 };
 
+const FilmReviewPropType = {
+  FILM_REVIEW: arrayOf(
+      shape({
+        id: number.isRequired,
+        user: shape({
+          id: number.isRequired,
+          name: string.isRequired
+        }),
+        rating: number.isRequired,
+        comment: string.isRequired,
+        date: string.isRequired
+      })
+  ).isRequired
+};
+
 const General = {
   CHILDREN: oneOfType([
     arrayOf(node),
@@ -75,6 +77,8 @@ const General = {
   ACTIVE_ITEM_INDEX: number.isRequired,
   CHANGE_ACTIVE_ITEM: func,
   ITEM_ID: number.isRequired,
+  ON_LOAD: func.isRequired,
+  REQUEST_ERROR: bool.isRequired
 };
 
 const VideoPlayer = {
@@ -92,6 +96,7 @@ export const PropValidator = Object.assign(
     VideoPropType,
     MovieGenre,
     General,
-    VideoPlayer
+    VideoPlayer,
+    FilmReviewPropType
 );
 

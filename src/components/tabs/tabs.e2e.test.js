@@ -1,7 +1,7 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {film} from '../../mocks/films-test';
+import {film, filmReviews} from '../../mocks/films-test';
 import Tabs from './tabs.jsx';
 
 Enzyme.configure({
@@ -18,6 +18,7 @@ it(`Active tab has been changed`, () => {
   const wrapper = shallow(
       <Tabs
         filmInfo={film}
+        filmReviews={filmReviews}
         activeItemIndex={0}
         onChangeActiveItemIndex={handleActiveItemIndex}
       />

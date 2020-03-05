@@ -4,6 +4,11 @@ exports[`<Movie /> component renders correctly 1`] = `
 Array [
   <section
     className="movie-card movie-card--full"
+    style={
+      Object {
+        "background": "",
+      }
+    }
   >
     <div
       className="movie-card__hero"
@@ -12,7 +17,7 @@ Array [
         className="movie-card__bg"
       >
         <img
-          alt="Terminator 2. Judgment day"
+          alt="Film 3"
           src=""
         />
       </div>
@@ -72,7 +77,7 @@ Array [
           <h2
             className="movie-card__title"
           >
-            Terminator 2. Judgment day
+            Film 3
           </h2>
           <p
             className="movie-card__meta"
@@ -80,12 +85,12 @@ Array [
             <span
               className="movie-card__genre"
             >
-              Action
+              Drama
             </span>
             <span
               className="movie-card__year"
             >
-              1991
+              2019
             </span>
           </p>
           <div
@@ -146,7 +151,7 @@ Array [
           className="movie-card__poster movie-card__poster--big"
         >
           <img
-            alt="Terminator 2. Judgment day"
+            alt="Film 3"
             height="327"
             src=""
             width="218"
@@ -202,7 +207,7 @@ Array [
             <div
               className="movie-rating__score"
             >
-              8,5
+              4,5
             </div>
             <p
               className="movie-rating__meta"
@@ -210,12 +215,11 @@ Array [
               <span
                 className="movie-rating__level"
               >
-                Very good
+                Normal
               </span>
               <span
                 className="movie-rating__count"
               >
-                12000
                  ratings
               </span>
             </p>
@@ -239,7 +243,7 @@ Array [
             >
               <strong>
                 Starring: 
-                Tim cook
+                
               </strong>
             </p>
           </div>
@@ -258,9 +262,106 @@ Array [
       >
         More like this
       </h2>
-      <h2>
-        No movies
-      </h2>
+      <div
+        className="catalog__movies-list"
+      >
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              height="175"
+              muted={true}
+              poster=""
+              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+            onClick={[Function]}
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+            />
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              height="175"
+              muted={true}
+              poster=""
+              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+            onClick={[Function]}
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+            />
+          </h3>
+        </article>
+        <article
+          className="small-movie-card catalog__movies-card"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <div
+            className="small-movie-card__image"
+            onClick={[Function]}
+          >
+            <video
+              height="175"
+              muted={true}
+              poster=""
+              src=""
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              width="280"
+            />
+          </div>
+          <h3
+            className="small-movie-card__title"
+            onClick={[Function]}
+          >
+            <a
+              className="small-movie-card__link"
+              href="movie-page.html"
+            />
+          </h3>
+        </article>
+      </div>
     </section>
     <footer
       className="page-footer"

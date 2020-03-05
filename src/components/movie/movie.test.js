@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {film, films} from '../../mocks/films-test';
+import {film, films, filmReviews} from '../../mocks/films-test';
 import {Movie} from './movie.jsx';
 
 it(`<Movie /> component renders correctly`, () => {
@@ -11,6 +11,9 @@ it(`<Movie /> component renders correctly`, () => {
       onTitleClick={() => {}}
       activeItemIndex={0}
       onChangeActiveItemIndex={() => {}}
+      filmReviews={filmReviews}
+      filmID={1}
+      onLoadFilmReviews={() => {}}
     />)
     .toJSON();
   expect(tree).toMatchSnapshot();

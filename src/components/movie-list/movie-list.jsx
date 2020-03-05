@@ -22,8 +22,8 @@ const MovieList = ({films, onTitleClick}) => {
               key={film.id}
               film={film}
               onTitleClick={onTitleClick}
-              src={film.src}
-              poster={film.poster}
+              src={film.previewVideoLink}
+              poster={film.previewImage}
               isPlaying={false}
               isMuted={true}
               isPreviewMode={true}
@@ -41,4 +41,5 @@ MovieList.propTypes = {
   onTitleClick: PropValidator.TITLE_CLICK
 };
 
+export {MovieList};
 export default MovieList;

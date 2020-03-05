@@ -10,7 +10,7 @@ exports[`<MoviePromo /> component renders correctly 1`] = `
     <h2
       className="movie-card__title"
     >
-      
+      Film 3
     </h2>
     <p
       className="movie-card__meta"
@@ -18,12 +18,12 @@ exports[`<MoviePromo /> component renders correctly 1`] = `
       <span
         className="movie-card__genre"
       >
-        
+        Drama
       </span>
       <span
         className="movie-card__year"
       >
-        2014
+        2019
       </span>
     </p>
     <div

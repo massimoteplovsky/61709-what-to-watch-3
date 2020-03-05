@@ -7,24 +7,24 @@ const withActiveFilm = (Component) => {
       super(props);
 
       this.state = {
-        activeFilm: null
+        filmID: -1
       };
 
       this.handleActiveFilmChange = this.handleActiveFilmChange.bind(this);
     }
 
-    handleActiveFilmChange(event, film) {
+    handleActiveFilmChange(event, filmID) {
       event.preventDefault();
-      this.setState({activeFilm: film});
+      this.setState({filmID});
     }
 
     render() {
-      const {activeFilm} = this.state;
+      const {filmID} = this.state;
 
       return (
         <Component
           {...this.props}
-          activeFilm={activeFilm}
+          filmID={filmID}
           onChangeActiveFilm={this.handleActiveFilmChange}
         />
       );

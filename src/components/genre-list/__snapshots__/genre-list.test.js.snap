@@ -23,7 +23,7 @@ exports[`<GenreList /> component renders correctly 1`] = `
       href="#"
       onClick={[Function]}
     >
-      Action
+      
     </a>
   </li>
   <li

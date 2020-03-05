@@ -8,8 +8,6 @@ it(`<GenreList /> component renders correctly`, () => {
     .create(<GenreList
       films={films}
       handleFilmGenreChange={() => {}}
-      filteredFilms={films}
-      filmCounter={8}
       onChangeActiveItemIndex={() => {}}
       activeItemIndex={0}
     />).toJSON();

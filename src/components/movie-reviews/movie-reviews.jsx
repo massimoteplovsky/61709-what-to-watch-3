@@ -2,10 +2,17 @@ import React from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
 import {makeRating, makeChuncks, getFormatDate, sortByDate} from '../../helpers/helpers';
 
-const MovieReviews = ({filmInfo}) => {
-  const {reviews} = filmInfo;
-  const REVIEW_IN_A_ROW = Math.ceil(reviews.length / 2);
-  const reviewChunks = makeChuncks(reviews.sort(sortByDate), REVIEW_IN_A_ROW);
+const MovieReviews = ({filmReviews}) => {
+  const REVIEW_IN_A_ROW = Math.ceil(filmReviews.length / 2);
+  const reviewChunks = makeChuncks(filmReviews.sort(sortByDate), REVIEW_IN_A_ROW);
+
+  if (filmReviews.length === 0) {
+    return (
+      <div className="movie-card__reviews movie-card__row">
+        No reviews
+      </div>
+    );
+  }
 
   return (
     <div className="movie-card__reviews movie-card__row">
@@ -14,13 +21,13 @@ const MovieReviews = ({filmInfo}) => {
           return (
             <div key={index} className="movie-card__reviews-col">
               {
-                chunk.map(({text, author, date, rating}, reviewIndex) => {
+                chunk.map(({id, user: {name}, rating, comment, date}) => {
                   return (
-                    <div key={reviewIndex} className="review">
+                    <div key={id} className="review">
                       <blockquote className="review__quote">
-                        <p className="review__text">{text}</p>
+                        <p className="review__text">{comment}</p>
                         <footer className="review__details">
-                          <cite className="review__author">{author}</cite>
+                          <cite className="review__author">{name}</cite>
                           <time className="review__date" dateTime={date}>{getFormatDate(date)}</time>
                         </footer>
                       </blockquote>
@@ -38,7 +45,7 @@ const MovieReviews = ({filmInfo}) => {
 };
 
 MovieReviews.propTypes = {
-  filmInfo: PropValidator.FILM_INFO
+  filmReviews: PropValidator.FILM_REVIEW
 };
 
 export default MovieReviews;

@@ -49,7 +49,7 @@ Array [
     <div
       className="movie-rating__score"
     >
-      8,5
+      4,5
     </div>
     <p
       className="movie-rating__meta"
@@ -57,12 +57,11 @@ Array [
       <span
         className="movie-rating__level"
       >
-        Very good
+        Normal
       </span>
       <span
         className="movie-rating__count"
       >
-        12000
          ratings
       </span>
     </p>
@@ -86,7 +85,7 @@ Array [
     >
       <strong>
         Starring: 
-        Tim cook
+        
       </strong>
     </p>
   </div>,

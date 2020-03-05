@@ -1,6 +1,7 @@
 import React from "react";
 import {PropValidator} from "../../prop-validator/prop-validator";
 import {connect} from 'react-redux';
+import {getFilteredFilms, getPromoFilm} from '../../selectors/films/films';
 import Header from '../header/header.jsx';
 import MoviePromo from '../movie-promo/movie-promo.jsx';
 import GenreList from '../genre-list/genre-list.jsx';
@@ -15,26 +16,30 @@ const WrappedGenreList = withActiveItem(GenreList);
 const WrappedVideoPlayer = withVideoPlayer(VideoPlayer);
 
 const Main = ({
+  films,
   activeItemIndex,
   onChangeActiveItemIndex,
-  filteredFilms,
   onTitleClick,
-  promoFilmInfo: {
-    id,
-    title,
-    genre,
-    year,
-    poster,
-    src
-  }
+  promoFilm
 }) => {
+
+  if (!promoFilm) {
+    return null;
+  }
+
+  const {
+    id,
+    name,
+    backgroundImage,
+    videoLink
+  } = promoFilm;
 
   if (activeItemIndex === id) {
     return (
       <WrappedVideoPlayer
-        src={src}
+        src={videoLink}
         isMuted={false}
-        poster={poster}
+        poster={backgroundImage}
         isPlaying={true}
         isPreviewMode={false}
         onChangeActiveItemIndex={onChangeActiveItemIndex}
@@ -46,7 +51,7 @@ const Main = ({
     <>
       <section className="movie-card">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -54,10 +59,7 @@ const Main = ({
         <Header/>
 
         <MoviePromo
-          id={id}
-          title={title}
-          genre={genre}
-          year={year}
+          filmInfo={promoFilm}
           onChangeActiveItemIndex={onChangeActiveItemIndex}
         />
       </section>
@@ -69,7 +71,7 @@ const Main = ({
           <WrappedGenreList/>
 
           <MovieList
-            films={filteredFilms}
+            films={films}
             onTitleClick={onTitleClick}
           />
 
@@ -83,17 +85,16 @@ const Main = ({
 };
 
 Main.propTypes = {
-  promoFilmInfo: PropValidator.PROMO_FILM_INFO,
-  filteredFilms: PropValidator.FILMS,
+  films: PropValidator.FILMS,
+  promoFilm: PropValidator.FILM_INFO,
   onTitleClick: PropValidator.TITLE_CLICK,
-  filmCounter: PropValidator.FILM_COUNTER,
   activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
   onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };
 
-const mapStateToProps = ({filteredFilms, filmCounter}) => ({
-  filteredFilms: filteredFilms.length > filmCounter ? filteredFilms.slice(0, filmCounter) : filteredFilms,
-  filmCounter
+const mapStateToProps = (state) => ({
+  films: getFilteredFilms(state),
+  promoFilm: getPromoFilm(state)
 });
 
 export {Main};

@@ -31,10 +31,7 @@ exports[`<MovieDetails /> component renders correctly 1`] = `
       </strong>
       <span
         className="movie-card__details-value"
-      >
-        Tim cook
-
-      </span>
+      />
     </p>
   </div>
   <div
@@ -51,7 +48,7 @@ exports[`<MovieDetails /> component renders correctly 1`] = `
       <span
         className="movie-card__details-value"
       >
-        0h 4m
+        0h 3m
       </span>
     </p>
     <p
@@ -65,7 +62,7 @@ exports[`<MovieDetails /> component renders correctly 1`] = `
       <span
         className="movie-card__details-value"
       >
-        Action
+        Drama
       </span>
     </p>
     <p
@@ -79,7 +76,7 @@ exports[`<MovieDetails /> component renders correctly 1`] = `
       <span
         className="movie-card__details-value"
       >
-        1991
+        2019
       </span>
     </p>
   </div>

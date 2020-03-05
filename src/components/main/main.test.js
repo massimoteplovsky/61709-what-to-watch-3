@@ -1,16 +1,23 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {films, promoFilmInfo} from '../../mocks/films-test';
+import {films, film} from '../../mocks/films-test';
 import {Main} from './main.jsx';
 import {Provider} from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 
 const mockStore = configureMockStore([]);
 let store = mockStore({
-  filteredFilms: [],
-  films,
-  filmCounter: 8,
-  actualGenre: ``
+  films: {
+    filteredFilms: films,
+    films,
+    promoFilm: null,
+    filmCounter: 8,
+    actualGenre: ``,
+    reviews: []
+  },
+  application: {
+    error: false
+  }
 });
 
 const handleTitleClick = () => {};
@@ -20,10 +27,9 @@ it(`<Main /> component renders correctly`, () => {
     .create(
         <Provider store={store}>
           <Main
-            promoFilmInfo={promoFilmInfo}
-            filteredFilms = {films}
+            films={films}
+            promoFilm={film}
             onTitleClick={handleTitleClick}
-            filmCounter={8}
             activeItemIndex={0}
             onChangeActiveItemIndex={() => {}}
           />

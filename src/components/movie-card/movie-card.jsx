@@ -14,8 +14,7 @@ class MovieCard extends PureComponent {
 
   render() {
     const {
-      film,
-      film: {title},
+      film: {id, title},
       onTitleClick,
       children,
       onRunModeToggle,
@@ -35,12 +34,12 @@ class MovieCard extends PureComponent {
           clearTimeout(this._timerID);
         }}
       >
-        <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, film)}>
+        <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, id)}>
           {children}
         </div>
         <h3
           className="small-movie-card__title"
-          onClick={(event) => onTitleClick(event, film)}
+          onClick={(event) => onTitleClick(event, id)}
         >
           <a className="small-movie-card__link" href="movie-page.html">{title}</a>
         </h3>

@@ -5,7 +5,7 @@ import MovieDetails from '../movie-details/movie-details.jsx';
 import MovieReviews from '../movie-reviews/movie-reviews.jsx';
 import TabsItem from '../tabs-item/tabs-item.jsx';
 
-const Tabs = ({filmInfo, activeItemIndex, onChangeActiveItemIndex}) => {
+const Tabs = ({filmInfo, filmReviews, activeItemIndex, onChangeActiveItemIndex}) => {
   const tabItems = [
     {
       title: `Overview`,
@@ -17,7 +17,7 @@ const Tabs = ({filmInfo, activeItemIndex, onChangeActiveItemIndex}) => {
     },
     {
       title: `Reviews`,
-      component: <MovieReviews filmInfo={filmInfo}/>
+      component: <MovieReviews filmReviews={filmReviews}/>
     }
   ];
   const activeComponent = tabItems[activeItemIndex].component;
@@ -48,6 +48,7 @@ const Tabs = ({filmInfo, activeItemIndex, onChangeActiveItemIndex}) => {
 
 Tabs.propTypes = {
   filmInfo: PropValidator.FILM_INFO,
+  filmReviews: PropValidator.FILM_REVIEW,
   activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
   onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };

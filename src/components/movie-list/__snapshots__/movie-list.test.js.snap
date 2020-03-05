@@ -33,9 +33,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        Terminator 2. Judgment day
-      </a>
+      />
     </h3>
   </article>
   <article
@@ -67,9 +65,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        1+1
-      </a>
+      />
     </h3>
   </article>
   <article
@@ -101,179 +97,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
       <a
         className="small-movie-card__link"
         href="movie-page.html"
-      >
-        Joker
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
       />
-    </div>
-    <h3
-      className="small-movie-card__title"
-      onClick={[Function]}
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-      >
-        Once upon a time in Hollywood
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-      onClick={[Function]}
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-      >
-        Ford vs Ferrari
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-      onClick={[Function]}
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-      >
-        1917
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-      onClick={[Function]}
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-      >
-        Parasite
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-      onClick={[Function]}
-    >
-      <a
-        className="small-movie-card__link"
-        href="movie-page.html"
-      >
-        Irishman
-      </a>
     </h3>
   </article>
 </div>

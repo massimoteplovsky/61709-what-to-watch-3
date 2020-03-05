@@ -1,9 +1,14 @@
 import React from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
 import {connect} from 'react-redux';
-import {changeFilmCounter} from '../../actions/action-creators/film-action-creators';
+import {incrementFilmCounter} from '../../actions/action-creators/films/films';
+import {getFilmCounter, getFilteredFilms} from '../../selectors/films/films';
 
-const ShowMore = ({filmCounter, handleFilmCounterChange, filteredFilms}) => {
+const ShowMore = ({
+  filmCounter,
+  filteredFilms,
+  handleFilmCounterIncrement,
+}) => {
 
   if (filmCounter > filteredFilms.length) {
     return null;
@@ -15,7 +20,7 @@ const ShowMore = ({filmCounter, handleFilmCounterChange, filteredFilms}) => {
         className="catalog__button"
         type="button"
         onClick={() => {
-          handleFilmCounterChange(filteredFilms.length, filmCounter);
+          handleFilmCounterIncrement();
         }}
       >Show more</button>
     </div>
@@ -24,18 +29,18 @@ const ShowMore = ({filmCounter, handleFilmCounterChange, filteredFilms}) => {
 
 ShowMore.propTypes = {
   filmCounter: PropValidator.FILM_COUNTER,
-  handleFilmCounterChange: PropValidator.SHOW_MORE_FILMS,
+  handleFilmCounterIncrement: PropValidator.SHOW_MORE_FILMS,
   filteredFilms: PropValidator.FILMS
 };
 
-const mapStateToProps = ({filmCounter, filteredFilms}) => ({
-  filmCounter,
-  filteredFilms
+const mapStateToProps = (state) => ({
+  filmCounter: getFilmCounter(state),
+  filteredFilms: getFilteredFilms(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleFilmCounterChange(filteredFilmsCount, filmCounter) {
-    dispatch(changeFilmCounter(filteredFilmsCount, filmCounter));
+  handleFilmCounterIncrement() {
+    dispatch(incrementFilmCounter());
   }
 });
 

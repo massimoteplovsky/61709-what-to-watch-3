@@ -28,7 +28,7 @@ exports[`<MovieReview /> component renders correctly 1`] = `
           </cite>
           <time
             className="review__date"
-            dateTime=""
+            dateTime="22.05.2019"
           >
             Invalid Date
           </time>
@@ -37,7 +37,7 @@ exports[`<MovieReview /> component renders correctly 1`] = `
       <div
         className="review__rating"
       >
-        7,5
+        5,5
       </div>
     </div>
   </div>

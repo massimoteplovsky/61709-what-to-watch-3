@@ -1,15 +1,25 @@
 import React from 'react';
 import {PropValidator} from '../../prop-validator/prop-validator';
 
-const MoviePromo = ({id, title, year, genre, onChangeActiveItemIndex}) => {
+const MoviePromo = ({
+  filmInfo,
+  onChangeActiveItemIndex
+}) => {
+
+  const {
+    id,
+    name,
+    released,
+    genre,
+  } = filmInfo;
 
   return (
     <div className="movie-card__wrap">
       <div className="movie-card__desc">
-        <h2 className="movie-card__title">{title}</h2>
+        <h2 className="movie-card__title">{name}</h2>
         <p className="movie-card__meta">
           <span className="movie-card__genre">{genre}</span>
-          <span className="movie-card__year">{year}</span>
+          <span className="movie-card__year">{released}</span>
         </p>
 
         <div className="movie-card__buttons">
@@ -37,10 +47,7 @@ const MoviePromo = ({id, title, year, genre, onChangeActiveItemIndex}) => {
 };
 
 MoviePromo.propTypes = {
-  id: PropValidator.ITEM_ID,
-  genre: PropValidator.GENRE,
-  title: PropValidator.TITLE,
-  year: PropValidator.YEAR,
+  filmInfo: PropValidator.FILM_INFO,
   onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };
 

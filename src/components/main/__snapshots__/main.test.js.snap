@@ -9,8 +9,8 @@ Array [
       className="movie-card__bg"
     >
       <img
-        alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        alt="Film 3"
+        src=""
       />
     </div>
     <h1
@@ -69,7 +69,7 @@ Array [
         <h2
           className="movie-card__title"
         >
-          The Grand Budapest Hotel
+          Film 3
         </h2>
         <p
           className="movie-card__meta"
@@ -82,7 +82,7 @@ Array [
           <span
             className="movie-card__year"
           >
-            2014
+            2019
           </span>
         </p>
         <div
@@ -166,7 +166,7 @@ Array [
             href="#"
             onClick={[Function]}
           >
-            Action
+            
           </a>
         </li>
         <li
@@ -213,9 +213,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Terminator 2. Judgment day
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -247,9 +245,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              1+1
-            </a>
+            />
           </h3>
         </article>
         <article
@@ -281,179 +277,7 @@ Array [
             <a
               className="small-movie-card__link"
               href="movie-page.html"
-            >
-              Joker
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              height="175"
-              muted={true}
-              poster=""
-              src=""
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              width="280"
             />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Once upon a time in Hollywood
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              height="175"
-              muted={true}
-              poster=""
-              src=""
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Ford vs Ferrari
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              height="175"
-              muted={true}
-              poster=""
-              src=""
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              1917
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              height="175"
-              muted={true}
-              poster=""
-              src=""
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Parasite
-            </a>
-          </h3>
-        </article>
-        <article
-          className="small-movie-card catalog__movies-card"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <div
-            className="small-movie-card__image"
-            onClick={[Function]}
-          >
-            <video
-              height="175"
-              muted={true}
-              poster=""
-              src=""
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              width="280"
-            />
-          </div>
-          <h3
-            className="small-movie-card__title"
-            onClick={[Function]}
-          >
-            <a
-              className="small-movie-card__link"
-              href="movie-page.html"
-            >
-              Irishman
-            </a>
           </h3>
         </article>
       </div>

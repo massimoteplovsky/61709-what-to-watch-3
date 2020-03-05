@@ -8,6 +8,10 @@ Enzyme.configure({
   adapter: new Adapter(),
 });
 
+const mockEvent = {
+  preventDefault() {}
+};
+
 const handleClick = jest.fn((...args) => [...args]);
 const handlePlayerRunMode = jest.fn();
 
@@ -82,9 +86,9 @@ it(`Title has been clicked`, () => {
   const title = movieCard.find(`h3.small-movie-card__title`);
   const img = movieCard.find(`.small-movie-card__image`);
 
-  title.simulate(`click`);
-  img.simulate(`click`);
+  title.simulate(`click`, mockEvent);
+  img.simulate(`click`, mockEvent);
 
   expect(handleClick.mock.calls.length).toBe(2);
-  expect(handleClick.mock.calls[0][1]).toMatchObject(film);
+  expect(handleClick).toHaveBeenCalledWith(mockEvent, film.id);
 });

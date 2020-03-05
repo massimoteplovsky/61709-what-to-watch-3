@@ -6,9 +6,9 @@ const MovieDetails = ({filmInfo}) => {
   const {
     director,
     starring,
-    runtime,
+    runTime,
     genre,
-    year
+    released
   } = filmInfo;
   return (
     <>
@@ -29,7 +29,7 @@ const MovieDetails = ({filmInfo}) => {
         <div className="movie-card__text-col">
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Run Time</strong>
-            <span className="movie-card__details-value">{makeDuration(runtime)}</span>
+            <span className="movie-card__details-value">{makeDuration(runTime)}</span>
           </p>
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Genre</strong>
@@ -37,7 +37,7 @@ const MovieDetails = ({filmInfo}) => {
           </p>
           <p className="movie-card__details-item">
             <strong className="movie-card__details-name">Released</strong>
-            <span className="movie-card__details-value">{year}</span>
+            <span className="movie-card__details-value">{released}</span>
           </p>
         </div>
       </div>
