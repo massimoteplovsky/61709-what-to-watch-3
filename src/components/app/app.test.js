@@ -17,6 +17,10 @@ let store = mockStore({
   },
   application: {
     error: false
+  },
+  user: {
+    authorizationStatus: `NO_AUTH`,
+    userInfo: null
   }
 });
 

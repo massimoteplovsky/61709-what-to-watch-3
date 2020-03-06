@@ -90,13 +90,34 @@ const VideoPlayer = {
   TOGGLE_FULL_SCREEN: func.isRequired,
 };
 
+const Auth = {
+  IS_AUTH: string.isRequired,
+  SEND_FROM: func.isRequired,
+  USER_INFO: oneOfType([shape({
+    id: number.isRequired,
+    email: string.isRequired,
+    name: string.isRequired,
+    avatarUrl: string.isRequired
+  }).isRequired, oneOf([null]).isRequired])
+};
+
+const Form = {
+  CHANGE_FORM_MESSAGE: func.isRequired,
+  FROM_ERROR: bool.isRequired,
+  FORM_MESSAGE: string.isRequired,
+  ERROR_FIELD: string.isRequired
+};
+
 export const PropValidator = Object.assign(
+    {},
     FilmPropType,
     {FILMS: arrayOf(FilmPropType.FILM_INFO).isRequired},
     VideoPropType,
     MovieGenre,
     General,
     VideoPlayer,
-    FilmReviewPropType
+    FilmReviewPropType,
+    Auth,
+    Form
 );
 

@@ -89,5 +89,12 @@ export const filmReviews = [{
   date: `22.05.2019`
 }];
 
+export const userInfo = {
+  id: 1,
+  name: ``,
+  email: ``,
+  avatarUrl: ``
+};
+
 export const genres = [...new Set([`All genres`, ...films.map((item) => item.genre)])];
 

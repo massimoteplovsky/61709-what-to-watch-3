@@ -4,6 +4,7 @@ import {PropValidator} from "../../prop-validator/prop-validator";
 import {connect} from 'react-redux';
 import Main from "../main/main.jsx";
 import Movie from "../movie/movie.jsx";
+import Signin from "../signin/signin.jsx";
 import ServerError from '../server-error/server-error.jsx';
 import withActiveFilm from '../../hocs/with-active-film/with-active-film';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
@@ -53,7 +54,8 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-component">
+          <Route exact path="/signin">
+            <Signin/>
           </Route>
         </Switch>
       </Router>

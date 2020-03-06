@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Main /> component renders correctly 1`] = `
+exports[`<Header /> component renders correctly 1`] = `
 <header
   className="page-header movie-card__head"
 >
@@ -31,16 +31,12 @@ exports[`<Main /> component renders correctly 1`] = `
   <div
     className="user-block"
   >
-    <div
-      className="user-block__avatar"
+    <a
+      href="#"
+      onClick={[Function]}
     >
-      <img
-        alt="User avatar"
-        height="63"
-        src="img/avatar.jpg"
-        width="63"
-      />
-    </div>
+      Sign in
+    </a>
   </div>
 </header>
 `;
