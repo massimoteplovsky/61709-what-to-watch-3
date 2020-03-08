@@ -1,9 +1,11 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {films, film} from '../../mocks/films-test';
-import {Main} from './main.jsx';
-import {Provider} from 'react-redux';
-import configureMockStore from 'redux-mock-store';
+import React from "react";
+import renderer from "react-test-renderer";
+import {films, film} from "../../mocks/films-test";
+import {Main} from "./main.jsx";
+import {Provider} from "react-redux";
+import {Router} from "react-router-dom";
+import history from "../../history";
+import configureMockStore from "redux-mock-store";
 
 const mockStore = configureMockStore([]);
 let store = mockStore({
@@ -20,23 +22,21 @@ let store = mockStore({
   },
   user: {
     authorizationStatus: `NO_AUTH`,
-    userInfo: null
+    userInfo: null,
+    favorites: []
   }
 });
-
-const handleTitleClick = () => {};
 
 it(`<Main /> component renders correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Main
-            films={films}
-            promoFilm={film}
-            onTitleClick={handleTitleClick}
-            activeItemIndex={0}
-            onChangeActiveItemIndex={() => {}}
-          />
+          <Router history={history}>
+            <Main
+              films={films}
+              promoFilm={film}
+            />
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};

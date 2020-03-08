@@ -1,13 +1,12 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import VideoPlayer from './video-player.jsx';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import VideoPlayer from "./video-player.jsx";
 
 Enzyme.configure({
   adapter: new Adapter(),
 });
 
-const handleChangeActiveItemIndex = jest.fn();
 const handleFullScreenMode = jest.fn();
 const handleRunModeToggle = jest.fn();
 
@@ -21,7 +20,6 @@ it(`All handlers has been called`, () => {
         timeRemain={``}
         onRunModeToggle={handleRunModeToggle}
         onFullScreenMode={handleFullScreenMode}
-        onChangeActiveItemIndex={handleChangeActiveItemIndex}
       >
         <video/>
       </VideoPlayer>
@@ -37,5 +35,4 @@ it(`All handlers has been called`, () => {
 
   expect(handleRunModeToggle).toHaveBeenCalledTimes(2);
   expect(handleFullScreenMode).toHaveBeenCalledTimes(1);
-  expect(handleChangeActiveItemIndex).toHaveBeenCalledTimes(1);
 });

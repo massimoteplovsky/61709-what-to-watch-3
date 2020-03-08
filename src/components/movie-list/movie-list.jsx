@@ -5,7 +5,7 @@ import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
 const WrappedMovieCard = withVideoPlayer(MovieCard);
 
-const MovieList = ({films, onTitleClick}) => {
+const MovieList = ({films}) => {
 
   if (films.length === 0) {
     return (
@@ -21,7 +21,6 @@ const MovieList = ({films, onTitleClick}) => {
             <WrappedMovieCard
               key={film.id}
               film={film}
-              onTitleClick={onTitleClick}
               src={film.previewVideoLink}
               poster={film.previewImage}
               isPlaying={false}
@@ -38,7 +37,6 @@ const MovieList = ({films, onTitleClick}) => {
 
 MovieList.propTypes = {
   films: PropValidator.FILMS,
-  onTitleClick: PropValidator.TITLE_CLICK
 };
 
 export {MovieList};

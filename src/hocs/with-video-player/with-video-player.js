@@ -108,7 +108,6 @@ const withVideoPlayer = (Component) => {
         poster,
         src,
         isMuted,
-        onChangeActiveItemIndex
       } = this.props;
 
       return (
@@ -120,7 +119,6 @@ const withVideoPlayer = (Component) => {
           isFullScreenMode={isFullScreenMode}
           onFullScreenMode={this.handleFullScreenMode}
           onRunModeToggle={this.handleRunModeToggle}
-          onChangeActiveItemIndex={onChangeActiveItemIndex}
         >
           {
             isPreviewMode ?
@@ -151,8 +149,7 @@ const withVideoPlayer = (Component) => {
     src: PropValidator.SRC,
     isMuted: PropValidator.IS_MUTED,
     poster: PropValidator.POSTER,
-    isPreviewMode: PropValidator.IS_PREVIEW_MODE,
-    onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM,
+    isPreviewMode: PropValidator.IS_PREVIEW_MODE
   };
 
   return WithVideoPlayer;

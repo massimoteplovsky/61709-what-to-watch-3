@@ -3,6 +3,8 @@ import renderer from 'react-test-renderer';
 import {film, films, filmReviews} from '../../mocks/films-test';
 import {Movie} from './movie.jsx';
 import {Provider} from 'react-redux';
+import {Router} from "react-router-dom";
+import history from "../../history";
 import configureMockStore from 'redux-mock-store';
 
 const mockStore = configureMockStore([]);
@@ -29,16 +31,15 @@ it(`<Movie /> component renders correctly`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <Movie
-            filmInfo={film}
-            films={films}
-            onTitleClick={() => {}}
-            activeItemIndex={0}
-            onChangeActiveItemIndex={() => {}}
-            filmReviews={filmReviews}
-            filmID={1}
-            onLoadFilmReviews={() => {}}
-          />
+          <Router history={history}>
+            <Movie
+              filmInfo={film}
+              relatedFilms={films}
+              filmReviews={filmReviews}
+              onLoadFilmReviews={() => {}}
+              match={{params: {id: 1}}}
+            />
+          </Router>
         </Provider>, {
           createNodeMock: () => {
             return {};

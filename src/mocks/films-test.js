@@ -75,7 +75,7 @@ export const film = {
   starring: [],
   previewVideoLink: ``,
   videoLink: ``,
-  isFavorite: false
+  isFavorite: true
 };
 
 export const filmReviews = [{

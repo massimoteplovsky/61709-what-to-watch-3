@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {PropValidator} from "../../prop-validator/prop-validator";
 import {validateEmail} from "../../helpers/helpers";
 import {login} from "../../actions/action-creators/user/user";
+import {Link} from "react-router-dom";
 import withSigninForm from "../../hocs/with-sigin-form/with-sugnin-form";
 
 class Signin extends PureComponent {
@@ -18,7 +19,7 @@ class Signin extends PureComponent {
 
   handleFormSubmit(event) {
     event.preventDefault();
-    const {sendForm, onChangeActiveItemIndex, onChangeFormMessage} = this.props;
+    const {sendForm, onChangeFormMessage} = this.props;
     const email = this._loginRef.current;
     const password = this._passwordRef.current;
 
@@ -36,8 +37,6 @@ class Signin extends PureComponent {
       email: email.value,
       password: password.value
     });
-
-    onChangeActiveItemIndex(0);
   }
 
   render() {
@@ -47,11 +46,11 @@ class Signin extends PureComponent {
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
-            <a href="main.html" className="logo__link">
+            <Link className="logo__link" to={`/`}>
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
 
           <h1 className="page-title user-page__title">Sign in</h1>
@@ -117,7 +116,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 Signin.propTypes = {
   sendForm: PropValidator.SEND_FROM,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM,
   onChangeFormMessage: PropValidator.CHANGE_FORM_MESSAGE,
   formError: PropValidator.FROM_ERROR,
   formMessage: PropValidator.FORM_MESSAGE,

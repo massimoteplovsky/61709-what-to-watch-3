@@ -20,7 +20,8 @@ let store = mockStore({
   },
   user: {
     authorizationStatus: `NO_AUTH`,
-    userInfo: null
+    userInfo: null,
+    favorites: []
   }
 });
 
@@ -29,8 +30,7 @@ it(`<App /> component renders correctly`, () => {
     .create(
         <Provider store={store}>
           <App
-            filmID={-1}
-            onChangeActiveFilm={() => {}}
+            films={films}
             error={false}
           />
         </Provider>, {
@@ -45,8 +45,7 @@ it(`<App /> component renders error`, () => {
     .create(
         <Provider store={store}>
           <App
-            filmID={-1}
-            onChangeActiveFilm={() => {}}
+            films={films}
             error={true}
           />
         </Provider>, {

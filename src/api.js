@@ -1,5 +1,6 @@
 import axios from "axios";
-import {convertObjectKeys} from './helpers/helpers';
+import {convertObjectKeys} from "./helpers/helpers";
+import history from "./history";
 
 const Errors = {
   REQUEST_ERRORS: [400, 404, 500],
@@ -20,18 +21,16 @@ export const createAPI = (onRequestFail, onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (Errors.REQUEST_ERRORS.includes(response.status) || !response) {
+    if (!response || Errors.REQUEST_ERRORS.includes(response.status)) {
       onRequestFail();
-      return Promise.reject(err);
     }
 
     if (response.status === Errors.NO_AUTHORIZED) {
       onUnauthorized();
-      return Promise.reject(err);
+      history.push(`/login`);
     }
 
-    return Promise.reject(err);
-
+    return err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

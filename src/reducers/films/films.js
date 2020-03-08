@@ -3,7 +3,8 @@ import {
   INCREMENT_FILM_COUNTER,
   LOAD_ALL_FILMS,
   LOAD_PROMO_FILM,
-  LOAD_FILM_REVIEWS
+  LOAD_FILM_REVIEWS,
+  CHANGE_FAVORITE_STATUS
 } from '../../actions/types/films/films';
 import {FILM_TO_SHOW} from '../../consts';
 
@@ -53,6 +54,19 @@ export const films = (state = initialState, {type, payload}) => {
           {},
           state,
           {filmCounter: state.filmCounter + FILM_TO_SHOW}
+      );
+    case CHANGE_FAVORITE_STATUS:
+      const filmIndex = state.films.findIndex((film) => film.id === payload.id);
+      return Object.assign(
+          {},
+          state,
+          {
+            films: [
+              ...state.films.slice(0, filmIndex),
+              payload,
+              ...state.films.slice(filmIndex + 1)],
+            promoFilm: state.promoFilm.id === payload.id ? payload : state.promoFilm
+          }
       );
     default:
       return state;

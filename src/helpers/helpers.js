@@ -21,6 +21,8 @@ export const makeTextRating = (numericRating) => {
   return `Awesome`;
 };
 
+export const getFilm = (films, id) => films.find((film) => film.id === Number(id));
+
 export const makeDuration = (time) => {
   const hours = time < 60 ? 0 : Math.floor(time / 60);
   const minutes = time < 60 ? time : time % 60;

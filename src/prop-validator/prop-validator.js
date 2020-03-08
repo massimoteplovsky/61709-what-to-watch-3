@@ -1,6 +1,7 @@
 import {
   string,
   number,
+  object,
   arrayOf,
   func,
   array,
@@ -76,9 +77,13 @@ const General = {
   IS_PREVIEW_MODE: bool.isRequired,
   ACTIVE_ITEM_INDEX: number.isRequired,
   CHANGE_ACTIVE_ITEM: func,
-  ITEM_ID: number.isRequired,
+  ITEM_ID: oneOfType([
+    number.isRequired,
+    string.isRequired
+  ]).isRequired,
   ON_LOAD: func.isRequired,
-  REQUEST_ERROR: bool.isRequired
+  REQUEST_ERROR: bool.isRequired,
+  MATCH: object
 };
 
 const VideoPlayer = {

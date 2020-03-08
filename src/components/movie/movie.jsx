@@ -6,14 +6,11 @@ import MoviePromo from '../movie-promo/movie-promo.jsx';
 import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import Footer from '../footer/footer.jsx';
-import VideoPlayer from '../video-player/video-player.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 import {makeRelatedFilmsList, getFilm, getFilmReviews} from '../../selectors/films/films';
 import {loadFilmReviews} from '../../actions/action-creators/films/films';
 
 const WrappedTabs = withActiveItem(Tabs);
-const WrappedVideoPlayer = withVideoPlayer(VideoPlayer);
 
 class Movie extends PureComponent {
   constructor(props) {
@@ -21,49 +18,37 @@ class Movie extends PureComponent {
   }
 
   componentDidMount() {
-    const {filmID, onLoadFilmReviews} = this.props;
-    onLoadFilmReviews(filmID);
+    const {onLoadFilmReviews} = this.props;
+    const {id} = this.props.match.params;
+    onLoadFilmReviews(id);
   }
 
   componentDidUpdate(prevProps) {
-    const {filmID, onLoadFilmReviews} = this.props;
+    const {onLoadFilmReviews} = this.props;
+    const {id} = this.props.match.params;
 
-    if (prevProps.filmID !== this.props.filmID) {
-      onLoadFilmReviews(filmID);
+    if (prevProps.match.params.id !== id) {
+      onLoadFilmReviews(id);
     }
   }
 
   render() {
     const {
       filmInfo,
-      films,
-      onChangeActiveItemIndex,
-      activeItemIndex,
-      onTitleClick,
+      relatedFilms,
       filmReviews
     } = this.props;
 
+    if (!filmInfo) {
+      return null;
+    }
+
     const {
-      id,
       name,
       backgroundImage,
       backgroundColor,
       posterImage,
-      videoLink
     } = filmInfo;
-
-    if (activeItemIndex === id) {
-      return (
-        <WrappedVideoPlayer
-          src={videoLink}
-          isMuted={false}
-          poster={backgroundImage}
-          isPlaying={true}
-          isPreviewMode={false}
-          onChangeActiveItemIndex={onChangeActiveItemIndex}
-        />
-      );
-    }
 
     return (
         <>
@@ -77,10 +62,7 @@ class Movie extends PureComponent {
 
               <Header/>
 
-              <MoviePromo
-                filmInfo={filmInfo}
-                onChangeActiveItemIndex={onChangeActiveItemIndex}
-              />
+              <MoviePromo filmInfo={filmInfo}/>
             </div>
 
             <div className="movie-card__wrap movie-card__translate-top">
@@ -103,8 +85,7 @@ class Movie extends PureComponent {
             <section className="catalog catalog--like-this">
               <h2 className="catalog__title">More like this</h2>
               <MovieList
-                films={films}
-                onTitleClick={onTitleClick}
+                films={relatedFilms}
               />
             </section>
 
@@ -116,21 +97,21 @@ class Movie extends PureComponent {
 }
 
 Movie.propTypes = {
-  films: PropValidator.FILMS,
+  relatedFilms: PropValidator.FILMS,
   filmInfo: PropValidator.FILM_INFO,
-  onTitleClick: PropValidator.TITLE_CLICK,
-  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM,
   filmReviews: PropValidator.FILM_REVIEW,
-  filmID: PropValidator.ITEM_ID,
-  onLoadFilmReviews: PropValidator.ON_LOAD
+  onLoadFilmReviews: PropValidator.ON_LOAD,
+  match: PropValidator.MATCH,
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  films: makeRelatedFilmsList(state, ownProps.filmID),
-  filmInfo: getFilm(state, ownProps.filmID),
-  filmReviews: getFilmReviews(state)
-});
+const mapStateToProps = (state, ownProps) => {
+  const {id} = ownProps.match.params;
+  return {
+    relatedFilms: makeRelatedFilmsList(state, id),
+    filmInfo: getFilm(state, id),
+    filmReviews: getFilmReviews(state)
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onLoadFilmReviews(filmID) {

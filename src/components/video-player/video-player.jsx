@@ -8,7 +8,6 @@ const VideoPlayer = ({
   timeRemain,
   onRunModeToggle,
   onFullScreenMode,
-  onChangeActiveItemIndex,
   children
 }) => {
   return (
@@ -24,7 +23,7 @@ const VideoPlayer = ({
         className={`player__exit ${isFullScreenMode ? `visually-hidden` : ``}`}
         onClick={() => {
           onRunModeToggle();
-          onChangeActiveItemIndex(-1);
+          history.back();
         }}
       >
         Exit
@@ -89,8 +88,7 @@ VideoPlayer.propTypes = {
   progress: PropValidator.PROGRESS,
   timeRemain: PropValidator.TIME_REMAIN,
   onRunModeToggle: PropValidator.TOGGLE_PLAYING,
-  onFullScreenMode: PropValidator.TOGGLE_FULL_SCREEN,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM,
+  onFullScreenMode: PropValidator.TOGGLE_FULL_SCREEN
 };
 
 export default VideoPlayer;

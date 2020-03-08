@@ -14,12 +14,14 @@ exports[`<MovieCard /> component renders correctly 1`] = `
   </div>
   <h3
     className="small-movie-card__title"
-    onClick={[Function]}
   >
     <a
       className="small-movie-card__link"
-      href="movie-page.html"
-    />
+      href="/film/1"
+      onClick={[Function]}
+    >
+      Film 3
+    </a>
   </h3>
 </article>
 `;

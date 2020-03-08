@@ -1,9 +1,15 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Router} from "react-router-dom";
+import history from "../../history";
 import Footer from './footer.jsx';
 
-it(`<Main /> component renders correctly`, () => {
+it(`<Footer /> component renders correctly`, () => {
   const tree = renderer
-    .create(<Footer/>).toJSON();
+    .create(
+        <Router history={history}>
+          <Footer/>
+        </Router>
+    ).toJSON();
   expect(tree).toMatchSnapshot();
 });

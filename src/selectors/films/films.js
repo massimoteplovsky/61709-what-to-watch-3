@@ -14,7 +14,7 @@ export const getActualGenre = (state) => {
 };
 
 export const getFilm = (state, filmID) => {
-  return state.films.films.find((film) => film.id === filmID);
+  return state.films.films.find((film) => film.id === Number(filmID));
 };
 
 export const getPromoFilm = (state) => {

@@ -8,18 +8,12 @@ import GenreList from '../genre-list/genre-list.jsx';
 import MovieList from "../movie-list/movie-list.jsx";
 import ShowMore from '../show-more/show-more.jsx';
 import Footer from '../footer/footer.jsx';
-import VideoPlayer from '../video-player/video-player.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
 const WrappedGenreList = withActiveItem(GenreList);
-const WrappedVideoPlayer = withVideoPlayer(VideoPlayer);
 
 const Main = ({
   films,
-  activeItemIndex,
-  onChangeActiveItemIndex,
-  onTitleClick,
   promoFilm
 }) => {
 
@@ -28,24 +22,9 @@ const Main = ({
   }
 
   const {
-    id,
     name,
     backgroundImage,
-    videoLink
   } = promoFilm;
-
-  if (activeItemIndex === id) {
-    return (
-      <WrappedVideoPlayer
-        src={videoLink}
-        isMuted={false}
-        poster={backgroundImage}
-        isPlaying={true}
-        isPreviewMode={false}
-        onChangeActiveItemIndex={onChangeActiveItemIndex}
-      />
-    );
-  }
 
   return (
     <>
@@ -58,10 +37,7 @@ const Main = ({
 
         <Header/>
 
-        <MoviePromo
-          filmInfo={promoFilm}
-          onChangeActiveItemIndex={onChangeActiveItemIndex}
-        />
+        <MoviePromo filmInfo={promoFilm}/>
       </section>
 
       <div className="page-content">
@@ -70,10 +46,7 @@ const Main = ({
 
           <WrappedGenreList/>
 
-          <MovieList
-            films={films}
-            onTitleClick={onTitleClick}
-          />
+          <MovieList films={films}/>
 
           <ShowMore/>
         </section>
@@ -87,9 +60,6 @@ const Main = ({
 Main.propTypes = {
   films: PropValidator.FILMS,
   promoFilm: PropValidator.FILM_INFO,
-  onTitleClick: PropValidator.TITLE_CLICK,
-  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
 };
 
 const mapStateToProps = (state) => ({

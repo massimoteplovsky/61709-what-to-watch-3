@@ -1,5 +1,7 @@
-import React, {PureComponent} from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
+import React, {PureComponent} from "react";
+import {PropValidator} from "../../prop-validator/prop-validator";
+import {Link} from "react-router-dom";
+import history from "../../history";
 
 class MovieCard extends PureComponent {
   constructor(props) {
@@ -14,8 +16,7 @@ class MovieCard extends PureComponent {
 
   render() {
     const {
-      film: {id, title},
-      onTitleClick,
+      film: {id, name},
       children,
       onRunModeToggle,
       isPlaying
@@ -34,14 +35,14 @@ class MovieCard extends PureComponent {
           clearTimeout(this._timerID);
         }}
       >
-        <div className="small-movie-card__image" onClick={(event) => onTitleClick(event, id)}>
+        <div
+          className="small-movie-card__image"
+          onClick={() => history.push(`/film/${id}`)}
+        >
           {children}
         </div>
-        <h3
-          className="small-movie-card__title"
-          onClick={(event) => onTitleClick(event, id)}
-        >
-          <a className="small-movie-card__link" href="movie-page.html">{title}</a>
+        <h3 className="small-movie-card__title">
+          <Link className="small-movie-card__link" to={`/film/${id}`}>{name}</Link>
         </h3>
       </article>
     );
@@ -50,11 +51,9 @@ class MovieCard extends PureComponent {
 
 MovieCard.propTypes = {
   film: PropValidator.FILM_INFO,
-  onTitleClick: PropValidator.TITLE_CLICK,
   children: PropValidator.CHILDREN,
   onRunModeToggle: PropValidator.TOGGLE_PLAYING,
   isPlaying: PropValidator.IS_PLAYING
 };
 
-export {MovieCard};
 export default MovieCard;
