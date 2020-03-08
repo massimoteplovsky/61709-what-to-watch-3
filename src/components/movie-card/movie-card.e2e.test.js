@@ -21,7 +21,6 @@ it(`VideoPlayer mode has been changed (paused)`, () => {
         <video/>
       </MovieCard>
   );
-
   const card = movieCard.find(`.small-movie-card`);
   card.simulate(`mouseleave`);
 
