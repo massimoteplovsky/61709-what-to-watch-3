@@ -5,11 +5,11 @@ import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
 
 const WrappedMovieCard = withVideoPlayer(MovieCard);
 
-const MovieList = ({films}) => {
+const MovieList = ({films, message}) => {
 
   if (films.length === 0) {
     return (
-      <h2>No movies</h2>
+      <p>{message}</p>
     );
   }
 
@@ -17,12 +17,12 @@ const MovieList = ({films}) => {
     <div className="catalog__movies-list">
       {
         films.map((film) => {
+          const {id} = film;
           return (
             <WrappedMovieCard
-              key={film.id}
+              key={id}
               film={film}
-              src={film.previewVideoLink}
-              poster={film.previewImage}
+              filmID={id}
               isPlaying={false}
               isMuted={true}
               isPreviewMode={true}
@@ -37,6 +37,7 @@ const MovieList = ({films}) => {
 
 MovieList.propTypes = {
   films: PropValidator.FILMS,
+  message: PropValidator.MESSAGE
 };
 
 export {MovieList};

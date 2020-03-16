@@ -1,6 +1,9 @@
-import React, {PureComponent, createRef} from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
-import {makeTimer} from '../../helpers/helpers';
+import React, {PureComponent, createRef} from "react";
+import {PropValidator} from "../../prop-validator/prop-validator";
+import {connect} from "react-redux";
+import {makeTimer} from "../../helpers/helpers";
+import {getFilm} from "../../selectors/films/films";
+import history from "../../history";
 
 const withVideoPlayer = (Component) => {
 
@@ -20,14 +23,26 @@ const withVideoPlayer = (Component) => {
       this._videoRef = createRef();
       this.handleRunModeToggle = this.handleRunModeToggle.bind(this);
       this.handleFullScreenMode = this.handleFullScreenMode.bind(this);
+      this.handleClosePlayer = this.handleClosePlayer.bind(this);
     }
 
     componentDidMount() {
       const {
         isPlaying,
-        isPreviewMode
+        isPreviewMode,
+        film
       } = this.props;
+
       const video = this._videoRef.current;
+
+      if (!film) {
+        history.push(`/`);
+        return null;
+      }
+
+      video.oncanplaythrough = () => this.setState({
+        isLoading: false,
+      });
 
       this.setState({isPlaying});
 
@@ -39,6 +54,14 @@ const withVideoPlayer = (Component) => {
           });
         };
       }
+
+      return true;
+    }
+
+    handleClosePlayer() {
+      const {id} = this.props.film;
+      this.handleRunModeToggle();
+      history.push(`/films/${id}`);
     }
 
     handleRunModeToggle() {
@@ -89,36 +112,50 @@ const withVideoPlayer = (Component) => {
 
     componentWillUnmount() {
       let video = this._videoRef.current;
-      video.src = ``;
-      video.ontimeupdate = null;
-      video = null;
+
+      if (video) {
+        video.ontimeupdate = null;
+        video.oncanplaythrough = null;
+        video = null;
+      }
     }
 
     render() {
-
       const {
         isPlaying,
         progress,
         isFullScreenMode,
-        timeRemain
+        timeRemain,
+        isLoading
       } = this.state;
+
+      if (!this.props.film) {
+        return null;
+      }
 
       const {
         isPreviewMode,
-        poster,
-        src,
+        film: {
+          name,
+          videoLink,
+          previewVideoLink,
+          previewImage
+        },
         isMuted,
       } = this.props;
 
       return (
         <Component
           {...this.props}
+          filmName={name}
           isPlaying={isPlaying}
+          isLoading={isLoading}
           progress={progress}
           timeRemain={timeRemain}
           isFullScreenMode={isFullScreenMode}
           onFullScreenMode={this.handleFullScreenMode}
           onRunModeToggle={this.handleRunModeToggle}
+          onClosePlayer={this.handleClosePlayer}
         >
           {
             isPreviewMode ?
@@ -126,16 +163,16 @@ const withVideoPlayer = (Component) => {
                 style={{objectFit: `cover`}}
                 width="280"
                 height="175"
-                poster={poster}
+                poster={previewImage}
                 muted={isMuted}
-                src={src}
+                src={previewVideoLink}
                 ref={this._videoRef}
               />
               :
               <video
                 className="player__video"
                 muted={isMuted}
-                src={src}
+                src={videoLink}
                 ref={this._videoRef}
               />
           }
@@ -145,14 +182,21 @@ const withVideoPlayer = (Component) => {
   }
 
   WithVideoPlayer.propTypes = {
+    film: PropValidator.FILM_INFO,
     isPlaying: PropValidator.IS_PLAYING,
-    src: PropValidator.SRC,
     isMuted: PropValidator.IS_MUTED,
-    poster: PropValidator.POSTER,
     isPreviewMode: PropValidator.IS_PREVIEW_MODE
   };
 
-  return WithVideoPlayer;
+  const mapStateToProps = (state, ownProps) => {
+    return {
+      film: getFilm(state, ownProps.filmID)
+    };
+  };
+
+  return connect(mapStateToProps)(WithVideoPlayer);
 };
 
 export default withVideoPlayer;
+
+

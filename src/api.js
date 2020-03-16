@@ -23,11 +23,13 @@ export const createAPI = (onRequestFail, onUnauthorized) => {
 
     if (!response || Errors.REQUEST_ERRORS.includes(response.status)) {
       onRequestFail();
+      return err;
     }
 
     if (response.status === Errors.NO_AUTHORIZED) {
       onUnauthorized();
       history.push(`/login`);
+      return err;
     }
 
     return err;

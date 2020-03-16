@@ -1,5 +1,14 @@
 export const makeRating = (number) => number.toFixed(1).replace(`.`, `,`);
 
+export const checkIsEmpty = (obj) => {
+
+  if (isObject(obj)) {
+    return Object.keys(obj).length === 0;
+  }
+
+  return obj.length === 0;
+};
+
 export const makeTextRating = (numericRating) => {
 
   if (numericRating < 3) {
