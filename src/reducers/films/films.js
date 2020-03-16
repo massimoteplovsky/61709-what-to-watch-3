@@ -4,13 +4,13 @@ import {
   LOAD_ALL_FILMS,
   LOAD_PROMO_FILM,
   LOAD_FILM_REVIEWS,
-  CHANGE_FAVORITE_STATUS
+  CHANGE_FAVORITE_STATUS,
+  ADD_REVIEW
 } from '../../actions/types/films/films';
 import {FILM_TO_SHOW} from '../../consts';
 
 const initialState = {
   films: [],
-  filteredFilms: [],
   actualGenre: `All genres`,
   filmCounter: FILM_TO_SHOW,
   promoFilm: null,
@@ -23,10 +23,7 @@ export const films = (state = initialState, {type, payload}) => {
       return Object.assign(
           {},
           state,
-          {
-            films: payload,
-            filteredFilms: payload
-          }
+          {films: payload}
       );
     case LOAD_PROMO_FILM:
       return Object.assign(
@@ -67,6 +64,12 @@ export const films = (state = initialState, {type, payload}) => {
               ...state.films.slice(filmIndex + 1)],
             promoFilm: state.promoFilm.id === payload.id ? payload : state.promoFilm
           }
+      );
+    case ADD_REVIEW:
+      return Object.assign(
+          {},
+          state,
+          {reviews: [...state.reviews, ...payload]}
       );
     default:
       return state;

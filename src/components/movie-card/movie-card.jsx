@@ -37,12 +37,12 @@ class MovieCard extends PureComponent {
       >
         <div
           className="small-movie-card__image"
-          onClick={() => history.push(`/film/${id}`)}
+          onClick={() => history.push(`/films/${id}`)}
         >
           {children}
         </div>
         <h3 className="small-movie-card__title">
-          <Link className="small-movie-card__link" to={`/film/${id}`}>{name}</Link>
+          <Link className="small-movie-card__link" to={`/films/${id}`}>{name}</Link>
         </h3>
       </article>
     );

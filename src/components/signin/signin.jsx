@@ -1,6 +1,6 @@
-import React, {PureComponent, createRef} from 'react';
-import Footer from '../footer/footer.jsx';
-import {connect} from 'react-redux';
+import React, {PureComponent, createRef} from "react";
+import Footer from "../footer/footer.jsx";
+import {connect} from "react-redux";
 import {PropValidator} from "../../prop-validator/prop-validator";
 import {validateEmail} from "../../helpers/helpers";
 import {login} from "../../actions/action-creators/user/user";
