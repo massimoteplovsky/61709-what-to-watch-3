@@ -4,8 +4,7 @@ import {
   LOAD_ALL_FILMS,
   LOAD_PROMO_FILM,
   LOAD_FILM_REVIEWS,
-  CHANGE_FAVORITE_STATUS,
-  ADD_REVIEW
+  CHANGE_FAVORITE_STATUS
 } from '../../types/films/films';
 import {addToFavorites, deleteFromFavorites} from "../user/user";
 
@@ -65,27 +64,16 @@ export const changeFavoriteStatus = (film) => {
 export const toggleIsFavoriteFilm = (id, status) => (dispatch, _, api) => {
   return api.post(`/favorite/${id}/${status}`)
   .then((res) => {
-    dispatch(changeFavoriteStatus(res.data));
+    if (res.status === 200) {
+      dispatch(changeFavoriteStatus(res.data));
 
-    if (status === 1) {
-      dispatch(addToFavorites(res.data));
-    }
+      if (status === 1) {
+        dispatch(addToFavorites(res.data));
+      }
 
-    if (status === 0) {
-      dispatch(deleteFromFavorites(id));
+      if (status === 0) {
+        dispatch(deleteFromFavorites(id));
+      }
     }
   });
-};
-
-export const addReview = (review) => ({
-  type: ADD_REVIEW,
-  payload: review
-});
-
-export const sendReview = (reviewInfo, filmID, onFormSuccess) => (dispatch, _, api) => {
-  return api.post(`/comments/${filmID}`, reviewInfo)
-    .then((res) => {
-      dispatch(addReview(res.data));
-      onFormSuccess();
-    });
 };

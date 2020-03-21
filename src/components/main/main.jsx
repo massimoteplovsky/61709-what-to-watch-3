@@ -1,8 +1,7 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import {PropValidator} from "../../prop-validator/prop-validator";
 import {connect} from 'react-redux';
 import {getFilteredFilms, getPromoFilm} from '../../selectors/films/films';
-import {changeFilmGenre} from "../../actions/action-creators/films/films";
 import Header from '../header/header.jsx';
 import MoviePromo from '../movie-promo/movie-promo.jsx';
 import GenreList from '../genre-list/genre-list.jsx';
@@ -10,87 +9,65 @@ import MovieList from "../movie-list/movie-list.jsx";
 import ShowMore from '../show-more/show-more.jsx';
 import Footer from '../footer/footer.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import {DEFAULT_GENRE} from "../../consts";
 
 const WrappedGenreList = withActiveItem(GenreList);
 
-class Main extends PureComponent {
+const Main = ({
+  films,
+  promoFilm
+}) => {
 
-  constructor(props) {
-    super(props);
+  if (!promoFilm) {
+    return null;
   }
 
-  componentDidMount() {
-    const {onChangeFilmGenre} = this.props;
-    onChangeFilmGenre(DEFAULT_GENRE);
-  }
+  const {
+    name,
+    backgroundImage,
+  } = promoFilm;
 
-  render() {
+  return (
+    <>
+      <section className="movie-card">
+        <div className="movie-card__bg">
+          <img src={backgroundImage} alt={name} />
+        </div>
 
-    const {
-      filteredFilms,
-      promoFilm
-    } = this.props;
+        <h1 className="visually-hidden">WTW</h1>
 
-    if (!promoFilm) {
-      return null;
-    }
+        <Header/>
 
-    const {
-      name,
-      backgroundImage,
-    } = promoFilm;
+        <MoviePromo filmInfo={promoFilm}/>
+      </section>
 
-    return (
-        <>
-          <section className="movie-card">
-            <div className="movie-card__bg">
-              <img src={backgroundImage} alt={name} />
-            </div>
+      <div className="page-content">
+        <section className="catalog">
+          <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-            <h1 className="visually-hidden">WTW</h1>
+          <WrappedGenreList/>
 
-            <Header additionalClass="movie-card__head"/>
+          <MovieList films={films}/>
 
-            <MoviePromo filmInfo={promoFilm}/>
-          </section>
+          <ShowMore/>
+        </section>
 
-          <div className="page-content">
-            <section className="catalog">
-              <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-              <WrappedGenreList/>
-
-              <MovieList films={filteredFilms}/>
-
-              <ShowMore/>
-            </section>
-
-            <Footer/>
-          </div>
-        </>
-    );
-  }
-}
+        <Footer/>
+      </div>
+    </>
+  );
+};
 
 Main.propTypes = {
-  filteredFilms: PropValidator.FILMS,
+  films: PropValidator.FILMS,
   promoFilm: PropValidator.FILM_INFO,
-  onChangeFilmGenre: PropValidator.CHANGE_GENRE
 };
 
 const mapStateToProps = (state) => ({
-  filteredFilms: getFilteredFilms(state),
+  films: getFilteredFilms(state),
   promoFilm: getPromoFilm(state)
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onChangeFilmGenre(genre) {
-    dispatch(changeFilmGenre(genre));
-  }
 });
 
 export {Main};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps)(Main);
 

@@ -7,45 +7,29 @@ import Tabs from '../tabs/tabs.jsx';
 import MovieList from '../movie-list/movie-list.jsx';
 import Footer from '../footer/footer.jsx';
 import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import history from "../../history";
-import {getRelatedFilmsList, getFilm, getFilmReviews, getFilms} from '../../selectors/films/films';
-import {loadFilmReviews, loadAllFilms} from '../../actions/action-creators/films/films';
+import {makeRelatedFilmsList, getFilm, getFilmReviews} from '../../selectors/films/films';
+import {loadFilmReviews} from '../../actions/action-creators/films/films';
 
 const WrappedTabs = withActiveItem(Tabs);
 
 class Movie extends PureComponent {
-
   constructor(props) {
     super(props);
-
-    this.state = {
-      loading: true
-    };
   }
 
   componentDidMount() {
-    const {filmInfo, onLoadFilmReviews} = this.props;
-
-    if (!filmInfo) {
-      return history.push(`/`);
-    }
-
-    return onLoadFilmReviews(filmInfo.id);
+    const {onLoadFilmReviews} = this.props;
+    const {id} = this.props.match.params;
+    onLoadFilmReviews(id);
   }
 
   componentDidUpdate(prevProps) {
-    const {filmInfo, onLoadFilmReviews} = this.props;
+    const {onLoadFilmReviews} = this.props;
     const {id} = this.props.match.params;
-
-    if (!filmInfo) {
-      return history.push(`/`);
-    }
 
     if (prevProps.match.params.id !== id) {
       onLoadFilmReviews(id);
     }
-
-    return null;
   }
 
   render() {
@@ -76,7 +60,7 @@ class Movie extends PureComponent {
 
               <h1 className="visually-hidden">WTW</h1>
 
-              <Header additionalClass="movie-card__head"/>
+              <Header/>
 
               <MoviePromo filmInfo={filmInfo}/>
             </div>
@@ -102,7 +86,6 @@ class Movie extends PureComponent {
               <h2 className="catalog__title">More like this</h2>
               <MovieList
                 films={relatedFilms}
-                message={`No related movies`}
               />
             </section>
 
@@ -122,18 +105,15 @@ Movie.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  const {id} = ownProps.match.params;
   return {
-    films: getFilms(state),
-    filmInfo: getFilm(state, ownProps.match.params.id),
-    relatedFilms: getRelatedFilmsList(state, ownProps.match.params.id),
+    relatedFilms: makeRelatedFilmsList(state, id),
+    filmInfo: getFilm(state, id),
     filmReviews: getFilmReviews(state)
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadAllFilms() {
-    return dispatch(loadAllFilms());
-  },
   onLoadFilmReviews(filmID) {
     dispatch(loadFilmReviews(filmID));
   }

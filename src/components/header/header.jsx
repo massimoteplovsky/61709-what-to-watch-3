@@ -3,14 +3,12 @@ import {connect} from 'react-redux';
 import {NO_AUTH, BASE_URL} from '../../consts';
 import {PropValidator} from '../../prop-validator/prop-validator';
 import {Link} from "react-router-dom";
-import history from "../../history";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import {getAuthorizationStatus} from "../../selectors/user/user";
 
-const Header = ({isAuth, userInfo, additionalClass}) => {
+const Header = ({isAuth, userInfo}) => {
 
   return (
-    <header className={`page-header ${additionalClass}`}>
+    <header className="page-header movie-card__head">
       <div className="logo">
         <Link className="logo__link" to={`/`}>
           <span className="logo__letter logo__letter--1">W</span>
@@ -25,11 +23,7 @@ const Header = ({isAuth, userInfo, additionalClass}) => {
             <Link className="user-block__link" to={`/login`}>Sign in</Link>
             :
             <div className="user-block__avatar">
-              <img
-                src={userInfo ? `${BASE_URL}${userInfo.avatarUrl}` : null}
-                alt={userInfo ? userInfo.name : null} width="63" height="63"
-                onClick={() => history.push(`/myList`)}
-              />
+              <img src={userInfo ? `${BASE_URL}${userInfo.avatarUrl}` : null} alt={userInfo ? userInfo.name : null} width="63" height="63" />
             </div>
         }
       </div>
@@ -38,14 +32,13 @@ const Header = ({isAuth, userInfo, additionalClass}) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: getAuthorizationStatus(state),
+  isAuth: state.user.authorizationStatus,
   userInfo: state.user.userInfo
 });
 
 Header.propTypes = {
   isAuth: PropValidator.IS_AUTH,
-  userInfo: PropValidator.USER_INFO,
-  additionalClass: PropValidator.ADDITIONAL_CLASS
+  userInfo: PropValidator.USER_INFO
 };
 
 export {Header};

@@ -1,16 +1,13 @@
-import React from "react";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import React from 'react';
+import {PropValidator} from '../../prop-validator/prop-validator';
 
 const VideoPlayer = ({
-  filmName,
   isPlaying,
-  isLoading,
   isFullScreenMode,
   progress,
   timeRemain,
   onRunModeToggle,
   onFullScreenMode,
-  onClosePlayer,
   children
 }) => {
   return (
@@ -24,7 +21,10 @@ const VideoPlayer = ({
       <button
         type="button"
         className={`player__exit ${isFullScreenMode ? `visually-hidden` : ``}`}
-        onClick={onClosePlayer}
+        onClick={() => {
+          onRunModeToggle();
+          history.back();
+        }}
       >
         Exit
       </button>
@@ -44,8 +44,6 @@ const VideoPlayer = ({
           <button
             type="button"
             className="player__play"
-            disabled={isLoading}
-            style={{opacity: isLoading ? 0.4 : 1}}
             onClick={onRunModeToggle}
           >
             {
@@ -65,7 +63,7 @@ const VideoPlayer = ({
               </>
             }
           </button>
-          <div className="player__name">{filmName}</div>
+          <div className="player__name">Transpotting</div>
 
           <button
             type="button"
@@ -85,15 +83,12 @@ const VideoPlayer = ({
 
 VideoPlayer.propTypes = {
   children: PropValidator.CHILDREN,
-  filmName: PropValidator.TITLE,
   isPlaying: PropValidator.IS_PLAYING,
-  isLoading: PropValidator.IS_LOADING,
   isFullScreenMode: PropValidator.IS_FULL_SCREEN_MODE,
   progress: PropValidator.PROGRESS,
   timeRemain: PropValidator.TIME_REMAIN,
   onRunModeToggle: PropValidator.TOGGLE_PLAYING,
-  onFullScreenMode: PropValidator.TOGGLE_FULL_SCREEN,
-  onClosePlayer: PropValidator.CLOSE_PLAYER
+  onFullScreenMode: PropValidator.TOGGLE_FULL_SCREEN
 };
 
 export default VideoPlayer;

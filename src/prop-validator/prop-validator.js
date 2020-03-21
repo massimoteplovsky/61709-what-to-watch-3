@@ -31,7 +31,7 @@ const FilmPropType = {
     previewVideoLink: string.isRequired,
     videoLink: string.isRequired,
     isFavorite: false
-  }).isRequired, oneOf([null]).isRequired, object]),
+  }).isRequired, oneOf([null]).isRequired]),
   TITLE_CLICK: func.isRequired,
   CARD_MOUSE_ENTER: func.isRequired,
   CARD_MOUSE_LEAVE: func.isRequired,
@@ -43,9 +43,15 @@ const FilmPropType = {
   GENRE: string.isRequired,
 };
 
+const VideoPropType = {
+  IS_PLAYING: bool.isRequired,
+  SRC: string.isRequired,
+  IS_MUTED: bool.isRequired,
+  POSTER: string.isRequired,
+};
+
 const MovieGenre = {
   CHANGE_GENRE: func.isRequired,
-  MESSAGE: string
 };
 
 const FilmReviewPropType = {
@@ -77,32 +83,20 @@ const General = {
   ]).isRequired,
   ON_LOAD: func.isRequired,
   REQUEST_ERROR: bool.isRequired,
-  MATCH: object,
-  ADDITIONAL_CLASS: string,
-  EXACT: bool.isRequired,
-  PATH: string.isRequired,
-  RENDER: func.isRequired,
-  CHANGE_LOAD_STATUS: func.isRequired,
-  ON_LOAD_DATA: func.isRequired,
-  LOADING: bool.isRequired,
+  MATCH: object
 };
 
 const VideoPlayer = {
   IS_PLAYING: bool.isRequired,
-  IS_LOADING: bool.isRequired,
   IS_FULL_SCREEN_MODE: bool.isRequired,
   PROGRESS: number.isRequired,
   TIME_REMAIN: string.isRequired,
   TOGGLE_PLAYING: func.isRequired,
   TOGGLE_FULL_SCREEN: func.isRequired,
-  SRC: string.isRequired,
-  IS_MUTED: bool.isRequired,
-  POSTER: string.isRequired,
-  CLOSE_PLAYER: func.isRequired
 };
 
 const Auth = {
-  IS_AUTH: oneOfType([string.isRequired, oneOf([null]).isRequired]),
+  IS_AUTH: string.isRequired,
   SEND_FROM: func.isRequired,
   USER_INFO: oneOfType([shape({
     id: number.isRequired,
@@ -116,22 +110,14 @@ const Form = {
   CHANGE_FORM_MESSAGE: func.isRequired,
   FROM_ERROR: bool.isRequired,
   FORM_MESSAGE: string.isRequired,
-  ERROR_FIELD: string.isRequired,
-  COMMENT: string.isRequired,
-  RATING: number.isRequired,
-  IS_DISABLED: bool.isRequired,
-  IS_VALID: bool.isRequired,
-  ON_USER_INPUT: func.isRequired,
-  ON_DISABLE: func.isRequired,
-  ON_SEND_REVIEW: func.isRequired,
-  ON_RESET: func.isRequired,
-  ON_FORM_SUCCESS: func.isRequired
+  ERROR_FIELD: string.isRequired
 };
 
 export const PropValidator = Object.assign(
     {},
     FilmPropType,
     {FILMS: arrayOf(FilmPropType.FILM_INFO).isRequired},
+    VideoPropType,
     MovieGenre,
     General,
     VideoPlayer,

@@ -4,7 +4,6 @@ import {PropValidator} from '../../prop-validator/prop-validator';
 import {changeFilmGenre} from '../../actions/action-creators/films/films';
 import {getFilms} from '../../selectors/films/films';
 import GenreItemList from '../genre-list-item/genre-list-item.jsx';
-import {DEFAULT_GENRE} from '../../consts';
 
 const GenreList = ({
   films,
@@ -12,7 +11,7 @@ const GenreList = ({
   onChangeActiveItemIndex,
   activeItemIndex
 }) => {
-  const genres = [...new Set([DEFAULT_GENRE, ...films.map((film) => film.genre)].slice(0, 8))];
+  const genres = [...new Set([`All genres`, ...films.map((film) => film.genre)])];
 
   return (
     <ul className="catalog__genres-list">

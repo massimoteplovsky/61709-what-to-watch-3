@@ -3,13 +3,8 @@ import {PropValidator} from "../../prop-validator/prop-validator";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {toggleIsFavoriteFilm} from "../../actions/action-creators/films/films";
-import {AUTH} from "../../consts";
 
-const MoviePromo = ({
-  filmInfo,
-  onToggleIsFavoriteFilm,
-  authorizationStatus
-}) => {
+const MoviePromo = ({filmInfo, onToggleIsFavoriteFilm}) => {
 
   const {
     id,
@@ -56,10 +51,7 @@ const MoviePromo = ({
             }
             <span>My list</span>
           </button>
-          {
-            authorizationStatus === AUTH &&
-            <Link to={`/films/${id}/review`} className="btn movie-card__button">Add review</Link>
-          }
+          <a href="add-review.html" className="btn movie-card__button">Add review</a>
         </div>
       </div>
     </div>
@@ -68,13 +60,8 @@ const MoviePromo = ({
 
 MoviePromo.propTypes = {
   filmInfo: PropValidator.FILM_INFO,
-  onToggleIsFavoriteFilm: PropValidator.CHANGE_ACTIVE_ITEM,
-  authorizationStatus: PropValidator.IS_AUTH
+  onToggleIsFavoriteFilm: PropValidator.CHANGE_ACTIVE_ITEM
 };
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.user.authorizationStatus
-});
 
 const mapDispatchToProps = (dispatch) => ({
   onToggleIsFavoriteFilm(id, status) {
@@ -83,4 +70,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {MoviePromo};
-export default connect(mapStateToProps, mapDispatchToProps)(MoviePromo);
+export default connect(null, mapDispatchToProps)(MoviePromo);

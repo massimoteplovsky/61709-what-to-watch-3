@@ -3,7 +3,7 @@ import {PropValidator} from '../../prop-validator/prop-validator';
 import {makeRating, makeTextRating} from '../../helpers/helpers';
 
 const MovieOverview = ({filmInfo}) => {
-  const {rating, scoresCount, director, starring, description} = filmInfo;
+  const {rating, votes, director, starring, description} = filmInfo;
 
   return (
     <>
@@ -11,7 +11,7 @@ const MovieOverview = ({filmInfo}) => {
         <div className="movie-rating__score">{makeRating(rating)}</div>
         <p className="movie-rating__meta">
           <span className="movie-rating__level">{makeTextRating(rating)}</span>
-          <span className="movie-rating__count">{scoresCount} ratings</span>
+          <span className="movie-rating__count">{votes} ratings</span>
         </p>
       </div>
 

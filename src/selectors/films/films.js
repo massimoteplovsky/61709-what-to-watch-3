@@ -47,15 +47,10 @@ export const getFilteredFilms = createSelector(
     }
 );
 
-export const getRelatedFilmsList = createSelector(
+export const makeRelatedFilmsList = createSelector(
     getFilms,
     getFilm,
     (films, searchedFilm) => {
-
-      if (!searchedFilm) {
-        return [];
-      }
-
       return films.filter((film) => {
         return film.id !== searchedFilm.id && film.genre === searchedFilm.genre;
       }).slice(0, RELATED_FILM_COUNT);

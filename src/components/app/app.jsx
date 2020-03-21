@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {Router, Switch, Route, Redirect} from "react-router-dom";
+import {Router, Switch, Route} from "react-router-dom";
 import history from "../../history.js";
 import {PropValidator} from "../../prop-validator/prop-validator";
 import {connect} from "react-redux";
@@ -7,102 +7,45 @@ import Main from "../main/main.jsx";
 import Movie from "../movie/movie.jsx";
 import Signin from "../signin/signin.jsx";
 import VideoPlayer from "../video-player/video-player.jsx";
-import AddReview from "../add-review/add-review.jsx";
-import MyList from "../my-list/my-list.jsx";
 import ServerError from "../server-error/server-error.jsx";
-import PageNotFound from "../page-not-found/page-not-found.jsx";
-import PrivateRoute from "../private-route/private-route.jsx";
 import withVideoPlayer from "../../hocs/with-video-player/with-video-player";
-import withLoading from "../../hocs/with-loading/with-loading";
-import {getAuthorizationStatus} from "../../selectors/user/user";
-import {AUTH} from "../../consts";
-import {loadAllFilms, loadPromoFilm} from '../../actions/action-creators/films/films';
-import {checkAuth} from '../../actions/action-creators/user/user';
+import {getFilms} from "../../selectors/films/films.js";
+import {getFilm} from "../../helpers/helpers";
 
 const WrappedVideoPlayer = withVideoPlayer(VideoPlayer);
 
 class App extends PureComponent {
-
-  componentDidMount() {
-    const {
-      onChangeLoadingStatus,
-      onLoadData
-    } = this.props;
-
-    onLoadData().then(() => {
-      onChangeLoadingStatus(false);
-    });
+  constructor(props) {
+    super(props);
   }
 
   render() {
-    const {
-      loading,
-      isAuth,
-      error,
-    } = this.props;
+    const {error, films} = this.props;
 
     if (error) {
-      return <ServerError/>;
-    }
-
-    if (loading) {
-      return null;
+      return (<ServerError/>);
     }
 
     return (
       <Router history={history}>
         <Switch>
-          <Route
-            path="/"
-            exact
-            component={Main}
-          />
-          <Route
-            path="/login"
-            exact
-            render={() => {
-              return (
-                isAuth === AUTH ?
-                  <Redirect to="/"/>
-                  :
-                  <Signin/>
-              );
-            }}
-          />
-          <Route
-            path="/films/:id"
-            exact
-            render={(props) => {
-              return <Movie {...props}/>;
-            }}
-          />
-          <PrivateRoute
-            exact
-            path="/films/:id/review"
-            render={(filmID) => {
-              return <AddReview filmID={filmID}/>;
-            }}
-          />
-          <Route
-            path="/player/:id"
-            exact
-            render={(props) => {
-              return (
-                <WrappedVideoPlayer
-                  isPlaying={true}
-                  isMuted={false}
-                  filmID={props.match.params.id}
-                  isPreviewMode={false}
-                />
-              );
-            }}
-          />
-          <PrivateRoute
-            path="/myList"
-            exact
-            render={() => <MyList/>}
-          />
-          <Route component={PageNotFound}/>
+          <Route exact path="/" component={Main}/>
+          <Route exact path="/login" component={Signin}/>
+          <Route exact path="/film/:id" component={Movie}/>
+          <Route exact path="/player/:id" render={(props) => {
+            const {id} = props.match.params;
+            const film = getFilm(films, id);
+
+            return (
+              <WrappedVideoPlayer
+                isPlaying={true}
+                isMuted={false}
+                src={film.videoLink}
+                poster={film.backgroundImage}
+                isPreviewMode={false}
+              />
+            );
+          }}/>
         </Switch>
       </Router>
     );
@@ -110,28 +53,14 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  error: PropValidator.REQUEST_ERROR,
-  isAuth: PropValidator.IS_AUTH,
-  onChangeLoadingStatus: PropValidator.CHANGE_LOAD_STATUS,
-  onLoadData: PropValidator.ON_LOAD_DATA,
-  loading: PropValidator.IS_LOADING,
-  match: PropValidator.MATCH
+  films: PropValidator.FILMS,
+  error: PropValidator.REQUEST_ERROR
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: getAuthorizationStatus(state),
+  films: getFilms(state),
   error: state.application.error
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onLoadData() {
-    return Promise.all([
-      dispatch(loadAllFilms()),
-      dispatch(loadPromoFilm()),
-      dispatch(checkAuth())
-    ]);
-  }
-});
-
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(withLoading(App));
+export default connect(mapStateToProps)(App);

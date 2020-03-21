@@ -3,7 +3,7 @@ import {
   LOAD_USER_INFO,
   LOAD_FAVORITES_FILMS,
   ADD_TO_FAVORITES,
-  DELETE_FROM_FAVORITES,
+  DELETE_FROM_FAVORITES
 } from "../../types/user/user";
 import {AUTH} from "../../../consts";
 import history from "../../../history";
