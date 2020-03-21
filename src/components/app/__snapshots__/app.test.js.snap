@@ -2,16 +2,12 @@
 
 exports[`<App /> component renders correctly 1`] = `null`;
 
-exports[`<App /> component renders error 1`] = `
+exports[`<App /> component with error status is true renders error 1`] = `
 <div
-  className="error-container"
+  className="user-page"
 >
-  <div
-    className="error-block"
-  >
-    <h1>
-      Sorry, connection with server failed!
-    </h1>
-  </div>
+  <h1>
+    Sorry, connection with server failed!
+  </h1>
 </div>
 `;

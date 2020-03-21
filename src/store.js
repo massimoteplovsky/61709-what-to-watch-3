@@ -1,10 +1,10 @@
-import {createStore, applyMiddleware, compose} from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from './reducers/reducer';
-import {createAPI} from './api';
-import {requestFail} from './actions/action-creators/application/application';
-import {requireAuthorization} from './actions/action-creators/user/user';
-import {NO_AUTH} from './consts';
+import {createStore, applyMiddleware, compose} from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers/reducer.js";
+import {createAPI} from "./api.js";
+import {requestFail} from "./actions/action-creators/application-actions/application-actions.js";
+import {requireAuthorization} from "./actions/action-creators/user-actions/user-actions.js";
+import {NO_AUTH} from "./consts.js";
 
 const onUnauthorized = () => {
   store.dispatch(requireAuthorization(NO_AUTH));

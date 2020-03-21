@@ -1,124 +1,34 @@
-import {film, filmReviews} from "../../mocks/films-test";
+import {film, films as filmsList, filmReviews} from "../../mocks/films-test";
 import {films} from "./films.js";
-import {
-  changeFilmGenre,
-  incrementFilmCounter,
-  loadAllFilms,
-  loadPromoFilm,
-  loadFilmReviews,
-  changeFavoriteStatus
-} from "../../actions/action-creators/films/films";
+
 import {
   CHANGE_FILM_GENRE,
   INCREMENT_FILM_COUNTER,
   LOAD_ALL_FILMS,
   LOAD_PROMO_FILM,
   LOAD_FILM_REVIEWS,
-  CHANGE_FAVORITE_STATUS
+  CHANGE_FAVORITE_STATUS,
+  ADD_REVIEW,
+  LOAD_FAVORITES_FILMS,
+  ADD_TO_FAVORITES,
+  DELETE_FROM_FAVORITES
 } from "../../actions/types/films/films";
-
-import MockAdapter from "axios-mock-adapter";
-import {createAPI} from "../../api";
-
-const filmsList = [
-  {
-    id: 1,
-    name: `Film 3`,
-    genre: `Drama`,
-    released: 2019,
-    backgroundImage: ``,
-    backgroundColor: ``,
-    previewImage: ``,
-    posterImage: ``,
-    description: ``,
-    rating: 4.5,
-    scoresCount: 300,
-    runTime: 3,
-    director: ``,
-    starring: [],
-    previewVideoLink: ``,
-    videoLink: ``,
-    isFavorite: false
-  },
-  {
-    id: 2,
-    name: `Film 2`,
-    genre: ``,
-    released: 2019,
-    backgroundImage: ``,
-    backgroundColor: ``,
-    previewImage: ``,
-    posterImage: ``,
-    description: ``,
-    rating: 4.5,
-    scoresCount: 300,
-    runTime: 3,
-    director: ``,
-    starring: [],
-    previewVideoLink: ``,
-    videoLink: ``,
-    isFavorite: false
-  },
-];
-
-const filmsListWithStatus = [
-  {
-    id: 1,
-    name: `Film 3`,
-    genre: `Drama`,
-    released: 2019,
-    backgroundImage: ``,
-    backgroundColor: ``,
-    previewImage: ``,
-    posterImage: ``,
-    description: ``,
-    rating: 4.5,
-    scoresCount: 300,
-    runTime: 3,
-    director: ``,
-    starring: [],
-    previewVideoLink: ``,
-    videoLink: ``,
-    isFavorite: true
-  },
-  {
-    id: 2,
-    name: `Film 2`,
-    genre: ``,
-    released: 2019,
-    backgroundImage: ``,
-    backgroundColor: ``,
-    previewImage: ``,
-    posterImage: ``,
-    description: ``,
-    rating: 4.5,
-    scoresCount: 300,
-    runTime: 3,
-    director: ``,
-    starring: [],
-    previewVideoLink: ``,
-    videoLink: ``,
-    isFavorite: false
-  },
-];
-
-const api = createAPI(() => {});
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(films(void 0, {})).toEqual({
     films: [],
-    filteredFilms: [],
+    favoriteFilms: [],
+    promoFilm: null,
     actualGenre: `All genres`,
     filmCounter: 8,
-    promoFilm: null,
     reviews: []
   });
 });
 
-it(`Reducer should change actual genre for recieved value`, () => {
+it(`Reducer should change actual genre and film counter for recieved values`, () => {
   expect(films({
-    films: filmsList,
-    filteredFilms: filmsList,
+    films: [],
+    favoriteFilms: [],
     actualGenre: `All genres`,
     filmCounter: 16,
     promoFilm: null,
@@ -127,8 +37,8 @@ it(`Reducer should change actual genre for recieved value`, () => {
     type: CHANGE_FILM_GENRE,
     payload: `Drama`,
   })).toEqual({
-    films: filmsList,
-    filteredFilms: filmsList,
+    films: [],
+    favoriteFilms: [],
     actualGenre: `Drama`,
     filmCounter: 8,
     promoFilm: null,
@@ -138,8 +48,8 @@ it(`Reducer should change actual genre for recieved value`, () => {
 
 it(`Reducer should change film to show counter`, () => {
   expect(films({
-    films: filmsList,
-    filteredFilms: filmsList,
+    films: [],
+    favoriteFilms: [],
     actualGenre: `Drama`,
     filmCounter: 8,
     promoFilm: null,
@@ -148,8 +58,8 @@ it(`Reducer should change film to show counter`, () => {
     type: INCREMENT_FILM_COUNTER,
     payload: null,
   })).toEqual({
-    films: filmsList,
-    filteredFilms: filmsList,
+    films: [],
+    favoriteFilms: [],
     actualGenre: `Drama`,
     filmCounter: 16,
     promoFilm: null,
@@ -160,7 +70,7 @@ it(`Reducer should change film to show counter`, () => {
 it(`Reducer should load all films`, () => {
   expect(films({
     films: [],
-    filteredFilms: [],
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: null,
@@ -170,7 +80,7 @@ it(`Reducer should load all films`, () => {
     payload: filmsList,
   })).toEqual({
     films: filmsList,
-    filteredFilms: filmsList,
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: null,
@@ -181,7 +91,7 @@ it(`Reducer should load all films`, () => {
 it(`Reducer should load promo film`, () => {
   expect(films({
     films: [],
-    filteredFilms: [],
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: null,
@@ -191,7 +101,7 @@ it(`Reducer should load promo film`, () => {
     payload: film,
   })).toEqual({
     films: [],
-    filteredFilms: [],
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: film,
@@ -202,7 +112,7 @@ it(`Reducer should load promo film`, () => {
 it(`Reducer should load film reviews`, () => {
   expect(films({
     films: [],
-    filteredFilms: [],
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: null,
@@ -212,7 +122,7 @@ it(`Reducer should load film reviews`, () => {
     payload: filmReviews,
   })).toEqual({
     films: [],
-    filteredFilms: [],
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: null,
@@ -223,17 +133,17 @@ it(`Reducer should load film reviews`, () => {
 it(`Reducer should change favorite field`, () => {
   expect(films({
     films: filmsList,
-    filteredFilms: [],
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: film,
     reviews: []
   }, {
     type: CHANGE_FAVORITE_STATUS,
-    payload: film,
+    payload: Object.assign({}, film, film[`isFavorite`] = true),
   })).toEqual({
-    films: filmsListWithStatus,
-    filteredFilms: [],
+    films: filmsList,
+    favoriteFilms: [],
     actualGenre: `All Genres`,
     filmCounter: 8,
     promoFilm: film,
@@ -241,83 +151,88 @@ it(`Reducer should change favorite field`, () => {
   });
 });
 
-describe(`Action creators work correctly`, () => {
-
-  it(`Action creator for changing film genre returns correct action`, () => {
-    expect(changeFilmGenre(`Drama`)).toEqual({
-      type: CHANGE_FILM_GENRE,
-      payload: `Drama`,
-    });
-  });
-
-  it(`Action creator for changing film favorite status should returns correct action`, () => {
-    expect(changeFavoriteStatus(film)).toEqual({
-      type: CHANGE_FAVORITE_STATUS,
-      payload: film
-    });
-  });
-
-  it(`Action creator for changing film counter returns correct action`, () => {
-    expect(incrementFilmCounter()).toEqual({
-      type: INCREMENT_FILM_COUNTER,
-      payload: null,
-    });
-  });
-
-  it(`Action creator for loading films returns correct action`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const filmsLoader = loadAllFilms();
-
-    apiMock
-      .onGet(`/films`)
-      .reply(200, [{fake: true}]);
-
-    return filmsLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: LOAD_ALL_FILMS,
-          payload: [{fake: true}],
-        });
-      });
-  });
-
-  it(`Action creator for loading promo film returns correct action`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const promoFilmLoader = loadPromoFilm();
-
-    apiMock
-      .onGet(`/films/promo`)
-      .reply(200, [{fake: true}]);
-
-    return promoFilmLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: LOAD_PROMO_FILM,
-          payload: [{fake: true}],
-        });
-      });
-  });
-
-  it(`Action creator for loading film reviews returns correct action`, () => {
-    const apiMock = new MockAdapter(api);
-    const dispatch = jest.fn();
-    const filmReviewsLoader = loadFilmReviews(film.id);
-
-    apiMock
-      .onGet(`/comments/${film.id}`)
-      .reply(200, [{fake: true}]);
-
-    return filmReviewsLoader(dispatch, () => {}, api)
-      .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenNthCalledWith(1, {
-          type: LOAD_FILM_REVIEWS,
-          payload: [{fake: true}],
-        });
-      });
+it(`Reducer should add review to store`, () => {
+  expect(films({
+    films: [],
+    favoriteFilms: [],
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: []
+  }, {
+    type: ADD_REVIEW,
+    payload: filmReviews
+  })).toEqual({
+    films: [],
+    favoriteFilms: [],
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: filmReviews
   });
 });
+
+it(`Reducer should load all user's favorite films in store`, () => {
+  expect(films({
+    films: [],
+    favoriteFilms: [],
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: []
+  }, {
+    type: LOAD_FAVORITES_FILMS,
+    payload: filmsList
+  })).toEqual({
+    films: [],
+    favoriteFilms: filmsList,
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: []
+  });
+});
+
+it(`Reducer should add favorite film to list in store`, () => {
+  expect(films({
+    films: [],
+    favoriteFilms: [],
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: []
+  }, {
+    type: ADD_TO_FAVORITES,
+    payload: film
+  })).toEqual({
+    films: [],
+    favoriteFilms: [film],
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: []
+  });
+});
+
+it(`Reducer should load all user's favorite films in store`, () => {
+  expect(films({
+    films: [],
+    favoriteFilms: [film],
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: []
+  }, {
+    type: DELETE_FROM_FAVORITES,
+    payload: 1
+  })).toEqual({
+    films: [],
+    favoriteFilms: [],
+    actualGenre: `All Genres`,
+    filmCounter: 8,
+    promoFilm: film,
+    reviews: []
+  });
+});
+
+

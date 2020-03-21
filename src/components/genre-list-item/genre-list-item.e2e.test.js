@@ -1,7 +1,7 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import GenreListItem from './genre-list-item.jsx';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import GenreListItem from "./genre-list-item.jsx";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -19,7 +19,7 @@ it(`Change item index handler has been called`, () => {
         onChangeActiveItemIndex={handleChangeActiveItemIndex}
         id={2}
         activeItemIndex={0}
-        onFilmGenreChange={() => {}}
+        onChangeFilmGenre={() => {}}
         genre={``}
       />
   );

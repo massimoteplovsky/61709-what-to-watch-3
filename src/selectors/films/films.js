@@ -1,5 +1,5 @@
 import {createSelector} from "reselect";
-import {DEFAULT_GENRE, RELATED_FILM_COUNT} from "../../consts";
+import {DEFAULT_GENRE, RELATED_FILM_COUNT} from "../../consts.js";
 
 export const getFilms = (state) => {
   return state.films.films;

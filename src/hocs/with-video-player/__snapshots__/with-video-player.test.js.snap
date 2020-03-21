@@ -1,18 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`withVideoPlayer is rendered correctly 1`] = `
-<div>
-  <video
-    height="175"
-    muted={true}
-    poster=""
-    src=""
-    style={
-      Object {
-        "objectFit": "cover",
-      }
-    }
-    width="280"
-  />
-</div>
-`;
+exports[`withVideoPlayer is rendered correctly 1`] = `null`;

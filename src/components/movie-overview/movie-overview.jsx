@@ -1,6 +1,6 @@
-import React from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
-import {makeRating, makeTextRating} from '../../helpers/helpers';
+import React from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {makeRating, makeTextRating} from "../../helpers/helpers.js";
 
 const MovieOverview = ({filmInfo}) => {
   const {rating, scoresCount, director, starring, description} = filmInfo;

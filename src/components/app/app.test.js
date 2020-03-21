@@ -1,14 +1,16 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {App} from './app.jsx';
-import {Provider} from 'react-redux';
-import configureMockStore from 'redux-mock-store';
-import {films} from '../../mocks/films-test';
+import React from "react";
+import renderer from "react-test-renderer";
+import {App} from "./app.jsx";
+import {Provider} from "react-redux";
+import configureMockStore from "redux-mock-store";
+import {films} from "../../mocks/films-test";
+import {NO_AUTH} from "../../consts.js";
 
 const mockStore = configureMockStore([]);
 let store = mockStore({
   films: {
     filteredFilms: films,
+    favoriteFilms: films,
     films,
     promoFilm: null,
     filmCounter: 8,
@@ -19,9 +21,8 @@ let store = mockStore({
     error: false
   },
   user: {
-    authorizationStatus: `NO_AUTH`,
+    authorizationStatus: NO_AUTH,
     userInfo: null,
-    favorites: []
   }
 });
 
@@ -30,8 +31,12 @@ it(`<App /> component renders correctly`, () => {
     .create(
         <Provider store={store}>
           <App
-            films={films}
             error={false}
+            authorizationStatus={NO_AUTH}
+            onChangeLoadingStatus={() => {}}
+            onLoadData={() => Promise.resolve()}
+            loading={false}
+            match={{}}
           />
         </Provider>, {
           createNodeMock: () => {
@@ -40,13 +45,17 @@ it(`<App /> component renders correctly`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`<App /> component renders error`, () => {
+it(`<App /> component with error status is true renders error`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
           <App
-            films={films}
             error={true}
+            authorizationStatus={NO_AUTH}
+            onChangeLoadingStatus={() => {}}
+            onLoadData={() => Promise.resolve()}
+            loading={false}
+            match={{}}
           />
         </Provider>, {
           createNodeMock: () => {

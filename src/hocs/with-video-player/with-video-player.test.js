@@ -1,7 +1,17 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {PropValidator} from '../../prop-validator/prop-validator';
+import {PropValidator} from "../../prop-validator/prop-validator";
 import withVideoPlayer from "./with-video-player.js";
+import {Provider} from "react-redux";
+import configureMockStore from "redux-mock-store";
+import {films} from "../../mocks/films-test";
+
+const mockStore = configureMockStore([]);
+let store = mockStore({
+  films: {
+    films
+  }
+});
 
 const MockComponent = (props) => {
   const {children} = props;
@@ -21,13 +31,14 @@ const MockComponentWrapped = withVideoPlayer(MockComponent);
 
 it(`withVideoPlayer is rendered correctly`, () => {
   const tree = renderer.create((
-    <MockComponentWrapped
-      src={``}
-      poster={``}
-      isPlaying={false}
-      isMuted={true}
-      isPreviewMode={true}
-    />
+    <Provider store={store}>
+      <MockComponentWrapped
+        film={``}
+        isPlaying={false}
+        isMuted={true}
+        isPreviewMode={true}
+      />
+    </Provider>
   ), {
     createNodeMock() {
       return {};

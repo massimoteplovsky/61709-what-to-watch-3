@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import {toCamelCase} from "../../helpers/helpers";
+import React, {PureComponent} from "react";
+import {convertToCamelCase} from "../../helpers/helpers.js";
 import {
   MIN_COMMENT_LENGTH,
   MAX_COMMENT_LENGTH,
@@ -41,7 +41,7 @@ const withReviewForm = (Component) => {
               this.setState({
                 formMessage: ``
               });
-            }, 2000);
+            }, 1500);
           }
       );
       this._resetForm();
@@ -54,8 +54,8 @@ const withReviewForm = (Component) => {
     _handleUserInput(event) {
       const {name, value} = event.target;
       this.setState(
-          {[toCamelCase(name)]: value},
-          () => this._validateFields(toCamelCase(name), value));
+          {[convertToCamelCase(name)]: value},
+          () => this._validateFields(convertToCamelCase(name), value));
     }
 
     _resetForm() {
@@ -111,9 +111,9 @@ const withReviewForm = (Component) => {
         isRatingValid={isRatingValid}
         isDisabled={isDisabled}
         isFormValid={isFormValid}
-        onUserInput={this._handleUserInput}
+        onChange={this._handleUserInput}
         onDisable={this._handleToggleFieldDisable}
-        onFormSuccess={this._handleSendFormSuccess}
+        onSendFormSuccess={this._handleSendFormSuccess}
       />;
     }
   }

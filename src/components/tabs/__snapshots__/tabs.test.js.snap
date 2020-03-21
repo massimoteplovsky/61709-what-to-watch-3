@@ -62,6 +62,7 @@ Array [
       <span
         className="movie-rating__count"
       >
+        300
          ratings
       </span>
     </p>

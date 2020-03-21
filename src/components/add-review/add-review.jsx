@@ -1,13 +1,14 @@
 import React, {Fragment} from "react";
 import {connect} from "react-redux";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 import {Link, Redirect} from "react-router-dom";
-import history from "../../history";
-import {getFilm} from "../../selectors/films/films";
-import {getUserInfo} from "../../selectors/user/user";
-import {sendReview} from "../../actions/action-creators/films/films";
-import {BASE_URL} from "../../consts";
-import withReviewForm from "../../hocs/with-review-form/with-review-form";
+import history from "../../history.js";
+import {getFilm} from "../../selectors/films/films.js";
+import {getUserInfo} from "../../selectors/user/user.js";
+import {sendReview} from "../../actions/action-creators/film-actions/film-actions.js";
+import {BASE_URL} from "../../consts.js";
+import withReviewForm from "../../hocs/with-review-form/with-review-form.js";
 
 const ratings = new Array(5).fill(``).map((_, i) => i + 1);
 
@@ -20,10 +21,10 @@ const AddReview = ({
   isCommentValid,
   isRatingValid,
   isFormValid,
-  onUserInput,
+  onChange,
   onDisable,
   onSendReview,
-  onFormSuccess,
+  onSendFormSuccess,
   formMessage
 }) => {
 
@@ -52,7 +53,7 @@ const AddReview = ({
 
     onDisable(true);
 
-    onSendReview({rating, comment}, id, onFormSuccess);
+    onSendReview({rating, comment}, id, onSendFormSuccess);
   };
 
   return (
@@ -119,7 +120,7 @@ const AddReview = ({
                         name="rating"
                         value={it}
                         checked={it === rating}
-                        onChange={onUserInput}
+                        onChange={onChange}
                         disabled={isDisabled}
                       />
                       <label
@@ -143,7 +144,7 @@ const AddReview = ({
               id="review-text"
               placeholder="Review text"
               value={comment}
-              onChange={onUserInput}
+              onChange={onChange}
               disabled={isDisabled}
               style={{opacity: isDisabled ? 0.3 : 1}}
             >
@@ -177,17 +178,17 @@ const AddReview = ({
 AddReview.propTypes = {
   filmInfo: PropValidator.FILM_INFO,
   userInfo: PropValidator.USER_INFO,
-  comment: PropValidator.COMMENT,
-  rating: PropValidator.RATING,
-  isDisabled: PropValidator.IS_DISABLED,
-  isCommentValid: PropValidator.IS_VALID,
-  isRatingValid: PropValidator.IS_VALID,
-  isFormValid: PropValidator.IS_VALID,
-  onUserInput: PropValidator.ON_USER_INPUT,
-  onDisable: PropValidator.ON_DISABLE,
-  onSendReview: PropValidator.ON_SEND_REVIEW,
-  onFormSuccess: PropValidator.ON_FORM_SUCCESS,
-  formMessage: PropValidator.FORM_MESSAGE
+  comment: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  isDisabled: PropTypes.bool.isRequired,
+  isCommentValid: PropTypes.bool.isRequired,
+  isRatingValid: PropTypes.bool.isRequired,
+  isFormValid: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onDisable: PropTypes.func.isRequired,
+  onSendReview: PropTypes.func.isRequired,
+  onSendFormSuccess: PropTypes.func.isRequired,
+  formMessage: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -198,9 +199,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSendReview(reviewInfo, id, onDisable, onReset) {
-    dispatch(sendReview(reviewInfo, id, onDisable, onReset));
+  onSendReview(reviewInfo, id, onSendFormSuccess) {
+    dispatch(sendReview(reviewInfo, id, onSendFormSuccess));
   }
 });
 
+export {AddReview};
 export default connect(mapStateToProps, mapDispatchToProps)(withReviewForm(AddReview));

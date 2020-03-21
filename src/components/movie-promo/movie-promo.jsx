@@ -1,9 +1,10 @@
 import React from "react";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {toggleIsFavoriteFilm} from "../../actions/action-creators/films/films";
-import {AUTH} from "../../consts";
+import {toggleIsFavoriteFilm} from "../../actions/action-creators/film-actions/film-actions.js";
+import {AUTH, NOT_FAVORITE_FILM, FAVORITE_FILM} from "../../consts.js";
 
 const MoviePromo = ({
   filmInfo,
@@ -42,7 +43,7 @@ const MoviePromo = ({
           <button
             className="btn btn--list movie-card__button"
             type="button"
-            onClick={() => onToggleIsFavoriteFilm(id, isFavorite ? 0 : 1)}
+            onClick={() => onToggleIsFavoriteFilm(id, isFavorite ? NOT_FAVORITE_FILM : FAVORITE_FILM)}
           >
             {
               isFavorite ?
@@ -68,8 +69,8 @@ const MoviePromo = ({
 
 MoviePromo.propTypes = {
   filmInfo: PropValidator.FILM_INFO,
-  onToggleIsFavoriteFilm: PropValidator.CHANGE_ACTIVE_ITEM,
-  authorizationStatus: PropValidator.IS_AUTH
+  onToggleIsFavoriteFilm: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({

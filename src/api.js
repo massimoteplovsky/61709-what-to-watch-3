@@ -1,6 +1,6 @@
 import axios from "axios";
-import {convertObjectKeys} from "./helpers/helpers";
-import history from "./history";
+import {convertObjectKeys} from "./helpers/helpers.js";
+import history from "./history.js";
 
 const Errors = {
   REQUEST_ERRORS: [400, 404, 500],

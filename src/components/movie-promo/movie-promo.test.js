@@ -3,7 +3,8 @@ import renderer from "react-test-renderer";
 import {MoviePromo} from "./movie-promo.jsx";
 import {film} from "../../mocks/films-test";
 import {Router} from "react-router-dom";
-import history from "../../history";
+import history from "../../history.js";
+import {AUTH} from "../../consts.js";
 
 it(`<MoviePromo /> component renders correctly`, () => {
   const tree = renderer
@@ -12,6 +13,7 @@ it(`<MoviePromo /> component renders correctly`, () => {
           <MoviePromo
             filmInfo={film}
             onToggleIsFavoriteFilm={() => {}}
+            authorizationStatus={AUTH}
           />
         </Router>, {
           createNodeMock: () => {

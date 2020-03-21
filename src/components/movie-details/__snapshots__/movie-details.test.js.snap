@@ -62,7 +62,7 @@ exports[`<MovieDetails /> component renders correctly 1`] = `
       <span
         className="movie-card__details-value"
       >
-        Drama
+        
       </span>
     </p>
     <p

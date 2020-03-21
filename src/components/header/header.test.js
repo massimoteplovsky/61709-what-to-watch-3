@@ -1,8 +1,9 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import {Header} from './header.jsx';
+import React from "react";
+import renderer from "react-test-renderer";
+import {Header} from "./header.jsx";
 import {userInfo} from "../../mocks/films-test";
 import {Router} from "react-router-dom";
+import {AUTH} from "../../consts.js";
 import history from "../../history";
 
 it(`<Header /> component renders correctly`, () => {
@@ -10,8 +11,9 @@ it(`<Header /> component renders correctly`, () => {
     .create(
         <Router history={history}>
           <Header
-            isAuth = {`NO_AUTH`}
+            authorizationStatus={AUTH}
             userInfo={userInfo}
+            additionalClass={``}
           />
         </Router>
     ).toJSON();

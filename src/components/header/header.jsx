@@ -1,13 +1,14 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {NO_AUTH, BASE_URL} from '../../consts';
-import {PropValidator} from '../../prop-validator/prop-validator';
+import React from "react";
+import {connect} from "react-redux";
+import {NO_AUTH, BASE_URL} from "../../consts.js";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
-import history from "../../history";
-import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import {getAuthorizationStatus} from "../../selectors/user/user";
+import history from "../../history.js";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import {getAuthorizationStatus} from "../../selectors/user/user.js";
 
-const Header = ({isAuth, userInfo, additionalClass}) => {
+const Header = ({authorizationStatus, userInfo, additionalClass}) => {
 
   return (
     <header className={`page-header ${additionalClass}`}>
@@ -21,7 +22,7 @@ const Header = ({isAuth, userInfo, additionalClass}) => {
 
       <div className="user-block">
         {
-          isAuth === NO_AUTH ?
+          authorizationStatus === NO_AUTH ?
             <Link className="user-block__link" to={`/login`}>Sign in</Link>
             :
             <div className="user-block__avatar">
@@ -38,14 +39,14 @@ const Header = ({isAuth, userInfo, additionalClass}) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: getAuthorizationStatus(state),
+  authorizationStatus: getAuthorizationStatus(state),
   userInfo: state.user.userInfo
 });
 
 Header.propTypes = {
-  isAuth: PropValidator.IS_AUTH,
+  authorizationStatus: PropTypes.string.isRequired,
   userInfo: PropValidator.USER_INFO,
-  additionalClass: PropValidator.ADDITIONAL_CLASS
+  additionalClass: PropTypes.string.isRequired
 };
 
 export {Header};

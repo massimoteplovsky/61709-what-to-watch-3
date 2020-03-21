@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import {film, filmReviews} from '../../mocks/films-test';
-import Tabs from './tabs.jsx';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {film, filmReviews} from "../../mocks/films-test";
+import Tabs from "./tabs.jsx";
 
 Enzyme.configure({
   adapter: new Adapter(),

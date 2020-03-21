@@ -55,7 +55,13 @@ exports[`<VideoPlayer /> component renders correctly 1`] = `
     >
       <button
         className="player__play"
+        disabled={false}
         onClick={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
         type="button"
       >
         <svg
@@ -74,7 +80,7 @@ exports[`<VideoPlayer /> component renders correctly 1`] = `
       <div
         className="player__name"
       >
-        Transpotting
+        
       </div>
       <button
         className="player__full-screen"

@@ -17,10 +17,10 @@ exports[`<MovieCard /> component renders correctly 1`] = `
   >
     <a
       className="small-movie-card__link"
-      href="/film/1"
+      href="/films/1"
       onClick={[Function]}
     >
-      Film 3
+      Film 1
     </a>
   </h3>
 </article>

@@ -1,9 +1,10 @@
 import React, {PureComponent, createRef} from "react";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 import {connect} from "react-redux";
-import {makeTimer} from "../../helpers/helpers";
-import {getFilm} from "../../selectors/films/films";
-import history from "../../history";
+import {makeTimer} from "../../helpers/helpers.js";
+import {getFilm} from "../../selectors/films/films.js";
+import history from "../../history.js";
 
 const withVideoPlayer = (Component) => {
 
@@ -153,8 +154,8 @@ const withVideoPlayer = (Component) => {
           progress={progress}
           timeRemain={timeRemain}
           isFullScreenMode={isFullScreenMode}
-          onFullScreenMode={this.handleFullScreenMode}
-          onRunModeToggle={this.handleRunModeToggle}
+          onChangeScreenMode={this.handleFullScreenMode}
+          onToggleRunMode={this.handleRunModeToggle}
           onClosePlayer={this.handleClosePlayer}
         >
           {
@@ -183,9 +184,9 @@ const withVideoPlayer = (Component) => {
 
   WithVideoPlayer.propTypes = {
     film: PropValidator.FILM_INFO,
-    isPlaying: PropValidator.IS_PLAYING,
-    isMuted: PropValidator.IS_MUTED,
-    isPreviewMode: PropValidator.IS_PREVIEW_MODE
+    isPlaying: PropTypes.bool.isRequired,
+    isMuted: PropTypes.bool.isRequired,
+    isPreviewMode: PropTypes.bool.isRequired
   };
 
   const mapStateToProps = (state, ownProps) => {
@@ -197,6 +198,7 @@ const withVideoPlayer = (Component) => {
   return connect(mapStateToProps)(WithVideoPlayer);
 };
 
+export {withVideoPlayer};
 export default withVideoPlayer;
 
 

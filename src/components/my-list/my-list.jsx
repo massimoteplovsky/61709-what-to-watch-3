@@ -4,6 +4,7 @@ import Footer from "../footer/footer.jsx";
 import MovieList from "../movie-list/movie-list.jsx";
 import {connect} from "react-redux";
 import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 
 const MyList = ({favoriteFilms}) => {
 
@@ -26,11 +27,12 @@ const MyList = ({favoriteFilms}) => {
 };
 
 MyList.propTypes = {
-  favoriteFilms: PropValidator.FILMS
+  favoriteFilms: PropTypes.arrayOf(PropValidator.FILM_INFO).isRequired
 };
 
 const stateToProps = (state) => ({
-  favoriteFilms: state.user.favorites
+  favoriteFilms: state.films.favoriteFilms
 });
 
+export {MyList};
 export default connect(stateToProps)(MyList);

@@ -9,6 +9,7 @@ Enzyme.configure({
 
 const handleFullScreenMode = jest.fn();
 const handleRunModeToggle = jest.fn();
+const handleClosePlayer = jest.fn();
 
 it(`All handlers has been called`, () => {
 
@@ -16,10 +17,13 @@ it(`All handlers has been called`, () => {
       <VideoPlayer
         isPlaying={true}
         isFullScreenMode={false}
+        filmName={``}
+        isLoading={false}
         progress={0}
         timeRemain={``}
-        onRunModeToggle={handleRunModeToggle}
-        onFullScreenMode={handleFullScreenMode}
+        onToggleRunMode={handleRunModeToggle}
+        onChangeScreenMode={handleFullScreenMode}
+        onClosePlayer={handleClosePlayer}
       >
         <video/>
       </VideoPlayer>
@@ -33,6 +37,7 @@ it(`All handlers has been called`, () => {
   fullModeBtn.simulate(`click`);
   exitBtn.simulate(`click`);
 
-  expect(handleRunModeToggle).toHaveBeenCalledTimes(2);
+  expect(handleRunModeToggle).toHaveBeenCalledTimes(1);
   expect(handleFullScreenMode).toHaveBeenCalledTimes(1);
+  expect(handleClosePlayer).toHaveBeenCalledTimes(1);
 });

@@ -41,5 +41,42 @@ exports[`<MovieReview /> component renders correctly 1`] = `
       </div>
     </div>
   </div>
+  <div
+    className="movie-card__reviews-col"
+  >
+    <div
+      className="review"
+    >
+      <blockquote
+        className="review__quote"
+      >
+        <p
+          className="review__text"
+        >
+          
+        </p>
+        <footer
+          className="review__details"
+        >
+          <cite
+            className="review__author"
+          >
+            
+          </cite>
+          <time
+            className="review__date"
+            dateTime="22.05.2019"
+          >
+            Invalid Date
+          </time>
+        </footer>
+      </blockquote>
+      <div
+        className="review__rating"
+      >
+        5,5
+      </div>
+    </div>
+  </div>
 </div>
 `;

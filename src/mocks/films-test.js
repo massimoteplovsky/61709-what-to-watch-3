@@ -16,7 +16,7 @@ export const films = [
     starring: [],
     previewVideoLink: ``,
     videoLink: ``,
-    isFavorite: false
+    isFavorite: true
   },
   {
     id: 2,
@@ -60,8 +60,8 @@ export const films = [
 
 export const film = {
   id: 1,
-  name: `Film 3`,
-  genre: `Drama`,
+  name: `Film 1`,
+  genre: ``,
   released: 2019,
   backgroundImage: ``,
   backgroundColor: ``,
@@ -75,19 +75,31 @@ export const film = {
   starring: [],
   previewVideoLink: ``,
   videoLink: ``,
-  isFavorite: true
+  isFavorite: false
 };
 
-export const filmReviews = [{
-  id: 1,
-  user: {
+export const filmReviews = [
+  {
     id: 1,
-    name: ``
+    user: {
+      id: 1,
+      name: ``
+    },
+    rating: 5.5,
+    comment: ``,
+    date: `22.05.2019`
   },
-  rating: 5.5,
-  comment: ``,
-  date: `22.05.2019`
-}];
+  {
+    id: 2,
+    user: {
+      id: 1,
+      name: ``
+    },
+    rating: 5.5,
+    comment: ``,
+    date: `22.05.2019`
+  }
+];
 
 export const userInfo = {
   id: 1,
@@ -95,6 +107,3 @@ export const userInfo = {
   email: ``,
   avatarUrl: ``
 };
-
-export const genres = [...new Set([`All genres`, ...films.map((item) => item.genre)])];
-

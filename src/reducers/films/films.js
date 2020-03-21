@@ -5,15 +5,19 @@ import {
   LOAD_PROMO_FILM,
   LOAD_FILM_REVIEWS,
   CHANGE_FAVORITE_STATUS,
-  ADD_REVIEW
-} from '../../actions/types/films/films';
-import {FILM_TO_SHOW} from '../../consts';
+  ADD_REVIEW,
+  LOAD_FAVORITES_FILMS,
+  ADD_TO_FAVORITES,
+  DELETE_FROM_FAVORITES
+} from "../../actions/types/films/films.js";
+import {FILM_TO_SHOW} from "../../consts.js";
 
 const initialState = {
   films: [],
+  favoriteFilms: [],
+  promoFilm: null,
   actualGenre: `All genres`,
   filmCounter: FILM_TO_SHOW,
-  promoFilm: null,
   reviews: []
 };
 
@@ -69,7 +73,26 @@ export const films = (state = initialState, {type, payload}) => {
       return Object.assign(
           {},
           state,
-          {reviews: [...state.reviews, ...payload]}
+          {reviews: [...payload]}
+      );
+    case ADD_TO_FAVORITES:
+      return Object.assign(
+          {},
+          state,
+          {favoriteFilms: [...state.favoriteFilms, payload]}
+      );
+    case DELETE_FROM_FAVORITES:
+      const favoriteFilms = state.favoriteFilms.filter((film) => film.id !== payload);
+      return Object.assign(
+          {},
+          state,
+          {favoriteFilms}
+      );
+    case LOAD_FAVORITES_FILMS:
+      return Object.assign(
+          {},
+          state,
+          {favoriteFilms: payload}
       );
     default:
       return state;

@@ -1,15 +1,16 @@
-import React, {PureComponent} from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
-import {connect} from 'react-redux';
-import Header from '../header/header.jsx';
-import MoviePromo from '../movie-promo/movie-promo.jsx';
-import Tabs from '../tabs/tabs.jsx';
-import MovieList from '../movie-list/movie-list.jsx';
-import Footer from '../footer/footer.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import history from "../../history";
-import {getRelatedFilmsList, getFilm, getFilmReviews, getFilms} from '../../selectors/films/films';
-import {loadFilmReviews, loadAllFilms} from '../../actions/action-creators/films/films';
+import React, {PureComponent} from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
+import {connect} from "react-redux";
+import Header from "../header/header.jsx";
+import MoviePromo from "../movie-promo/movie-promo.jsx";
+import Tabs from "../tabs/tabs.jsx";
+import MovieList from "../movie-list/movie-list.jsx";
+import Footer from "../footer/footer.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import history from "../../history.js";
+import {getRelatedFilmsList, getFilm, getFilmReviews, getFilms} from "../../selectors/films/films.js";
+import {loadFilmReviews} from "../../actions/action-creators/film-actions/film-actions.js";
 
 const WrappedTabs = withActiveItem(Tabs);
 
@@ -114,11 +115,11 @@ class Movie extends PureComponent {
 }
 
 Movie.propTypes = {
-  relatedFilms: PropValidator.FILMS,
+  relatedFilms: PropTypes.arrayOf(PropValidator.FILM_INFO),
   filmInfo: PropValidator.FILM_INFO,
   filmReviews: PropValidator.FILM_REVIEW,
-  onLoadFilmReviews: PropValidator.ON_LOAD,
-  match: PropValidator.MATCH,
+  onLoadFilmReviews: PropTypes.func.isRequired,
+  match: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -131,9 +132,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoadAllFilms() {
-    return dispatch(loadAllFilms());
-  },
   onLoadFilmReviews(filmID) {
     dispatch(loadFilmReviews(filmID));
   }

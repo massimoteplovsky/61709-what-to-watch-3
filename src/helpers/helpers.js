@@ -1,14 +1,5 @@
 export const makeRating = (number) => number.toFixed(1).replace(`.`, `,`);
 
-export const checkIsEmpty = (obj) => {
-
-  if (isObject(obj)) {
-    return Object.keys(obj).length === 0;
-  }
-
-  return obj.length === 0;
-};
-
 export const makeTextRating = (numericRating) => {
 
   if (numericRating < 3) {
@@ -29,8 +20,6 @@ export const makeTextRating = (numericRating) => {
 
   return `Awesome`;
 };
-
-export const getFilm = (films, id) => films.find((film) => film.id === Number(id));
 
 export const makeDuration = (time) => {
   const hours = time < 60 ? 0 : Math.floor(time / 60);
@@ -59,14 +48,14 @@ export const sortByDate = (a, b) => {
 };
 
 export const makeTimer = (time) => {
-  const pad = (num) => num < 10 ? `0${num}` : num;
+  const convertTime = (num) => num < 10 ? `0${num}` : num;
   const hours = Math.floor(time / 60 / 60);
   const minutes = Math.floor(time / 60);
   const seconds = Math.floor(time - minutes * 60);
-  return `${hours}:${pad(minutes)}:${pad(seconds)}`;
+  return `${hours}:${convertTime(minutes)}:${convertTime(seconds)}`;
 };
 
-export const toCamelCase = (str) => {
+export const convertToCamelCase = (str) => {
   return str.replace(/([-_][a-z])/gi, ($1) => {
     return $1
       .toUpperCase()
@@ -75,22 +64,22 @@ export const toCamelCase = (str) => {
   });
 };
 
-export const isObject = (obj) => {
+export const checkIsObject = (obj) => {
   return obj === Object(obj) && !Array.isArray(obj) && typeof obj !== `function`;
 };
 
 export const convertObjectKeys = (obj) => {
-  if (isObject(obj)) {
+  if (checkIsObject(obj)) {
     const newObj = {};
 
-    Object.keys(obj).forEach((k) => {
-      newObj[toCamelCase(k)] = convertObjectKeys(obj[k]);
+    Object.keys(obj).forEach((item) => {
+      newObj[convertToCamelCase(item)] = convertObjectKeys(obj[item]);
     });
 
     return newObj;
   } else if (Array.isArray(obj)) {
-    return obj.map((i) => {
-      return convertObjectKeys(i);
+    return obj.map((item) => {
+      return convertObjectKeys(item);
     });
   }
 
@@ -98,8 +87,8 @@ export const convertObjectKeys = (obj) => {
 };
 
 export const validateEmail = (email) => {
-  const reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return reg.test(email);
+  const regularExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return regularExp.test(email);
 };
 
 

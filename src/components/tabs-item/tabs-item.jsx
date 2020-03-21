@@ -1,5 +1,6 @@
-import React from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
+import React from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 
 const TabsItem = ({
   id,
@@ -25,9 +26,9 @@ const TabsItem = ({
 
 TabsItem.propTypes = {
   id: PropValidator.ITEM_ID,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM,
-  title: PropValidator.TITLE,
-  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX
+  onChangeActiveItemIndex: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  activeItemIndex: PropTypes.number.isRequired
 };
 
 export default TabsItem;

@@ -1,5 +1,6 @@
 import React from "react";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 
 const VideoPlayer = ({
   filmName,
@@ -8,8 +9,8 @@ const VideoPlayer = ({
   isFullScreenMode,
   progress,
   timeRemain,
-  onRunModeToggle,
-  onFullScreenMode,
+  onToggleRunMode,
+  onChangeScreenMode,
   onClosePlayer,
   children
 }) => {
@@ -17,8 +18,8 @@ const VideoPlayer = ({
     <div
       className="player"
       style={{cursor: `${isFullScreenMode ? `none` : `auto`}`}}
-      onMouseMove={isFullScreenMode ? onFullScreenMode : null}
-      onClick={isFullScreenMode ? onFullScreenMode : null}
+      onMouseMove={isFullScreenMode ? onChangeScreenMode : null}
+      onClick={isFullScreenMode ? onChangeScreenMode : null}
     >
       {children}
       <button
@@ -46,7 +47,7 @@ const VideoPlayer = ({
             className="player__play"
             disabled={isLoading}
             style={{opacity: isLoading ? 0.4 : 1}}
-            onClick={onRunModeToggle}
+            onClick={onToggleRunMode}
           >
             {
               isPlaying ?
@@ -70,7 +71,7 @@ const VideoPlayer = ({
           <button
             type="button"
             className="player__full-screen"
-            onClick={onFullScreenMode}
+            onClick={onChangeScreenMode}
           >
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
@@ -84,16 +85,17 @@ const VideoPlayer = ({
 };
 
 VideoPlayer.propTypes = {
-  children: PropValidator.CHILDREN,
-  filmName: PropValidator.TITLE,
-  isPlaying: PropValidator.IS_PLAYING,
-  isLoading: PropValidator.IS_LOADING,
-  isFullScreenMode: PropValidator.IS_FULL_SCREEN_MODE,
-  progress: PropValidator.PROGRESS,
-  timeRemain: PropValidator.TIME_REMAIN,
-  onRunModeToggle: PropValidator.TOGGLE_PLAYING,
-  onFullScreenMode: PropValidator.TOGGLE_FULL_SCREEN,
-  onClosePlayer: PropValidator.CLOSE_PLAYER
+  children: PropValidator.CHILD_NODE,
+  filmName: PropTypes.string.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isFullScreenMode: PropTypes.bool.isRequired,
+  progress: PropTypes.number.isRequired,
+  timeRemain: PropTypes.string.isRequired,
+  onToggleRunMode: PropTypes.func.isRequired,
+  onChangeScreenMode: PropTypes.func.isRequired,
+  onClosePlayer: PropTypes.func.isRequired
 };
 
+export {VideoPlayer};
 export default VideoPlayer;

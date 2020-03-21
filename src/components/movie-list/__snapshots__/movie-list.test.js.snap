@@ -31,7 +31,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="/film/1"
+        href="/films/1"
         onClick={[Function]}
       >
         Film 1
@@ -65,7 +65,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="/film/2"
+        href="/films/2"
         onClick={[Function]}
       >
         Film 2
@@ -99,7 +99,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
     >
       <a
         className="small-movie-card__link"
-        href="/film/3"
+        href="/films/3"
         onClick={[Function]}
       >
         Film 3
@@ -110,110 +110,7 @@ exports[`<MovieList /> component renders correctly 1`] = `
 `;
 
 exports[`<MovieList /> component renders correctly with empty films array 1`] = `
-<div
-  className="catalog__movies-list"
->
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="/film/1"
-        onClick={[Function]}
-      >
-        Film 1
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="/film/2"
-        onClick={[Function]}
-      >
-        Film 2
-      </a>
-    </h3>
-  </article>
-  <article
-    className="small-movie-card catalog__movies-card"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-  >
-    <div
-      className="small-movie-card__image"
-      onClick={[Function]}
-    >
-      <video
-        height="175"
-        muted={true}
-        poster=""
-        src=""
-        style={
-          Object {
-            "objectFit": "cover",
-          }
-        }
-        width="280"
-      />
-    </div>
-    <h3
-      className="small-movie-card__title"
-    >
-      <a
-        className="small-movie-card__link"
-        href="/film/3"
-        onClick={[Function]}
-      >
-        Film 3
-      </a>
-    </h3>
-  </article>
-</div>
+<p>
+  
+</p>
 `;

@@ -2,7 +2,8 @@ import React from "react";
 import Enzyme, {shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import {MoviePromo} from "./movie-promo.jsx";
-import {film} from "../../mocks/films-test";
+import {film} from "../../mocks/films-test.js";
+import {AUTH} from "../../consts.js";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -16,6 +17,7 @@ it(`video player is run`, () => {
       <MoviePromo
         filmInfo={film}
         onToggleIsFavoriteFilm={handleToggleIsFavoriteFilm}
+        authorizationStatus={AUTH}
       />
   );
 

@@ -12,7 +12,7 @@ it(`<MovieCard /> component renders correctly`, () => {
           <MovieCard
             film={film}
             isPlaying={false}
-            onRunModeToggle={() => {}}
+            onToggleRunMode={() => {}}
           >
             <video/>
           </MovieCard>

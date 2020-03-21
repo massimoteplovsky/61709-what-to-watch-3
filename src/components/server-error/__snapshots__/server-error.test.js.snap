@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ServerError /> component renders correctly 1`] = `
+<div
+  className="user-page"
+>
+  <h1>
+    Sorry, connection with server failed!
+  </h1>
+</div>
+`;

@@ -1,6 +1,6 @@
-import React from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
-import {makeRating, makeChuncks, getFormatDate, sortByDate} from '../../helpers/helpers';
+import React from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {makeRating, makeChuncks, getFormatDate, sortByDate} from "../../helpers/helpers.js";
 
 const MovieReviews = ({filmReviews}) => {
   const REVIEW_IN_A_ROW = Math.ceil(filmReviews.length / 2);

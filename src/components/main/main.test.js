@@ -11,19 +11,16 @@ const mockStore = configureMockStore([]);
 let store = mockStore({
   films: {
     filteredFilms: films,
+    favoriteFilms: films,
     films,
     promoFilm: null,
     filmCounter: 8,
     actualGenre: ``,
     reviews: []
   },
-  application: {
-    error: false
-  },
   user: {
     authorizationStatus: `NO_AUTH`,
-    userInfo: null,
-    favorites: []
+    userInfo: null
   }
 });
 
@@ -33,8 +30,9 @@ it(`<Main /> component renders correctly`, () => {
         <Provider store={store}>
           <Router history={history}>
             <Main
-              films={films}
+              filteredFilms={films}
               promoFilm={film}
+              onChangeFilmGenre={() => {}}
             />
           </Router>
         </Provider>, {

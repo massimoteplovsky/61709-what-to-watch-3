@@ -1,18 +1,30 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import {films} from "../../mocks/films-test";
+import {films} from "../../mocks/films-test.js";
 import MovieList from "./movie-list.jsx";
 import {Router} from "react-router-dom";
-import history from "../../history";
+import {Provider} from "react-redux";
+import history from "../../history.js";
+import configureMockStore from "redux-mock-store";
+
+const mockStore = configureMockStore([]);
+let store = mockStore({
+  films: {
+    films
+  }
+});
 
 it(`<MovieList /> component renders correctly`, () => {
   const tree = renderer
     .create(
-        <Router history={history}>
-          <MovieList
-            films={films}
-          />
-        </Router>
+        <Provider store={store}>
+          <Router history={history}>
+            <MovieList
+              films={films}
+              message={``}
+            />
+          </Router>
+        </Provider>
         , {
           createNodeMock: () => {
             return {};
@@ -25,7 +37,8 @@ it(`<MovieList /> component renders correctly with empty films array`, () => {
     .create(
         <Router history={history}>
           <MovieList
-            films={films}
+            films={[]}
+            message={``}
           />
         </Router>
         , {

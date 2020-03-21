@@ -1,7 +1,8 @@
-import React from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
-import MovieCard from '../movie-card/movie-card.jsx';
-import withVideoPlayer from '../../hocs/with-video-player/with-video-player';
+import React from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
+import MovieCard from "../movie-card/movie-card.jsx";
+import withVideoPlayer from "../../hocs/with-video-player/with-video-player.js";
 
 const WrappedMovieCard = withVideoPlayer(MovieCard);
 
@@ -36,9 +37,8 @@ const MovieList = ({films, message}) => {
 };
 
 MovieList.propTypes = {
-  films: PropValidator.FILMS,
-  message: PropValidator.MESSAGE
+  films: PropTypes.arrayOf(PropValidator.FILM_INFO),
+  message: PropTypes.string
 };
 
-export {MovieList};
 export default MovieList;

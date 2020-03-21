@@ -1,7 +1,8 @@
 import React, {PureComponent} from "react";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 import {Link} from "react-router-dom";
-import history from "../../history";
+import history from "../../history.js";
 
 class MovieCard extends PureComponent {
   constructor(props) {
@@ -18,7 +19,7 @@ class MovieCard extends PureComponent {
     const {
       film: {id, name},
       children,
-      onRunModeToggle,
+      onToggleRunMode,
       isPlaying
     } = this.props;
 
@@ -26,11 +27,11 @@ class MovieCard extends PureComponent {
       <article
         className="small-movie-card catalog__movies-card"
         onMouseEnter={() => {
-          this._timerID = setTimeout(() => onRunModeToggle(true), 1000);
+          this._timerID = setTimeout(() => onToggleRunMode(true), 1000);
         }}
         onMouseLeave={() => {
           if (isPlaying) {
-            onRunModeToggle();
+            onToggleRunMode();
           }
           clearTimeout(this._timerID);
         }}
@@ -51,9 +52,9 @@ class MovieCard extends PureComponent {
 
 MovieCard.propTypes = {
   film: PropValidator.FILM_INFO,
-  children: PropValidator.CHILDREN,
-  onRunModeToggle: PropValidator.TOGGLE_PLAYING,
-  isPlaying: PropValidator.IS_PLAYING
+  children: PropValidator.CHILD_NODE,
+  onToggleRunMode: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired
 };
 
 export default MovieCard;

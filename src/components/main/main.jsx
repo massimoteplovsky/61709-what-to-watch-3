@@ -1,16 +1,17 @@
 import React, {PureComponent} from "react";
-import {PropValidator} from "../../prop-validator/prop-validator";
-import {connect} from 'react-redux';
-import {getFilteredFilms, getPromoFilm} from '../../selectors/films/films';
-import {changeFilmGenre} from "../../actions/action-creators/films/films";
-import Header from '../header/header.jsx';
-import MoviePromo from '../movie-promo/movie-promo.jsx';
-import GenreList from '../genre-list/genre-list.jsx';
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
+import {connect} from "react-redux";
+import {getFilteredFilms, getPromoFilm} from "../../selectors/films/films.js";
+import {changeFilmGenre} from "../../actions/action-creators/film-actions/film-actions.js";
+import Header from "../header/header.jsx";
+import MoviePromo from "../movie-promo/movie-promo.jsx";
+import GenreList from "../genre-list/genre-list.jsx";
 import MovieList from "../movie-list/movie-list.jsx";
-import ShowMore from '../show-more/show-more.jsx';
-import Footer from '../footer/footer.jsx';
-import withActiveItem from '../../hocs/with-active-item/with-active-item';
-import {DEFAULT_GENRE} from "../../consts";
+import ShowMore from "../show-more/show-more.jsx";
+import Footer from "../footer/footer.jsx";
+import withActiveItem from "../../hocs/with-active-item/with-active-item.js";
+import {DEFAULT_GENRE} from "../../consts.js";
 
 const WrappedGenreList = withActiveItem(GenreList);
 
@@ -74,9 +75,9 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  filteredFilms: PropValidator.FILMS,
+  filteredFilms: PropTypes.arrayOf(PropValidator.FILM_INFO).isRequired,
   promoFilm: PropValidator.FILM_INFO,
-  onChangeFilmGenre: PropValidator.CHANGE_GENRE
+  onChangeFilmGenre: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -91,6 +92,5 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {Main};
-
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
 

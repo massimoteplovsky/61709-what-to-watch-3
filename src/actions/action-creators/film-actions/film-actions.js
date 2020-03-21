@@ -5,9 +5,13 @@ import {
   LOAD_PROMO_FILM,
   LOAD_FILM_REVIEWS,
   CHANGE_FAVORITE_STATUS,
-  ADD_REVIEW
-} from '../../types/films/films';
-import {addToFavorites, deleteFromFavorites} from "../user/user";
+  ADD_REVIEW,
+  LOAD_FAVORITES_FILMS,
+  ADD_TO_FAVORITES,
+  DELETE_FROM_FAVORITES
+} from "../../types/films/films";
+import history from "../../../history";
+import {FAVORITE_FILM} from "../../../consts";
 
 export const changeFilmGenre = (genre) => ({
   type: CHANGE_FILM_GENRE,
@@ -34,6 +38,35 @@ const loadFilmReviewsToState = (reviews) => ({
   payload: reviews
 });
 
+const changeFavoriteStatus = (film) => ({
+  type: CHANGE_FAVORITE_STATUS,
+  payload: film
+});
+
+const addReview = (review) => ({
+  type: ADD_REVIEW,
+  payload: review
+});
+
+const loadFavoritesFilmsToState = (films) => ({
+  type: LOAD_FAVORITES_FILMS,
+  payload: films
+});
+
+const addToFavoriteFilms = (film) => {
+  return {
+    type: ADD_TO_FAVORITES,
+    payload: film
+  };
+};
+
+const deleteFromFavoriteFilms = (id) => {
+  return {
+    type: DELETE_FROM_FAVORITES,
+    payload: id
+  };
+};
+
 export const loadAllFilms = () => (dispatch, _, api) => {
   return api.get(`/films`)
     .then((res) => {
@@ -55,37 +88,33 @@ export const loadFilmReviews = (filmID) => (dispatch, _, api) => {
     });
 };
 
-export const changeFavoriteStatus = (film) => {
-  return {
-    type: CHANGE_FAVORITE_STATUS,
-    payload: film
-  };
-};
-
 export const toggleIsFavoriteFilm = (id, status) => (dispatch, _, api) => {
   return api.post(`/favorite/${id}/${status}`)
   .then((res) => {
-    dispatch(changeFavoriteStatus(res.data));
+    if (res.status === 200) {
+      dispatch(changeFavoriteStatus(res.data));
 
-    if (status === 1) {
-      dispatch(addToFavorites(res.data));
-    }
-
-    if (status === 0) {
-      dispatch(deleteFromFavorites(id));
+      if (status === FAVORITE_FILM) {
+        dispatch(addToFavoriteFilms(res.data));
+      } else {
+        dispatch(deleteFromFavoriteFilms(id));
+      }
     }
   });
 };
 
-export const addReview = (review) => ({
-  type: ADD_REVIEW,
-  payload: review
-});
+export const loadFavoritesFilms = () => (dispatch, _, api) => {
+  return api.get(`/favorite`)
+    .then((res) => {
+      dispatch(loadFavoritesFilmsToState(res.data));
+    });
+};
 
 export const sendReview = (reviewInfo, filmID, onFormSuccess) => (dispatch, _, api) => {
   return api.post(`/comments/${filmID}`, reviewInfo)
     .then((res) => {
       dispatch(addReview(res.data));
       onFormSuccess();
+      setTimeout(() => history.push(`/films/${filmID}`), 1500);
     });
 };

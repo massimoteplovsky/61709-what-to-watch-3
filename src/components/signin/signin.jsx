@@ -1,11 +1,11 @@
 import React, {PureComponent, createRef} from "react";
 import Footer from "../footer/footer.jsx";
 import {connect} from "react-redux";
-import {PropValidator} from "../../prop-validator/prop-validator";
-import {validateEmail} from "../../helpers/helpers";
-import {login} from "../../actions/action-creators/user/user";
+import {PropTypes} from "prop-types";
+import {validateEmail} from "../../helpers/helpers.js";
+import {login} from "../../actions/action-creators/user-actions/user-actions.js";
 import {Link} from "react-router-dom";
-import withSigninForm from "../../hocs/with-sigin-form/with-sugnin-form";
+import withSigninForm from "../../hocs/with-sigin-form/with-signin-form.js";
 
 class Signin extends PureComponent {
   constructor(props) {
@@ -115,11 +115,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Signin.propTypes = {
-  sendForm: PropValidator.SEND_FROM,
-  onChangeFormMessage: PropValidator.CHANGE_FORM_MESSAGE,
-  formError: PropValidator.FROM_ERROR,
-  formMessage: PropValidator.FORM_MESSAGE,
-  errorField: PropValidator.ERROR_FIELD
+  sendForm: PropTypes.func.isRequired,
+  onChangeFormMessage: PropTypes.func.isRequired,
+  formError: PropTypes.bool.isRequired,
+  formMessage: PropTypes.string.isRequired,
+  errorField: PropTypes.string.isRequired
 };
 
 export {Signin};

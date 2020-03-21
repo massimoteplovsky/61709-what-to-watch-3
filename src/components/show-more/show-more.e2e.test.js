@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import {ShowMore} from './show-more.jsx';
-import {films} from '../../mocks/films-test';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {ShowMore} from "./show-more.jsx";
+import {films} from "../../mocks/films-test";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -15,7 +15,7 @@ it(`Film counter has been changed`, () => {
   const wrapper = shallow(
       <ShowMore
         filmCounter={0}
-        handleFilmCounterIncrement={handleFilmCounterChange}
+        onIncrementFilmsCounter={handleFilmCounterChange}
         filteredFilms={films}
       />
   );

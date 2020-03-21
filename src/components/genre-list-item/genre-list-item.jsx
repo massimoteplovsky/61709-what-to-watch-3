@@ -1,11 +1,12 @@
-import React from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
+import React from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
 
 const GenreListItem = ({
   onChangeActiveItemIndex,
   id,
   activeItemIndex,
-  onFilmGenreChange,
+  onChangeFilmGenre,
   genre
 }) => {
   return (
@@ -18,7 +19,7 @@ const GenreListItem = ({
         onClick={(event) => {
           event.preventDefault();
           onChangeActiveItemIndex(id);
-          onFilmGenreChange();
+          onChangeFilmGenre();
         }}
       >{genre}</a>
     </li>
@@ -26,11 +27,11 @@ const GenreListItem = ({
 };
 
 GenreListItem.propTypes = {
-  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
-  genre: PropValidator.GENRE,
+  activeItemIndex: PropTypes.number.isRequired,
+  genre: PropTypes.string.isRequired,
   id: PropValidator.ITEM_ID,
-  onFilmGenreChange: PropValidator.CHANGE_GENRE,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM,
+  onChangeFilmGenre: PropTypes.func.isRequired,
+  onChangeActiveItemIndex: PropTypes.func.isRequired,
 };
 
 export default GenreListItem;

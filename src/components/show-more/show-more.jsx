@@ -1,13 +1,14 @@
-import React from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
-import {connect} from 'react-redux';
-import {incrementFilmCounter} from '../../actions/action-creators/films/films';
-import {getFilmCounter, getFilteredFilms} from '../../selectors/films/films';
+import React from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
+import {connect} from "react-redux";
+import {incrementFilmCounter} from "../../actions/action-creators/film-actions/film-actions.js";
+import {getFilmCounter, getFilteredFilms} from "../../selectors/films/films.js";
 
 const ShowMore = ({
   filmCounter,
   filteredFilms,
-  handleFilmCounterIncrement,
+  onIncrementFilmsCounter,
 }) => {
 
   if (filmCounter > filteredFilms.length) {
@@ -20,7 +21,7 @@ const ShowMore = ({
         className="catalog__button"
         type="button"
         onClick={() => {
-          handleFilmCounterIncrement();
+          onIncrementFilmsCounter();
         }}
       >Show more</button>
     </div>
@@ -28,9 +29,9 @@ const ShowMore = ({
 };
 
 ShowMore.propTypes = {
-  filmCounter: PropValidator.FILM_COUNTER,
-  handleFilmCounterIncrement: PropValidator.SHOW_MORE_FILMS,
-  filteredFilms: PropValidator.FILMS
+  filmCounter: PropTypes.number.isRequired,
+  onIncrementFilmsCounter: PropTypes.func.isRequired,
+  filteredFilms: PropTypes.arrayOf(PropValidator.FILM_INFO).isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -39,7 +40,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleFilmCounterIncrement() {
+  onIncrementFilmsCounter() {
     dispatch(incrementFilmCounter());
   }
 });

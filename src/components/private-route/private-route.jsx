@@ -1,11 +1,11 @@
 import React from "react";
 import {Route, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
-import {AUTH} from "../../consts";
-import {getAuthorizationStatus} from "../../selectors/user/user";
-import {PropValidator} from "../../prop-validator/prop-validator";
+import {AUTH} from "../../consts.js";
+import {getAuthorizationStatus} from "../../selectors/user/user.js";
+import {PropTypes} from "prop-types";
 
-const PrivateRoute = ({isAuth, path, exact, computedMatch, render}) => {
+const PrivateRoute = ({authorizationStatus, path, exact, computedMatch, render}) => {
   const {id} = computedMatch.params;
   return (
     <Route
@@ -13,7 +13,7 @@ const PrivateRoute = ({isAuth, path, exact, computedMatch, render}) => {
       exact={exact}
       render={() => {
         return (
-          isAuth === AUTH ?
+          authorizationStatus === AUTH ?
             render(id)
             :
             <Redirect to="/login"/>
@@ -24,15 +24,15 @@ const PrivateRoute = ({isAuth, path, exact, computedMatch, render}) => {
 };
 
 PrivateRoute.propTypes = {
-  isAuth: PropValidator.IS_AUTH,
-  exact: PropValidator.EXACT,
-  path: PropValidator.PATH,
-  render: PropValidator.RENDER,
-  computedMatch: PropValidator.MATCH
+  authorizationStatus: PropTypes.string.isRequired,
+  exact: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
+  render: PropTypes.func.isRequired,
+  computedMatch: PropTypes.object
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: getAuthorizationStatus(state)
+  authorizationStatus: getAuthorizationStatus(state)
 });
 
 

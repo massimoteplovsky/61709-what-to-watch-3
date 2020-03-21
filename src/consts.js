@@ -6,4 +6,6 @@ export const NO_AUTH = `NO_AUTH`;
 export const BASE_URL = `https://htmlacademy-react-2.appspot.com`;
 export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 400;
+export const NOT_FAVORITE_FILM = 0;
+export const FAVORITE_FILM = 1;
 export const MAX_RATING = 5;

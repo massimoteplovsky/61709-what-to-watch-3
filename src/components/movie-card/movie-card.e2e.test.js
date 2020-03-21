@@ -16,7 +16,7 @@ it(`VideoPlayer mode has been changed (paused)`, () => {
       <MovieCard
         film={film}
         isPlaying={true}
-        onRunModeToggle={handlePlayerRunMode}
+        onToggleRunMode={handlePlayerRunMode}
       >
         <video/>
       </MovieCard>
@@ -35,7 +35,7 @@ it(`VideoPlayer mode has been changed (play)`, () => {
       <MovieCard
         film={film}
         isPlaying={true}
-        onRunModeToggle={handlePlayerRunMode}
+        onToggleRunMode={handlePlayerRunMode}
       >
         <video/>
       </MovieCard>

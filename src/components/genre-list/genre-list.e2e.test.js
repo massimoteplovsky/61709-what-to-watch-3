@@ -1,8 +1,8 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import {films, genres} from '../../mocks/films-test';
-import {GenreList} from './genre-list.jsx';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import {films, genres} from "../../mocks/films-test";
+import {GenreList} from "./genre-list.jsx";
 
 Enzyme.configure({
   adapter: new Adapter(),
@@ -19,7 +19,7 @@ it(`Change film genre handler has been called`, () => {
   const wrapper = shallow(
       <GenreList
         films={films}
-        handleFilmGenreChange={handleFilmGenreChange}
+        onChangeFilmGenre={handleFilmGenreChange}
         onChangeActiveItemIndex={() => {}}
         activeItemIndex={0}
       />

@@ -1,9 +1,10 @@
-import React from 'react';
-import {PropValidator} from '../../prop-validator/prop-validator';
-import MovieOverview from '../movie-overview/movie-overview.jsx';
-import MovieDetails from '../movie-details/movie-details.jsx';
-import MovieReviews from '../movie-reviews/movie-reviews.jsx';
-import TabsItem from '../tabs-item/tabs-item.jsx';
+import React from "react";
+import {PropValidator} from "../../prop-validator/prop-validator.js";
+import {PropTypes} from "prop-types";
+import MovieOverview from "../movie-overview/movie-overview.jsx";
+import MovieDetails from "../movie-details/movie-details.jsx";
+import MovieReviews from "../movie-reviews/movie-reviews.jsx";
+import TabsItem from "../tabs-item/tabs-item.jsx";
 
 const Tabs = ({filmInfo, filmReviews, activeItemIndex, onChangeActiveItemIndex}) => {
   const tabItems = [
@@ -49,8 +50,8 @@ const Tabs = ({filmInfo, filmReviews, activeItemIndex, onChangeActiveItemIndex})
 Tabs.propTypes = {
   filmInfo: PropValidator.FILM_INFO,
   filmReviews: PropValidator.FILM_REVIEW,
-  activeItemIndex: PropValidator.ACTIVE_ITEM_INDEX,
-  onChangeActiveItemIndex: PropValidator.CHANGE_ACTIVE_ITEM
+  activeItemIndex: PropTypes.number.isRequired,
+  onChangeActiveItemIndex: PropTypes.func.isRequired
 };
 
 export default Tabs;
